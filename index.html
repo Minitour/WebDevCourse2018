@@ -27,7 +27,8 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Movie Ratings</a>
+            <!-- <a class="navbar-brand" href="#">Movie Ratings</a> -->
+            <img src="./web_dev_pictures/logo.png" alt="" width=20% height=50%>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -62,100 +63,13 @@
       <h1 class="my-4">Movies
         <small>Trending</small>
       </h1>
-      
 
-      <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="./web_dev_pictures/action/final_score.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Final Score (2018)</a>
-              </h4>
-              <p class="card-text">Final Score is a movie starring Aaron McCusker, Dave Bautista, and Pierce Brosnan. After deadly terrorists abduct his niece at a soccer match...</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="./web_dev_pictures/action/mission_impossible.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Mission Impossible (2018)</a>
-              </h4>
-              <p class="card-text">Mission: Impossible - Fallout is a movie starring Tom Cruise, Henry Cavill, and Ving Rhames. Ethan Hunt and his IMF team...</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="./web_dev_pictures/action/ocean_8.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Ocean's Eight (2018)</a>
-              </h4>
-              <p class="card-text">Oceans Eight is a movie starring Sandra Bullock, Cate Blanchett, and Anne Hathaway...</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="./web_dev_pictures/action/the_marine.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">The Marine 6 (2018)</a>
-              </h4>
-              <p class="card-text">The Marine 6: Close Quarters is a movie starring Mike The Miz Mizanin, Shawn Michaels, and Rebecca Quin...</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="./web_dev_pictures/comedy/the_equ_2.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">The Equalizer 2 (2018)</a>
-              </h4>
-              <p class="card-text">The Equalizer 2 is a movie starring Denzel Washington, Pedro Pascal, and Ashton Sanders. Robert McCall serves an unflinching justice for the exploited and oppressed...</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="./web_dev_pictures/comedy/year_one.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Year One (2009)</a>
-              </h4>
-              <p class="card-text">Year One is a movie starring Jack Black, Michael Cera, and Olivia Wilde. After being banished from their tribe...</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="./web_dev_pictures/comedy/yes_man.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Yes Man (2008)</a>
-              </h4>
-              <p class="card-text">Yes Man is a movie starring Jim Carrey, Zooey Deschanel, and Bradley Cooper. A man challenges himself to say yes to everything for an entire year...</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="./web_dev_pictures/comedy/the_singer.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">The Wedding Singer (1998)</a>
-              </h4>
-              <p class="card-text">The Wedding Singer is a movie starring Adam Sandler, Drew Barrymore, and Christine Taylor. Robbie, a singer...</p>
-            </div>
-          </div>
-        </div>
+
+      <div class="row" id="first_tag">
+
       </div>
       <!-- /.row -->
-      
+
 
       <!-- Pagination -->
       <ul class="pagination justify-content-center">
@@ -190,7 +104,28 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    
+    <script src="./pictures.js"></script>
+    <script>
+    var final_str = "";
+    for (var movie in pictures_info)
+    {
+      var splited = pictures_info[movie].split('|');
+      var first_line = '<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">';
+      var second_line = '<div class="card h-100">';
+      var link = '<img class="card-img-top" src="' + splited[0] + '" alt="">';
+      var fourth_line = '<div class="card-body">';
+      var fifth_line = '<h4 class="card-title">';
+      var title = '<a href="#">' + movie + '</a>';
+      var sixth_line = '</h4>';
+      var description = '<p class="card-text">' + splited[1] + '</p>';
+      var divs = '</div></div></div>';
+      final_str += first_line + second_line + link + fourth_line + fifth_line + title + sixth_line + description + divs;
+
+    }
+    var first_tag_element = document.getElementById('first_tag');
+    first_tag_element.insertAdjacentHTML('beforeend', final_str);
+    </script>
+
   </body>
 
 </html>
