@@ -97,7 +97,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; T&T Movies 2018</p>
+      <p class="m-0 text-center text-white">Copyright &copy; Antonio Zaiton & Tomer Goldfeder Movies 2018</p>
     </div>
     <!-- /.container -->
   </footer>
@@ -135,11 +135,11 @@
 
     // fetching the info the specific movie
     var fields_for_movie_info = "";
-    var ratings = '<p style="font-size:20">Ratings : ' + movies_infos[movie]['ratings'] + "</p>";
-    var released = '<p style="font-size:20">Released : ' + movies_infos[movie]['released'] + "</p>";
-    var genre = '<p style="font-size:20">Genre : ' + movies_infos[movie]['genre'] + "</p>";
-    var plot = '<p style="font-size:20">Plot : ' + movies_infos[movie]['plot'] + "</p>";
-    var actors = '<p style="font-size:20">Actors : ' + movies_infos[movie]['actors'] + "</p>";
+    var ratings = '<p style="font-size:20"><span style="font-weight:bold;">Ratings</span> : ' + movies_infos[movie]['ratings'] + "</p>";
+    var released = '<p style="font-size:20"><span style="font-weight:bold;">Released</span> : ' + movies_infos[movie]['released'] + "</p>";
+    var genre = '<p style="font-size:20"><span style="font-weight:bold;">Genre</span> : ' + movies_infos[movie]['genre'] + "</p>";
+    var plot = '<p style="font-size:20"><span style="font-weight:bold;">Plot</span> : ' + movies_infos[movie]['plot'] + "</p>";
+    var actors = '<p style="font-size:20"><span style="font-weight:bold;">Actors</span> : ' + movies_infos[movie]['actors'] + "</p>";
 
     // appending the fields together
     fields_for_movie_info = ratings +released + genre +  plot +  actors;
