@@ -64,27 +64,25 @@ function validateForm(){
     // checking all elements by conditions set before
 
     // check first and last name
-    names_regex = /^[A-Za-z]*$/;
+    var names_regex = /^[A-Za-z]*$/;
 
     // check first name and put corrisponding message
-    var first_name_error_box_element = document.getElementById("first_name_error_box");
     if ((first_name_field != "") && (first_name_field.match(names_regex) != null)) {
       var first_name_form_message = "<h6 style='color:green;'>Valid Name</h6>";
     } else {
       checkAllElements = false;
-      var first_name_form_message = "<h6 style='color:red;'>InValid Name</h6>";
+      var first_name_form_message = "<h6 style='color:red;'>Invalid Name</h6>";
     }
-    first_name_error_box_element.insertAdjacentHTML('beforeend', first_name_form_message);
+    
 
     // checking last name and put corrisponding message
-    var last_name_error_box_element = document.getElementById("last_name_error_box");
     if ((last_name_field != "") && (last_name_field.match(names_regex) != null)) {
       var last_name_form_message = "<h6 style='color:green;'>Valid Last Name</h6>";
     } else {
       checkAllElements = false;
-      var last_name_form_message = "<h6 style='color:red;'>InValid Last Name</h6>";
+      var last_name_form_message = "<h6 style='color:red;'>Invalid Last Name</h6>";
     }
-    last_name_error_box_element.insertAdjacentHTML('beforeend', last_name_form_message);
+    
 
     // check birthdate -> will be before today
     var date1 = new Date(birthday_field);
@@ -92,25 +90,23 @@ function validateForm(){
       var birthday_form_message = "<h6 style='color:green;'>Valid Birthday</h6>";
     } else {
       checkAllElements = false;
-      var birthday_form_message = "<h6 style='color:red;'>InValid Birthday</h6>";
+      var birthday_form_message = "<h6 style='color:red;'>Invalid Birthday</h6>";
     }
-    document.getElementById("birthday_error_box").insertAdjacentHTML('beforeend', birthday_form_message);
+    
 
     // check phone is not empty
-    var phone_element = document.getElementById("phone_error_box");
     if (phone_field != "") {
       var phone_form_message = "<h6 style='color:green;'>Valid Phone</h6>";
     } else {
       checkAllElements = false;
-      var phone_form_message = "<h6 style='color:red;'>InValid Phone</h6>";
+      var phone_form_message = "<h6 style='color:red;'>Invalid Phone</h6>";
     }
-    phone_element.insertAdjacentHTML('beforeend', phone_form_message);
+    
     // check email_field and put corrisponding message
 
     // regex for mail
-    email_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var email_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     // element to attach the message
-    var email_error_box_element = document.getElementById("email_error_box");
     if ((email_field != "") && (email_field.match(email_regex) != null)) {
 
       //TODO: add ok message
@@ -120,16 +116,14 @@ function validateForm(){
       checkAllElements = false;
 
       //TODO: add error message
-      var email_form_message = "<h6 style='color:red;'>InValid Email</h6>";
+      var email_form_message = "<h6 style='color:red;'>Invalid Email</h6>";
     }
-    email_error_box_element.insertAdjacentHTML('beforeend', email_form_message);
+    
 
     // check phone_field - not needed
 
     // check password_field and password_confirm_field and put corrisponding message
-    password_regex = /^[A-Za-z0-9]*$/;
-    var password_box_element = document.getElementById("password_error_box");
-    var password_confirm_box_element = document.getElementById("password_confirm_error_box");
+    var password_regex = /^[A-Za-z0-9]*$/;
 
     // checking if the passwords are not empty
     if ((password_field != "") && (password_confirm_field != "")) {
@@ -153,22 +147,13 @@ function validateForm(){
       var password_form_message = "<h6 style='color:red;'>No Password Entered</h6>";
     }
 
-    password_box_element.insertAdjacentHTML('beforeend', password_form_message);
-    password_confirm_box_element.insertAdjacentHTML('beforeend', password_form_message);
-
-    // give response based on boolean flag
-    var button_element = document.getElementById("submit_message_div");
-    if (checkAllElements == true) {
-
-      //TODO: put success message below the submit button
-      var valid_form_message = "<br><div style='display: inline-block'><h5 style='color:green;'>Valid Form</h5></div>";
-      button_element.insertAdjacentHTML('beforeend', valid_form_message);
-    } else {
-
-      //TODO: put error message below saying to look up for errors
-      var invalid_form_message = "<br><div style='display: inline-block'><h5 style='color:red;'>InValid Form</h5></div>";
-      button_element.insertAdjacentHTML('beforeend', invalid_form_message);
-    }
+    $('#first_name_error_box').html(first_name_form_message);
+    $('#last_name_error_box').html(last_name_form_message);
+    $('#birthday_error_box').html(birthday_form_message);
+    $('#phone_error_box').html(phone_form_message);
+    $('#email_error_box').html(email_form_message);
+    $('#password_error_box').html(password_form_message);
+    $('#password_confirm_error_box').html(password_form_message);
   });
 }
 
@@ -220,7 +205,8 @@ function validateForm(){
     					<input id="first_name" name="first_name" type="text" required>
               <label for="first_name">First Name</label>
               <div id="first_name_error_box" name="first_name_error_box">
-            </div>
+
+              </div>
             </div>
           </div>
           <div class="row">
@@ -267,7 +253,7 @@ function validateForm(){
             </div>
   				</div>
   				<center>
-  					<input class="btn waves-effect waves-light" type="submit" id="submit_button" onclick="validateForm()" name="action" value="Submit">
+  					<button class="btn waves-effect waves-light" type="submit" id="submit_button" onclick="validateForm()" name="action">Register</button>
   				</center>
           <div style="text-align:center;" id="submit_message_div"></div>
 			</div>
