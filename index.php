@@ -31,8 +31,14 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
     crossorigin="anonymous">
 
+  <!-- for stars icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
+  <style>
+    .checked {
+      color: orange;
+    }
+  </style>
 </head>
 
 <body>
@@ -125,6 +131,7 @@
 
   // for taging the movies in the modal_first_div var below
   var i = 0;
+  var stars_number = 5;
   for (var movie in pictures_info)
   {
     // constructing a movie
@@ -149,7 +156,17 @@
 
     // fetching the info the specific movie
     var fields_for_movie_info = "";
-    var ratings = '<p style="font-size:20"><span style="font-weight:bold;">Ratings</span> : ' + movies_infos[movie]['ratings'] + "</p>";
+
+    var number_of_empty_stars = stars_number - movies_infos[movie]['ratings'];
+    var i;
+    var ratings = "";
+    for (i=0; i<movies_infos[movie]['ratings']; i++) {
+      ratings += "<span class='fa fa-star checked'></span>";
+    }
+    for (i=0; i<number_of_empty_stars; i++) {
+      ratings += "<span class='fa fa-star'></span>";
+    }
+    //var ratings = '<p style="font-size:20"><span style="font-weight:bold;">Ratings</span> : ' + movies_infos[movie]['ratings'] + "</p>";
     var released = '<p style="font-size:20"><span style="font-weight:bold;">Released</span> : ' + movies_infos[movie]['released'] + "</p>";
     var genre = '<p style="font-size:20"><span style="font-weight:bold;">Genre</span> : ' + movies_infos[movie]['genre'] + "</p>";
     var plot = '<p style="font-size:20"><span style="font-weight:bold;">Plot</span> : ' + movies_infos[movie]['plot'] + "</p>";
