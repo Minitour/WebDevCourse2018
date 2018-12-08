@@ -1,3 +1,15 @@
+<?php
+    $username = "Unknown";
+    // check if user has loging cookies
+    if (isset($_COOKIE["username"])) {
+      //proceed to login
+      $username = $_COOKIE["username"];
+    } else {
+      // redirect to logout page.
+      header("Location: ./login.php");
+      die();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,13 +48,9 @@
                     <li class="nav-item">
                       <a class="nav-link" href="login.php">Logout</a>
                     </li>
-                    <?php
-                      if ($_GET['email-login'] != NULL) {
-                        $username=$_GET['email-login'];
-
-                        echo "<li class='nav-item'><a class='nav-link' href='profile.php>" . $username . "</a></li>";
-                      }
-                    ?>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"><?php echo $username; ?></a>
+                    </li>
                 </ul>
             </div>
         </div>

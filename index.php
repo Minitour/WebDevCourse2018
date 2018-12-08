@@ -59,11 +59,8 @@
             <a class="nav-link" href="login.php">Logout</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link"></a>
+            <a class="nav-link" href="profile.php"> <?php echo $username; ?></a>
           </li>
-          <?php
-              echo "<li class='nav-item'><a class='nav-link' href='profile.php'>" . $username . "</a></li>";
-          ?>
         </ul>
       </div>
     </div>
