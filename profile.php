@@ -88,45 +88,48 @@
         <div class="row" >
             <div class="col s3" style="padding-margin: 30px">
                 <!--left col-->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="aspect_ratio">
+                            <img id = "avatar_picture" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="width: 100%; border-radius: 100px;object-fit: cover;" class="avatar img-circle img-thumbnail" alt="avatar">
+                        </div>
+                        <br>
+                        <div>
+                        <button class="btn waves-effect waves-light" style="width: 100%;" id="change_picture" name="action">Change Picture</button>
+                        </div>
+                        <br>
 
+                        <ul class="list-group">
+                            <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+                            <li class="list-group-item">
+                                <i class="fas fa-film"></i>
+                                <span class="pull-left"><strong>Rated Movies</strong></span> 125
+                            </li>
 
-                <div class="text-center">
-                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="border-radius: 100px" class="avatar img-circle img-thumbnail"
-                        alt="avatar">
+                            <li class="list-group-item">
+                                <i class="fas fa-thumbs-up"></i>
+                                <span class="pull-left"><strong>Upvotes</strong></span> 13
+                            </li>
 
+                            <li class="list-group-item">
+                                <i class="fas fa-comment"></i>
+                                <span class="pull-left"><strong>Reviews</strong></span> 37
+                            </li>
+
+                            <li class="list-group-item">
+                                <i class="fas fa-users"></i>
+                                <span class="pull-left"><strong>Followers</strong></span> 78
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <br>
-                <div>
-                    <h6>Upload a different photo...</h6>
-                    <input type="file" class="text-center center-block file-upload">
-                </div>
-                <br>
 
-                <ul class="list-group">
-                    <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-                    <li class="list-group-item">
-                        <i class="fas fa-film"></i>
-                        <span class="pull-left"><strong>Rated Movies</strong></span> 125
-                    </li>
 
-                    <li class="list-group-item">
-                        <i class="fas fa-thumbs-up"></i>
-                        <span class="pull-left"><strong>Upvotes</strong></span> 13
-                    </li>
-
-                    <li class="list-group-item">
-                        <i class="fas fa-comment"></i>
-                        <span class="pull-left"><strong>Reviews</strong></span> 37
-                    </li>
-
-                    <li class="list-group-item">
-                        <i class="fas fa-users"></i>
-                        <span class="pull-left"><strong>Followers</strong></span> 78
-                    </li>
-                </ul>
+                
 
             </div>
             <!--/col-3-->
+
             <div class="col s8">
                 <div id="home">
                     <form class="form" action="##" method="post" id="registrationForm">
@@ -205,6 +208,37 @@
         </div>
         <!--/col-9-->
     </div>
+
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                console.log("hello world");
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    console.log(e);
+                    $('#avatar_picture').attr('src', e.target.result);
+                    $('#avatar_picture').height($('#avatar_picture').width());
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(document).ready(function() {
+            var input = $(document.createElement("input"));
+            input.attr("type", "file");
+            input.attr("accept","image/png, image/jpeg");
+            input.on('change', ()=> {
+                    readURL(input[0]);
+            });
+            
+            $('#change_picture').click(()=>{
+                // add onchange handler if you wish to get the file :)
+                
+                input.trigger("click"); // opening dialog
+                return false;
+            });
+        });
+    </script>
     <!--/row-->
 </body>
 
