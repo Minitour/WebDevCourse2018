@@ -17,22 +17,46 @@
     <title>Profile Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
+    
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/4-col-portfolio.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-        crossorigin="anonymous">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="css/profile.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" >
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
 </head>
 
 <body>
-    <hr>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
+    <script>
+    $(document).ready(function(){
+        $('.datepicker').datepicker();
+        $('.sidenav').sidenav();
+    });
+  </script>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="blue-grey darken-3" role="navigation">
+    <div class="nav-wrapper container">
+      <a href="/" class="brand-logo" style="float: left;text-align: center;white-space: nowrap;padding: 5px 10px;">
+      <img style="width: 100px;" src="./web_dev_pictures/logo.png" alt="Image text">
+      </a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">Javascript</a></li>
+        <li><a href="mobile.html">Mobile</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-demo">
+    <li><a href="sass.html">Sass</a></li>
+    <li><a href="badges.html">Components</a></li>
+    <li><a href="collapsible.html">Javascript</a></li>
+    <li><a href="mobile.html">Mobile</a></li>
+  </ul>
+    <!-- <nav>
         <div class="container">
             <a class="navbar-brand" href="/"><img style="width: 100px;" src="./web_dev_pictures/logo.png" alt="Image text"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -54,11 +78,14 @@
                 </ul>
             </div>
         </div>
-    </nav>
-    <div class="container bootstrap snippet">
+    </nav> -->
+    <div class="container" >
 
         <div class="row">
-            <div class="col-sm-3">
+        
+        </div>
+        <div class="row" >
+            <div class="col s3" style="padding-margin: 30px">
                 <!--left col-->
 
 
@@ -99,89 +126,64 @@
 
             </div>
             <!--/col-3-->
-            <div class="col-sm-9">
+            <div class="col s8">
                 <div id="home">
-                    <hr>
                     <form class="form" action="##" method="post" id="registrationForm">
                         <div class="form-group">
 
-                            <div class="col-xs-6">
-                                <label for="first_name">
-                                    <h5>First name</h5>
-                                </label>
-                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name"
-                                    title="enter your first name if any.">
+                            <div class="input-field col s12">
+    					        <input id="first_name" name="first_name" type="text" required>
+                                <label for="first_name">First Name</label>
+                                <div id="first_name_error_box" name="first_name_error_box">
                             </div>
                         </div>
                         <div class="form-group">
 
-                            <div class="col-xs-6">
-                                <label for="last_name">
-                                    <h5>Last name</h5>
-                                </label>
-                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name"
-                                    title="enter your last name if any.">
+                            <div class="input-field col s12">
+  						        <input id="last_name" name="last_name" type="text" class="validate" required>
+  						        <label for="last_name">Last Name</label>
+                                <div id="last_name_error_box" name="last_name_error_box"></div>
+  					        </div>
+                        </div>
+
+                        <div class="form-group">
+
+                           <div class="input-field col s12">
+  						        <input id="phone" type="text" class="validate" required>
+  						        <label for="phone-confirm">Phone Confirmation</label>
+                                <div id="phone_error_box" name="phone_error_box"></div>
+  					        </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="input-field col s12">
+  						        <input id="email" type="text" class="validate" required>
+  						        <label for="email">Email</label>
+                                <div id="email_error_box" name="email_error_box"></div>
+  					        </div>
+                        </div>
+                        <div class="form-group">
+                            <div class='input-field col s12'>
+                                <input id="birthday_date" type="text" class="datepicker">
+                                <label for="birthday_date">Birthday</label>
+                                <div id="birthday_error_box" name="birthday_error_box"></div>
                             </div>
                         </div>
 
                         <div class="form-group">
 
-                            <div class="col-xs-6">
-                                <label for="phone">
-                                    <h5>Phone</h5>
-                                </label>
-                                <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone"
-                                    title="enter your phone number if any.">
-                            </div>
+                            <div class="input-field col s12">
+  						        <input id="location" name="location" type="text" class="validate" required>
+  						        <label for="location">Location</label>
+                            <div id="location_error_box" name="location_error_box"></div>
+  					</div>
                         </div>
                         <div class="form-group">
 
-                            <div class="col-xs-6">
-                                <label for="email">
-                                    <h5>Email</h5>
-                                </label>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com"
-                                    title="enter your email.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="birthday">
-                                    <h5>Birthdate</h5>
-                                </label>
-                                <div class="input-group input-append date">
-                                  <input type="text" class="form-control birthday" name="birthday" id="birthday" placeholder="MM/DD/YYYY">
-                                  <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                </div>
-                            </div>
-
-                        </div>
-                        <script type="text/javascript">
-                          $(document).ready(function () {
-                            $('.birthday').datepicker({
-                              format: 'mm/d/yyyy'
-                            });
-                          });
-                        </script>
-
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="location">
-                                    <h5>Location</h5>
-                                </label>
-                                <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="password">
-                                    <h5>Password</h5>
-                                </label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="password"
-                                    title="enter your password.">
+                            <div class="input-field col s12">
+  						        <input id="password-confirm" name="password-confirm" type="password" class="validate" required>
+                                <label for="password-confirm">Password Confirmation</label>
+                                <div id="password_confirm_error_box" name="password_confirm_error_box"></div>
                             </div>
                         </div>
 
@@ -194,7 +196,6 @@
                         </div>
                     </form>
 
-                    <hr>
 
                 </div>
             </div>

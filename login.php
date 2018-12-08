@@ -246,8 +246,7 @@ function validateForm(){
   				</div>
           <div class="row">
             <div class='input-field col s12'>
-              <!-- <input id="birthday_date" name="birthday_date" type="date" class="validate" required> -->
-              <input id="birthday_date" type="text" class="datepicker">
+              <input id="birthday_date" type="text" class="datepicker" required>
               <label for="birthday_date">Birthday</label>
               <div id="birthday_error_box" name="birthday_error_box"></div>
             </div>
@@ -264,8 +263,7 @@ function validateForm(){
   					<div class="input-field col s12">
   						<input id="password-confirm" name="password-confirm" type="password" class="validate" required>
               <label for="password-confirm">Password Confirmation</label>
-              <div id="password_confirm_error_box" name="password_confirm_error_box">
-  					</div>
+              <div id="password_confirm_error_box" name="password_confirm_error_box"></div>
             </div>
   				</div>
   				<center>
