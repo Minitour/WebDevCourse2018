@@ -1,24 +1,49 @@
+<?php
+  $cookie_name = "username";
+
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      // case post check username and password
+      $email = $_POST['email-login'];
+      $password = $_POST['password-login'];
+      if (!($password == "Admin") || !($email == "Admin")) {
+        header("Location: ./login.php?notRegistered=true");
+      }else {
+        $cookie_value = $email;
+        setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+        header("Location: ./index.php");
+      }
+      die();  
+  }
+
+  if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+      // set username cookie to null with 1 ms expiration (remove cookie)
+      setcookie($cookie_name, null, 1, "/");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en" >
 
 <head>
   <meta charset="UTF-8">
   <title>Login / register material design form</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css'>
+  <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/> -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
   <link rel="stylesheet" href="css/login_style.css">
-
-
+  
 </head>
 
 <body>
-
-  <script src='https://code.jquery.com/jquery-2.1.1.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js'></script>
   <script src="js/jquery.validate.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
-
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script> -->
+  
+  <script>
+    $(document).ready(function(){
+        $('.datepicker').datepicker();
+        $('.tabs').tabs();
+    });
+  </script>
 <script>
 
 function validateForm(){
@@ -148,13 +173,13 @@ function validateForm(){
 }
 
 </script>
-  <div class="container white z-depth-2" style="height:1100px;">
+  <div class="container white z-depth-2">
 	<ul class="tabs">
 		<li class="tab col s3"><a class="white-text active" href="#login">login</a></li>
 		<li class="tab col s3"><a class="white-text" href="#register">register</a></li>
 	</ul>
 	<div id="login" class="col s12">
-		<form class="col s12" method="POST" action="index.php">
+		<form class="col s12" method="POST" action="login.php">
 			<div class="form-container">
 				<h3>Hello</h3>
         <?php
@@ -221,7 +246,8 @@ function validateForm(){
   				</div>
           <div class="row">
             <div class='input-field col s12'>
-              <input id="birthday_date" name="birthday_date" type="date" class="validate" required>
+              <!-- <input id="birthday_date" name="birthday_date" type="date" class="validate" required> -->
+              <input id="birthday_date" type="text" class="datepicker">
               <label for="birthday_date">Birthday</label>
               <div id="birthday_error_box" name="birthday_error_box"></div>
             </div>
@@ -243,15 +269,13 @@ function validateForm(){
             </div>
   				</div>
   				<center>
-  					<input class="btn waves-effect waves-light" id="submit_button" onclick="validateForm()" name="action" value="Submit">
+  					<input class="btn waves-effect waves-light" type="submit" id="submit_button" onclick="validateForm()" name="action" value="Submit">
   				</center>
           <div style="text-align:center;" id="submit_message_div"></div>
 			</div>
 		</form>
 	</div>
 </div>
-
-    <!-- <script  src="js/login.js"></script> -->
 
 </body>
 

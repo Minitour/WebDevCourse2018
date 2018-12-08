@@ -1,16 +1,15 @@
 <?php
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      //echo "innn";
-      $email = $_POST['email-login'];
-      $password = $_POST['password-login'];
-      if (!($password == "Admin") && !($email == "Admin")) {
-        //header("Location: ./login.php");
-        //exit();
-        echo "<script type='text/javascript'>window.top.location='login.php?notRegistered=true';</script>"; exit;
-      }
-  }
+    $username = "Unknown";
+    // check if user has loging cookies
+    if (isset($_COOKIE["username"])) {
+      //proceed to login
+      $username = $_COOKIE["username"];
+    } else {
+      // redirect to logout page.
+      header("Location: ./login.php");
+      die();
+    }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,11 +62,7 @@
             <a class="nav-link"></a>
           </li>
           <?php
-            if (isset($_POST['email-login'])) {
-              $username = $_POST['email-login'];
-              //var_dump($username);
               echo "<li class='nav-item'><a class='nav-link' href='profile.php'>" . $username . "</a></li>";
-            }
           ?>
         </ul>
       </div>
