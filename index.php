@@ -158,14 +158,15 @@
     var fields_for_movie_info = "";
 
     var number_of_empty_stars = stars_number - movies_infos[movie]['ratings'];
-    var i;
-    var ratings = "";
-    for (i=0; i<movies_infos[movie]['ratings']; i++) {
+    var j;
+    var ratings = "<p><span style='font-weight:bold;'>Rating: </span>";
+    for (j=0; j<movies_infos[movie]['ratings']; j++) {
       ratings += "<span class='fa fa-star checked'></span>";
     }
-    for (i=0; i<number_of_empty_stars; i++) {
+    for (j=0; j<number_of_empty_stars; j++) {
       ratings += "<span class='fa fa-star'></span>";
     }
+    ratings += "</p>";
     //var ratings = '<p style="font-size:20"><span style="font-weight:bold;">Ratings</span> : ' + movies_infos[movie]['ratings'] + "</p>";
     var released = '<p style="font-size:20"><span style="font-weight:bold;">Released</span> : ' + movies_infos[movie]['released'] + "</p>";
     var genre = '<p style="font-size:20"><span style="font-weight:bold;">Genre</span> : ' + movies_infos[movie]['genre'] + "</p>";
