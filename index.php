@@ -141,7 +141,7 @@
     var link_to_image = '<img style="width:device-width;" class="card-img-top" src="' + splited[0] + '" alt="">';
     var third_div = '<div class="card-body">';
     var h4_line = '<h4 class="card-title">';
-    var title = '<a href="#">' + movie + '</a>';
+    var title = '<a href="reviews.php?movie='+i+'">' + movie + '</a>';
     var close_h4 = '</h4>';
     var description = '<p class="card-text">' + splited[1] + '</p>';
     var close_third_div = '</div>';

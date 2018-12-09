@@ -1,4 +1,4 @@
-// {
-//     "phpformatter.pharPath" : "/usr/local/bin/php-cs-fixer",
-//     "phpformatter.composer" : false
-// }
+{
+    "phpformatter.pharPath" : "/usr/local/bin/php-cs-fixer",
+    "phpformatter.composer" : false
+}
