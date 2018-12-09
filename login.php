@@ -10,9 +10,9 @@
       }else {
         $cookie_value = $email;
         setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
-        header("Location: ./index.php");
+        header("Location: ./index.php?#");
       }
-      die();  
+      die();
   }
 
   if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -30,14 +30,14 @@
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/> -->
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
   <link rel="stylesheet" href="css/login_style.css">
-  
+
 </head>
 
 <body>
   <script src="js/jquery.validate.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
   <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script> -->
-  
+
   <script>
     $(document).ready(function(){
         $('.datepicker').datepicker();
@@ -68,7 +68,8 @@ function validateForm(){
 
     // check first name and put corrisponding message
     if ((first_name_field != "") && (first_name_field.match(names_regex) != null)) {
-      var first_name_form_message = "<h6 style='color:green;'>Valid Name</h6>";
+      //var first_name_form_message = "<h6 style='color:green;'>Valid Name</h6>";
+      first_name_error_box_element.style.visibility = "hidden";
     } else {
       checkAllElements = false;
       var first_name_form_message = "<h6 style='color:red;'>Invalid Name</h6>";
@@ -77,7 +78,7 @@ function validateForm(){
 
     // checking last name and put corrisponding message
     if ((last_name_field != "") && (last_name_field.match(names_regex) != null)) {
-      var last_name_form_message = "<h6 style='color:green;'>Valid Last Name</h6>";
+      //var last_name_form_message = "<h6 style='color:green;'>Valid Last Name</h6>";
     } else {
       checkAllElements = false;
       var last_name_form_message = "<h6 style='color:red;'>Invalid Last Name</h6>";
@@ -87,7 +88,7 @@ function validateForm(){
     // check birthdate -> will be before today
     var date1 = new Date(birthday_field);
     if (date1 < new Date()) {
-      var birthday_form_message = "<h6 style='color:green;'>Valid Birthday</h6>";
+      //var birthday_form_message = "<h6 style='color:green;'>Valid Birthday</h6>";
     } else {
       checkAllElements = false;
       var birthday_form_message = "<h6 style='color:red;'>Invalid Birthday</h6>";
@@ -96,7 +97,7 @@ function validateForm(){
 
     // check phone is not empty
     if (phone_field != "") {
-      var phone_form_message = "<h6 style='color:green;'>Valid Phone</h6>";
+      //var phone_form_message = "<h6 style='color:green;'>Valid Phone</h6>";
     } else {
       checkAllElements = false;
       var phone_form_message = "<h6 style='color:red;'>Invalid Phone</h6>";
@@ -119,6 +120,7 @@ function validateForm(){
       var email_form_message = "<h6 style='color:red;'>Invalid Email</h6>";
     }
     
+
 
     // check phone_field - not needed
 
