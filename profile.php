@@ -188,7 +188,7 @@
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a href="index.php">Home</a></li>
-        <li><a href="logout.php">Logout</a></li>
+        <li><a href="login.php">Logout</a></li>
         <li class="nav-item active"><a href="profile.php">
             <?php echo $username; ?>
         </a></li>
@@ -322,8 +322,8 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-  						        <input id="password" name="location" type="text" class="validate" required>
-  						        <label for="password">Location</label>
+  						        <input id="password" name="location" type="password" class="validate" required>
+  						        <label for="password">Password</label>
                             <div id="password_error_box" name="password_error_box"></div>
   					</div>
                         </div>
