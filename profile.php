@@ -187,7 +187,7 @@
       </a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="index.php">Home</a></li>
+        <li><a href="index.php?#">Home</a></li>
         <li><a href="login.php">Logout</a></li>
         <li class="nav-item active"><a href="profile.php">
             <?php echo $username; ?>
