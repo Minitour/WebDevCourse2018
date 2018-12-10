@@ -263,9 +263,7 @@
   <div class="container">
 
     <!-- Page Heading -->
-    <h1 class="my-4">Movies
-      <small>Trending</small>
-    </h1>
+    <h3 style="font-weight:bold;padding-bottom: 20px">Trending Movies</h3>
 
 
     <div class="row" id="first_tag">

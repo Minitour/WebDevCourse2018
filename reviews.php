@@ -80,12 +80,12 @@
     </div>
 
     <div class="row justify-content-center" id="comment_box">
-        <div class="input-field col s6">
+        <div class="input-field col s9">
           <textarea id="review_title" data-length="80" class="materialize-textarea"></textarea>
           <label for="title">Title</label>
         </div>
 
-        <div class="col s6">
+        <div class="col s3">
         <form id="star_rating_form">
             <fieldset class="rating">
                 <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
@@ -101,7 +101,7 @@
         </form>
         </div>
 
-        <div class="input-field col s9">
+        <div class="input-field col s12">
           <textarea id="textarea1" data-length="500" class="materialize-textarea"></textarea>
           <label for="textarea1">Review</label>
         </div>
@@ -269,7 +269,6 @@
     $('#create_comment').click(()=>{
         let review = $('#textarea1').val();
         let title = $('#review_title').val();
-        console.log(title);
         let stars = parseInt($('input[name=rating]:checked', '#star_rating_form').val())
         let name = "<?php echo $username; ?>"
 
