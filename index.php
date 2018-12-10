@@ -316,6 +316,19 @@
       let title = movie_name;
       let description = movie_details.plot;
       let reviews_url = '/reviews.php?movie=' + index;
+      const stars_number = 5;
+
+      let star_rating = movie_details.ratings;
+      let number_of_empty_stars = stars_number - star_rating;
+
+      let ratings = "<p><span style='font-weight:bold;'></span>";
+      for (j=0; j<star_rating; j++) {
+        ratings += "<span class='fa fa-star checked'></span>";
+      }
+      for (j=0; j<number_of_empty_stars; j++) {
+        ratings += "<span class='fa fa-star'></span>";
+      }
+      ratings += "</p>";
 
       let card_html = "";
       card_html += '<div class="col s4">'
@@ -325,10 +338,13 @@
       card_html += '</div>'
       card_html += '<div class="card-content">'
       card_html += '<span class="card-title activator grey-text text-darken-4">' + title + '<i class="material-icons right">more_vert</i></span>'
+      card_html += ratings
+      card_html += '<br>'
       card_html += '<p><a href="'+ reviews_url + '">See Reviews</a></p>'
       card_html += '</div>'
       card_html += '<div class="card-reveal">'
       card_html += '<span class="card-title grey-text text-darken-4">' + title + '<i class="material-icons right">close</i></span>'
+      card_html += ratings
       card_html += '<p>'+ description + '</p>'
       card_html += '</div>'
       card_html += '</div>'
