@@ -63,11 +63,12 @@
       padding-left:30px;
       background-color:#353a40;
       border-color:grey;
-      border-radius:10px;
+      border-radius:2px;
       padding-right:30px;
     }
     b {
       color:white;
+      font-size:13px;
     }
     tbody {
       display:inline;
@@ -77,7 +78,8 @@
     }
     table {
       background-color:#353a40;
-      border-radius:10px;
+      border-radius:10px; 
+
       width:1000px;
       margin:auto;
     }
@@ -381,7 +383,7 @@
     var closing_modal_first_second_third_divs ="</div></div></div>";
 
     // appending all movies together and put in a specific tag later
-    final_str += first_div + second_div + link_to_image + third_div + h4_line + title + close_h4 + description + close_third_div + button + closing_first_second_divs_first + modal_first_div + modal_second_div + modal_third_div_and_close_div_header + modalBody + closing_modal_first_second_third_divs;
+    final_str += first_div + second_div + link_to_image + third_div + h4_line + title + close_h4 + description + close_third_div + button + closing_first_second_divs_first + modal_first_div +modal_second_div + modal_third_div_and_close_div_header + modalBody + closing_modal_first_second_third_divs;
     i++;
   }
 
