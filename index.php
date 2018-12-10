@@ -26,7 +26,7 @@
   <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
 
   <!-- Custom styles for this template -->
-  <!-- <link href="css/4-col-portfolio.css" rel="stylesheet"> -->
+  <link href="css/4-col-portfolio.css" rel="stylesheet">
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
     crossorigin="anonymous">
@@ -74,12 +74,12 @@
       display:inline;
     }
     td {
-      padding-right:10px;
+      padding:20px;
+      padding-right: 50px;
     }
     table {
       background-color:#353a40;
-      border-radius:10px; 
-
+      border-radius:5px;
       width:1000px;
       margin:auto;
     }
@@ -91,39 +91,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script>
   function toggleTabs() {
-    $('#table_tabs').fadeToggle('fast');
+    //$('#table_tabs').fadeToggle('fast');
+    $('#table_tabs').toggle(700,'linear');
   }
 </script>
 
 
-  <!-- Navigation
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="index.php"><img style="width: 100px;" src="./web_dev_pictures/logo.png" alt="Image text"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.php">Logout</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="profile.php"> <?php echo $username; ?></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav> -->
-
-  <!-- Navigation -->
   <nav class="blue-grey darken-3" role="navigation">
     <div class="nav-wrapper container">
       <a href="/" class="brand-logo" style="float: left;text-align: center;white-space: nowrap;padding: 5px 10px;">
@@ -143,17 +116,15 @@
 
 <div>
   <div style="text-align:center;padding-top: 20px">
-    <form class="search-container">
-      <div id="wrapper_div">
-        <div id="tabs_div_1">
+      <div id="wrapper_div" class="row">
+        <div id="tabs_div_1" class="col s9">
           <input type="text" id="search-bar" placeholder="What movie are you looking for?">
           <a class="search-icon" href="#"><i class="fas fa-search"></i></a>
         </div>
-        <div id="tabs_div_2">
-          <button onclick="toggleTabs()" class="waves-effect waves-light btn">Categories</button>
+        <div id="tabs_div_2" class="col s3">
+          <button id="cat_btn" class="waves-effect waves-light btn">Categories</button>
         </div>
       </div>
-    </form>
   </div>
   <div>
     <table id="table_tabs" style="display:none;">
@@ -163,7 +134,7 @@
             <label>
               <input type="checkbox" name="1" value>
               <span>
-                <a href="?1"><b>Action</b></a>
+                <a><b>Action</b></a>
               </span>
             </label>
           </td>
@@ -171,7 +142,7 @@
             <label>
               <input type="checkbox" name="2" value>
               <span>
-                <a href="?2"><b>Adult</b></a>
+                <a><b>Adult</b></a>
               </span>
             </label>
           </td>
@@ -179,7 +150,7 @@
             <label>
               <input type="checkbox" name="1" value>
               <span>
-                <a href="?1"><b>Adventure</b></a>
+                <a><b>Adventure</b></a>
               </span>
             </label>
           </td>
@@ -187,7 +158,7 @@
             <label>
               <input type="checkbox" name="2" value>
               <span>
-                <a href="?2"><b>Comedy</b></a>
+                <a><b>Comedy</b></a>
               </span>
             </label>
           </td>
@@ -195,7 +166,7 @@
             <label>
               <input type="checkbox" name="1" value>
               <span>
-                <a href="?1"><b>Drama</b></a>
+                <a><b>Drama</b></a>
               </span>
             </label>
           </td>
@@ -203,7 +174,7 @@
             <label>
               <input type="checkbox" name="2" value>
               <span>
-                <a href="?2"><b>Sci-Fi</b></a>
+                <a><b>Sci-Fi</b></a>
               </span>
             </label>
           </td>
@@ -211,7 +182,7 @@
             <label>
               <input type="checkbox" name="1" value>
               <span>
-                <a href="?1"><b>Sport</b></a>
+                <a><b>Sport</b></a>
               </span>
             </label>
           </td>
@@ -219,7 +190,7 @@
             <label>
               <input type="checkbox" name="2" value>
               <span>
-                <a href="?2"><b>Romance</b></a>
+                <a><b>Romance</b></a>
               </span>
             </label>
           </td>
@@ -229,7 +200,7 @@
             <label>
               <input type="checkbox" name="3" value>
               <span>
-                <a href="?3"><b>Fantasy</b></a>
+                <a><b>Fantasy</b></a>
               </span>
             </label>
           </td>
@@ -237,7 +208,7 @@
             <label>
               <input type="checkbox" name="4" value>
               <span>
-                <a href="?4"><b>Family</b></a>
+                <a><b>Family</b></a>
               </span>
             </label>
           </td>
@@ -245,7 +216,7 @@
             <label>
               <input type="checkbox" name="3" value>
               <span>
-                <a href="?3"><b>Crime</b></a>
+                <a><b>Crime</b></a>
               </span>
             </label>
           </td>
@@ -253,7 +224,7 @@
             <label>
               <input type="checkbox" name="4" value>
               <span>
-                <a href="?4"><b>Mystery</b></a>
+                <a><b>Mystery</b></a>
               </span>
             </label>
           </td>
@@ -261,7 +232,7 @@
             <label>
               <input type="checkbox" name="3" value>
               <span>
-                <a href="?3"><b>Documentary</b></a>
+                <a><b>Documentary</b></a>
               </span>
             </label>
           </td>
@@ -269,7 +240,7 @@
             <label>
               <input type="checkbox" name="4" value>
               <span>
-                <a href="?4"><b>Horror</b></a>
+                <a><b>Horror</b></a>
               </span>
             </label>
           </td>
@@ -277,7 +248,7 @@
             <label>
               <input type="checkbox" name="3" value>
               <span>
-                <a href="?3"><b>Musical</b></a>
+                <a><b>Musical</b></a>
               </span>
             </label>
           </td>
@@ -285,7 +256,7 @@
             <label>
               <input type="checkbox" name="4" value>
               <span>
-                <a href="?4"><b>Animation</b></a>
+                <a><b>Animation</b></a>
               </span>
             </label>
           </td>
@@ -311,23 +282,14 @@
 
 
     <!-- Pagination -->
-    <ul class="pagination justify-content-center">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-          <span class="sr-only">Previous</span>
-        </a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">1</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">Next</span>
-        </a>
-      </li>
-    </ul>
+    <div class="row" style="display: flex;align-items: center;justify-content: center;">
+        <ul class="pagination">
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            <li class="active"><a href="#!">1</a></li>
+            <li class="waves-effect"><a href="#!">2</a></li>
+            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        </ul>
+    </div>
 
   </div>
   <!-- /.container -->
@@ -363,7 +325,7 @@
       let reviews_url = '/reviews.php?movie=' + index;
 
       let card_html = "";
-      card_html += '<div class="col s3">'
+      card_html += '<div class="col s4">'
       card_html += '<div class="card">'
       card_html += '<div class="card-image waves-effect waves-block waves-light">'
       card_html += '<img class="activator" src="'+ cover + '">'
@@ -387,13 +349,17 @@
       let movie_name = movie;
       let movie_details = movies[movie_name];
       let cardHtml = get_card(index,movie_name,movie_details);
-      console.log(cardHtml);
       $('#first_tag').append(cardHtml);
       index += 1;
     }
+  </script>
 
-
-    
+  <script>
+    $(document).ready(() => {
+        $('#cat_btn').click(()=> {
+          $('#table_tabs').fadeToggle('fast');
+        });
+    })
   </script>
 
 </body>
