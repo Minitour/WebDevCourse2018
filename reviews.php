@@ -78,28 +78,38 @@
     <div class="row" id="first_tag">
 
     </div>
+
     <div class="row justify-content-center" id="comment_box">
+        <div class="input-field col s6">
+          <textarea id="review_title" data-length="80" class="materialize-textarea"></textarea>
+          <label for="title">Title</label>
+        </div>
+
+        <div class="col s6">
+        <form id="star_rating_form">
+            <fieldset class="rating">
+                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                <!-- <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label> -->
+                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                <!-- <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label> -->
+                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                <!-- <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label> -->
+                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                <!-- <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label> -->
+                <input checked="checked" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                <!-- <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>  -->
+        </form>
+        </div>
+
         <div class="input-field col s9">
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <textarea id="textarea1" data-length="500" class="materialize-textarea"></textarea>
           <label for="textarea1">Review</label>
         </div>
 
-        <div class="col s3">
-            <fieldset class="rating">
-                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label> 
-        </div>
+        
 
-        <div class="col s3 offset-s9">
-            <a class="waves-effect waves-light btn" style="width: 100%">Post</a>
+        <div class="col s12">
+            <a id="create_comment" class="waves-effect waves-light btn" style="width: 100%">Post</a>
         </div>
     </div>
 
@@ -110,7 +120,7 @@
     <h4> All Reviews</h2>
     <div class="row" id="comments_all">
         <div class="col s12">
-        <ul class="collection">
+        <ul class="collection" id="comments">
             <li class="collection-item avatar">
                 <img src="http://www.bistiproofpage.com/wp-content/uploads/2018/04/cute-profile-pics-for-whatsapp-images.png" alt="" class="circle">
                 <span class="title"><b>Awesome movie!</b></span>
@@ -231,6 +241,46 @@
 
     // attach the string we constructed above to the div we taged as "first_tag".
     first_tag_element.insertAdjacentHTML('beforeend', modalBody);
+  </script>
+
+  <script>
+
+    /**
+     * Creates a comment list item.
+     */
+    function construct_comment(profile_img,title,name,review,score) {
+        var comment_item = ""
+        comment_item += '<li class="collection-item avatar">'
+        comment_item += '<img src="' + profile_img + '" alt="" class="circle">'
+        comment_item += '<span class="title"><b>' + title + '</b></span>'
+        comment_item += '<p>' + name + '<br><br>'
+        comment_item += review
+        comment_item += '</p>'
+        comment_item += '<a href="#!" class="secondary-content">'
+        for(var i = 0; i < score; i++){
+            comment_item += '<i class="material-icons">grade</i>'
+        }
+        comment_item += '</a>'
+        comment_item += '</li>'
+
+        return comment_item;
+    }
+
+    $('#create_comment').click(()=>{
+        let review = $('#textarea1').val();
+        let title = $('#review_title').val();
+        console.log(title);
+        let stars = parseInt($('input[name=rating]:checked', '#star_rating_form').val())
+        let name = "<?php echo $username; ?>"
+
+        let commentView = construct_comment("https://catking.in/wp-content/uploads/2017/02/default-profile-1.png",title,name,review,stars);
+        $('#textarea1').val("");
+        $('#review_title').val("");
+
+        $('#comments').prepend(commentView);
+    });
+
+
   </script>
 </body>
 

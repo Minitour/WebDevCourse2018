@@ -89,13 +89,6 @@
 <body>
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script>
-  function toggleTabs() {
-    //$('#table_tabs').fadeToggle('fast');
-    $('#table_tabs').toggle(700,'linear');
-  }
-</script>
-
 
   <nav class="blue-grey darken-3" role="navigation">
     <div class="nav-wrapper container">
