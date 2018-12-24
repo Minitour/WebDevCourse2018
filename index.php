@@ -294,7 +294,7 @@
   main {
     flex: 1 0 auto;
   }
-    
+
   </style>
   <!-- Footer -->
   <footer class="page-footer blue-grey darken-3">
@@ -305,60 +305,75 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  
+
   <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
-  <script src="./pictures.js"></script>
+  <!-- <script src="./pictures.js"></script> -->
   <script>
-    function get_card(index,movie_name,movie_details){
-      let cover = movie_details.cover;
-      let title = movie_name;
-      let description = movie_details.plot;
-      let reviews_url = '/reviews.php?movie=' + index;
-      const stars_number = 5;
+  function get_card(index,movie_name,movie_details){
+    let cover = movie_details.cover;
+    let title = movie_name;
+    console.log(title);
+    let description = movie_details.plot;
+    let reviews_url = '/reviews.php?movie=' + index;
+    const stars_number = 5;
 
-      let star_rating = movie_details.ratings;
-      let number_of_empty_stars = stars_number - star_rating;
+    let star_rating = movie_details.ratings;
+    let number_of_empty_stars = stars_number - star_rating;
 
-      let ratings = "<p><span style='font-weight:bold;'></span>";
-      for (j=0; j<star_rating; j++) {
-        ratings += "<span class='fa fa-star checked'></span>";
-      }
-      for (j=0; j<number_of_empty_stars; j++) {
-        ratings += "<span class='fa fa-star'></span>";
-      }
-      ratings += "</p>";
-
-      let card_html = "";
-      card_html += '<div class="col s4">'
-      card_html += '<div class="card">'
-      card_html += '<div class="card-image waves-effect waves-block waves-light">'
-      card_html += '<img class="activator" src="'+ cover + '">'
-      card_html += '</div>'
-      card_html += '<div class="card-content">'
-      card_html += '<span class="card-title activator grey-text text-darken-4">' + title + '<i class="material-icons right">more_vert</i></span>'
-      card_html += ratings
-      card_html += '<br>'
-      card_html += '<p><a href="'+ reviews_url + '">See Reviews</a></p>'
-      card_html += '</div>'
-      card_html += '<div class="card-reveal">'
-      card_html += '<span class="card-title grey-text text-darken-4">' + title + '<i class="material-icons right">close</i></span>'
-      card_html += ratings
-      card_html += '<p>'+ description + '</p>'
-      card_html += '</div>'
-      card_html += '</div>'
-      card_html += '</div>'
-      return card_html;
+    let ratings = "<p><span style='font-weight:bold;'></span>";
+    for (j=0; j<star_rating; j++) {
+      ratings += "<span class='fa fa-star checked'></span>";
     }
-
-    var movies = movies_infos;
-    var index = 0;
-    for (var movie in movies) {
-      let movie_name = movie;
-      let movie_details = movies[movie_name];
-      let cardHtml = get_card(index,movie_name,movie_details);
-      $('#first_tag').append(cardHtml);
-      index += 1;
+    for (j=0; j<number_of_empty_stars; j++) {
+      ratings += "<span class='fa fa-star'></span>";
     }
+    ratings += "</p>";
+
+    let card_html = "";
+    card_html += '<div class="col s4">'
+    card_html += '<div class="card">'
+    card_html += '<div class="card-image waves-effect waves-block waves-light">'
+    card_html += '<img class="activator" src="'+ cover + '">'
+    card_html += '</div>'
+    card_html += '<div class="card-content">'
+    card_html += '<span class="card-title activator grey-text text-darken-4">' + title + '<i class="material-icons right">more_vert</i></span>'
+    card_html += ratings
+    card_html += '<br>'
+    card_html += '<p><a href="'+ reviews_url + '">See Reviews</a></p>'
+    card_html += '</div>'
+    card_html += '<div class="card-reveal">'
+    card_html += '<span class="card-title grey-text text-darken-4">' + title + '<i class="material-icons right">close</i></span>'
+    card_html += ratings
+    card_html += '<p>'+ description + '</p>'
+    card_html += '</div>'
+    card_html += '</div>'
+    card_html += '</div>'
+    return card_html;
+  }
+  function readTextFile(file, callback) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.overrideMimeType("application/json");
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4 && rawFile.status == "200") {
+            callback(rawFile.responseText);
+        }
+    }
+    rawFile.send(null);
+  }
+  readTextFile("movies_info.json", function(text){
+      var data = JSON.parse(text);
+      var movies = data.movies;
+      var index = 0;
+      for (var movie in movies) {
+        let movie_name = movies[movie]['name'];
+        let movie_details = movies[movie];
+        let cardHtml = get_card(index,movie_name,movie_details);
+        $('#first_tag').append(cardHtml);
+        index += 1;
+      }
+  });
+
   </script>
 
   <script>
