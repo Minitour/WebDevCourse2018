@@ -121,7 +121,7 @@
     <div class="row" id="comments_all">
         <div class="col s12">
         <ul class="collection" id="comments">
-            <li class="collection-item avatar">
+            <!-- <li class="collection-item avatar">
                 <img src="http://www.bistiproofpage.com/wp-content/uploads/2018/04/cute-profile-pics-for-whatsapp-images.png" alt="" class="circle">
                 <span class="title"><b>Awesome movie!</b></span>
                 <p>Amy<br><br>
@@ -146,11 +146,15 @@
                     <i class="material-icons">grade</i>
                     <i class="material-icons">grade</i>
                 </a>
-            </li>
+            </li> -->
         </ul>
 
         </div>
     </div>
+
+
+
+
     <div class="row" style="display: flex;align-items: center;justify-content: center;">
         <ul class="pagination">
             <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
@@ -260,6 +264,53 @@
           counter += 1;
       }
     });
+
+    readTextFile("reviews_comments.json", function(text){
+      var data = JSON.parse(text);
+      comments = data.reviews[i];
+
+      let posted = "";
+      for (var comment in comments) {
+        for (var in_comment in comments[comment]){
+          for (var inside in comments[comment][in_comment]){
+            console.log(comments[comment][in_comment][inside]);
+            var title = comments[comment][in_comment][inside]['title'];
+            var commenter = comments[comment][in_comment][inside]['commenter'];
+            var number_of_stars = comments[comment][in_comment][inside]['number_of_stars'];
+            var comment_posted = comments[comment][in_comment][inside]['comment'];
+            posted += '<li class="collection-item avatar">';
+            posted += '<img src="http://www.bistiproofpage.com/wp-content/uploads/2018/04/cute-profile-pics-for-whatsapp-images.png" alt="" class="circle">';
+            posted += '<span class="title"><b>' + title + '</b></span>';
+            posted += '<p>' + commenter + '<br><br>';
+            posted += comment_posted;
+            posted += '</p>';
+            posted += '<a href="#!" class="secondary-content">';
+            for (j=0; j<number_of_stars; j++) {
+              posted += '<i class="material-icons">grade</i>';
+            }
+            posted += '</a>';
+            posted += '</li>';
+          }
+        }
+      }
+      $('#comments').append(posted);
+    });
+        // <li class="collection-item avatar">
+        //     <img src="http://www.bistiproofpage.com/wp-content/uploads/2018/04/cute-profile-pics-for-whatsapp-images.png" alt="" class="circle">
+        //     <span class="title"><b>Awesome movie!</b></span>
+        //     <p>Amy<br><br>
+        //         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        //     </p>
+        //     <a href="#!" class="secondary-content">
+        //         <i class="material-icons">grade</i>
+        //         <i class="material-icons">grade</i>
+        //         <i class="material-icons">grade</i>
+        //         <i class="material-icons">grade</i>
+        //         <i class="material-icons">grade</i>
+        //     </a>
+        // </li>
+
+
 
   </script>
 
