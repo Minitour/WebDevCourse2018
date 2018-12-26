@@ -1,4 +1,5 @@
 <?php
+
     $username = "Unknown";
     // check if user has loging cookies
     if (isset($_COOKIE["username"])) {
@@ -9,6 +10,30 @@
       header("Location: ./login.php");
       die();
     }
+
+    $first_name_value = "";
+    $last_name_value = "";
+    $phone_value = "";
+    $email_value = "";
+    $birthday_value = "";
+    $password_value = "";
+
+    $string = file_get_contents("accounts_json.json");
+    $accounts = json_decode($string, true);
+    foreach ($accounts["accounts"] as $key => $value) {
+      foreach ($value as $key1 => $value1) {
+        if (($key1 == "username") && ($value1 == $username)) {
+          $first_name_value = $value['first_name'];
+          $last_name_value = $value['last_name'];
+          $phone_value = $value['phone'];
+          $email_value = $value['email'];
+          $birthday_value = $value['birthday'];
+          $password_value = $value['password'];
+        }
+      }
+    }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,12 +43,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
-    
+
     <!-- Bootstrap core CSS -->
     <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="css/profile.css" rel="stylesheet">
+    <link href="css/reviews.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" >
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -55,17 +82,97 @@
             input.on('change', ()=> {
                     readURL(input[0]);
             });
-            
+
             $('#change_picture').click(()=>{
                 // add onchange handler if you wish to get the file :)
-                
+
                 input.trigger("click"); // opening dialog
                 return false;
             });
         });
+
+        $(document).ready(function() {
+            var input = $(document.createElement("input"));
+            input.attr("type", "file");
+            input.attr("accept","application/json");
+            input.on('change', ()=> {
+                    //readURL(input[0]);
+            });
+
+            $('#upload_file').click(()=>{
+                // add onchange handler if you wish to get the file :)
+
+                input.trigger("click"); // opening dialog
+                return false;
+            });
+        });
+
     </script>
     <!--/row-->
+
     <script>
+      function edit_profile() {
+        //$('#Button').attr('disabled','disabled');
+        //removing the disabled value for editing the info
+        $('#first_name').removeAttr('disabled value');
+        $('#last_name').removeAttr('disabled value');
+        $('#email').removeAttr('disabled value');
+        $('#phone').removeAttr('disabled value');
+        $('#birthday_date').removeAttr('disabled value');
+        $('#password').removeAttr('disabled value');
+        $('#password-confirm').removeAttr('disabled value');
+
+        // removing the disabled button
+        $('#save_info_button').removeAttr('disabled');
+
+        get_accounts();
+
+      }
+      function readTextFile(file, callback) {
+          var rawFile = new XMLHttpRequest();
+          rawFile.overrideMimeType("application/json");
+          rawFile.open("GET", file, true);
+          rawFile.onreadystatechange = function() {
+              if (rawFile.readyState === 4 && rawFile.status == "200") {
+                  callback(rawFile.responseText);
+              }
+          }
+          rawFile.send(null);
+      }
+
+      function get_accounts() {
+            readTextFile("accounts_json.json", function(text){
+              var data = JSON.parse(text);
+              var accounts = data.accounts;
+
+              for (var account in accounts) {
+                  var username = accounts[account]['username'];
+                  if (username == "<?php echo $username; ?>"){
+                    //console.log(accounts[account]);
+                    var first_name = accounts[account]['first_name'];
+                    var last_name = accounts[account]['last_name'];
+                    var phone = accounts[account]['phone'];
+                    var email = accounts[account]['email'];
+                    var birthday = accounts[account]['birthday'];
+                    var password = accounts[account]['password'];
+
+                    // adding the info into text area to edit it
+                    $('#first_name').attr('value',first_name);
+                    $('#last_name').attr('value',last_name);
+                    $('#email').attr('value',email);
+                    $('#phone').attr('value',phone);
+                    $('#birthday_date').attr('value',birthday);
+                    $('#password').attr('value',password);
+                    $('#password-confirm').attr('value',password);
+                  }
+              }
+            });
+        }
+
+    </script>
+
+    <script>
+
         function validateForm(){
         $(document).ready(function(){
 
@@ -89,12 +196,12 @@
             // check first name and put corrisponding message
             if ((first_name_field != "") && (first_name_field.match(names_regex) != null)) {
             //var first_name_form_message = "<h6 style='color:green;'>Valid Name</h6>";
-            first_name_error_box_element.style.visibility = "hidden";
+            //first_name_error_box_element.style.visibility = "hidden";
             } else {
             checkAllElements = false;
             var first_name_form_message = "<h6 style='color:red;'>Invalid Name</h6>";
             }
-            
+
 
             // checking last name and put corrisponding message
             if ((last_name_field != "") && (last_name_field.match(names_regex) != null)) {
@@ -103,7 +210,7 @@
             checkAllElements = false;
             var last_name_form_message = "<h6 style='color:red;'>Invalid Last Name</h6>";
             }
-            
+
 
             // check birthdate -> will be before today
             var date1 = new Date(birthday_field);
@@ -113,7 +220,7 @@
             checkAllElements = false;
             var birthday_form_message = "<h6 style='color:red;'>Invalid Birthday</h6>";
             }
-            
+
 
             // check phone is not empty
             if (phone_field != "") {
@@ -122,7 +229,7 @@
             checkAllElements = false;
             var phone_form_message = "<h6 style='color:red;'>Invalid Phone</h6>";
             }
-            
+
             // check email_field and put corrisponding message
 
             // regex for mail
@@ -139,7 +246,7 @@
             //TODO: add error message
             var email_form_message = "<h6 style='color:red;'>Invalid Email</h6>";
             }
-            
+
 
 
             // check phone_field - not needed
@@ -176,9 +283,15 @@
             $('#email_error_box').html(email_form_message);
             $('#password_error_box').html(password_form_message);
             $('#password_confirm_error_box').html(password_form_message);
+            //test_func();
+
+            //$('#first_name').attr("disabled value", first_name_field);
             });
+
+
         }
     </script>
+
     <!-- Navigation -->
 <nav class="blue-grey darken-3" role="navigation">
     <div class="nav-wrapper container">
@@ -202,33 +315,11 @@
     <li><a href="collapsible.html">Javascript</a></li>
     <li><a href="mobile.html">Mobile</a></li>
   </ul>
-    <!-- <nav>
-        <div class="container">
-            <a class="navbar-brand" href="/"><img style="width: 100px;" src="./web_dev_pictures/logo.png" alt="Image text"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="login.php">Logout</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"><?php echo $username; ?></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav> -->
-    <div class="container" >
+    <div class="container" id="personal" style="display:cell;">
 
         <div class="row">
-        
+
         </div>
         <div class="row" >
             <div class="col s3" style="padding-margin: 30px">
@@ -239,8 +330,11 @@
                             <img id = "avatar_picture" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="width: 100%; border-radius: 100px;object-fit: cover;" class="avatar img-circle img-thumbnail" alt="avatar">
                         </div>
                         <br>
-                        <div>
+                        <div id="change_picture_div" style="padding-bottom:5px;">
                         <button class="btn waves-effect waves-light" style="width: 100%;" id="change_picture" name="action">Change Picture</button>
+                        </div>
+                        <div id="upload_file_div">
+                        <button class="btn waves-effect waves-light" style="width: 100%;" id="edit_profile" onclick="edit_profile()" name="action">Edit Profile</button>
                         </div>
                         <br>
 
@@ -267,21 +361,48 @@
                             </li>
                         </ul>
                     </div>
+
                 </div>
-
-
-                
-
+                <div id="display_actions" style="display:cell;">
+                  <button class="btn waves-effect waves-light" style="width: 100%;" id="user_actions" name="action">Actions</button>
+                </div>
+                <div id="actions_for_user" class="card" style="display:none;">
+                  <div style="padding-bottom:5px;text-align:center;">
+                    <h5 style="font-weight:bold;">Actions</h5>
+                  </div>
+                  <div style="padding-bottom:5px;padding-top:5px;padding-left:5px;padding-right:5px;">
+                    <button class="btn waves-effect waves-light" style="width: 100%;" id="get_reviews" name="action">Past Reviews</button>
+                  </div>
+                  <?php
+                    function user_has_permissions($user) {
+                      // the permissions will change according to the excersize.
+                      // for now its for Admin user only
+                      if ($user == "Admin"){
+                        return true;
+                      }
+                      else {
+                        return false;
+                      }
+                    }
+                    if (user_has_permissions($username)) {
+                      echo '<div style="padding-bottom:5px;padding-left:5px;padding-right:5px;">';
+                      echo '<button class="btn waves-effect waves-light" style="width: 100%;" id="upload_file" name="action">Upload File</button>';
+                      echo '</div>';
+                    }
+                  ?>
+                </div>
             </div>
-            <!--/col-3-->
 
+            <!--/col-3-->
+            <div>
+            </div>
             <div class="col s8">
                 <div id="home">
-                    <form class="form" action="##" method="post" id="registrationForm">
+                    <form class="form" method="post" action="##" id="registrationForm">
                         <div class="form-group">
 
                             <div class="input-field col s12">
-    					        <input id="first_name" name="first_name" type="text" required>
+    					        <input id="first_name" name="first_name" type="text" disabled value="<?php echo $first_name_value; ?>" required>
                                 <label for="first_name">First Name</label>
                                 <div id="first_name_error_box" name="first_name_error_box">
                             </div>
@@ -289,7 +410,7 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-  						        <input id="last_name" name="last_name" type="text" class="validate" required>
+  						        <input id="last_name" name="last_name" type="text" class="validate" disabled value="<?php echo $last_name_value; ?>" required>
   						        <label for="last_name">Last Name</label>
                                 <div id="last_name_error_box" name="last_name_error_box"></div>
   					        </div>
@@ -298,7 +419,7 @@
                         <div class="form-group">
 
                            <div class="input-field col s12">
-  						        <input id="phone" type="text" class="validate" required>
+  						        <input id="phone" type="text" class="validate" disabled value="<?php echo $phone_value; ?>" required>
   						        <label for="phone-confirm">Phone Confirmation</label>
                                 <div id="phone_error_box" name="phone_error_box"></div>
   					        </div>
@@ -306,14 +427,14 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-  						        <input id="email" type="text" class="validate" required>
+  						        <input id="email" type="text" class="validate" disabled value="<?php echo $email_value; ?>" required>
   						        <label for="email">Email</label>
                                 <div id="email_error_box" name="email_error_box"></div>
   					        </div>
                         </div>
                         <div class="form-group">
                             <div class='input-field col s12'>
-                                <input id="birthday_date" type="text" class="datepicker">
+                                <input id="birthday_date" type="text" class="datepicker" disabled value="<?php echo $birthday_value; ?>">
                                 <label for="birthday_date">Birthday</label>
                                 <div id="birthday_error_box" name="birthday_error_box"></div>
                             </div>
@@ -322,7 +443,7 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-  						        <input id="password" name="location" type="password" class="validate" required>
+  						        <input id="password" name="location" type="password" class="validate" disabled value="<?php echo $password_value; ?>" required>
   						        <label for="password">Password</label>
                             <div id="password_error_box" name="password_error_box"></div>
   					</div>
@@ -330,7 +451,7 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-  						        <input id="password-confirm" name="password-confirm" type="password" class="validate" required>
+  						        <input id="password-confirm" name="password-confirm" type="password" class="validate" disabled value="<?php echo $password_value; ?>" required>
                                 <label for="password-confirm">Password Confirmation</label>
                                 <div id="password_confirm_error_box" name="password_confirm_error_box"></div>
                             </div>
@@ -339,8 +460,8 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <br>
-                                <button class="btn btn-lg btn-success" onclick="validateForm()"><i class="glyphicon glyphicon-ok-sign"></i>
-                                    Save</button>
+                                <button id="save_info_button" class="btn btn-lg btn-success" onclick="validateForm()" type="submit" name="action" disabled><i class="glyphicon glyphicon-ok-sign"></i>
+                                    SAVE</button>
                             </div>
                         </div>
                     </form>
@@ -353,6 +474,97 @@
         </div>
         <!--/col-9-->
     </div>
+  </div>
+  <div class="row" id="comments_all" style="display:none;">
+      <div class="col s12">
+        <h3 style="font-weight:bold;padding-bottom: 20px">Past Reviews</h3>
+        <ul class="collection" id="past_reviews">
+        </ul>
+      </div>
+  </div>
+  <!-- <div id="past_reviews" style="display:none;">
+    <h4>test</h4>
+  </div> -->
+  <script>
+    function readTextFile(file, callback) {
+      var rawFile = new XMLHttpRequest();
+      rawFile.overrideMimeType("application/json");
+      rawFile.open("GET", file, true);
+      rawFile.onreadystatechange = function() {
+          if (rawFile.readyState === 4 && rawFile.status == "200") {
+              callback(rawFile.responseText);
+          }
+      }
+      rawFile.send(null);
+    }
+
+    function construct_comment(profile_img,title,name,review,score) {
+        var comment_item = ""
+        comment_item += '<li class="collection-item avatar">'
+        comment_item += '<img src="' + profile_img + '" alt="" class="circle">'
+        comment_item += '<span class="title"><b>' + title + '</b></span>'
+        comment_item += '<p>' + name + '<br><br>'
+        comment_item += review
+        comment_item += '</p>'
+        comment_item += '<a href="#!" class="secondary-content">'
+        for(var i = 0; i < score; i++){
+            comment_item += '<i class="material-icons">grade</i>'
+        }
+        comment_item += '</a>'
+        comment_item += '</li>'
+
+        return comment_item;
+    }
+
+    $(document).ready(() => {
+        $('#get_reviews').click(()=> {
+          $('#personal').fadeToggle('fast');
+          $('#comments_all').fadeToggle('fast');
+
+          readTextFile("accounts_json.json", function(text){
+              var data = JSON.parse(text);
+              var accounts = data.accounts;
+
+              // iterate over all accounts to find the right one
+              for (var account in accounts) {
+
+                // searching the right account
+                if (accounts[account]['username'] == "<?php echo $username; ?>") {
+
+                  // iterate over the reviews and construct in html
+                  var reviews = accounts[account]['reviews'];
+                  console.log(accounts[account]['reviews']);
+                  var index = 0;
+                  for (var review in reviews) {
+                    let review_comment = reviews[review][index]['comment'];
+                    let title = reviews[review][index]['title'];
+                    let stars = parseInt(reviews[review][index]['number_of_stars']);
+                    let name = reviews[review][index]['commenter'];
+
+                    let commentView = construct_comment("https://catking.in/wp-content/uploads/2017/02/default-profile-1.png",title,name,review_comment,stars);
+                    // $('#textarea1').val("");
+                    // $('#review_title').val("");
+
+                    $('#past_reviews').prepend(commentView);
+                    index += 1;
+                  }
+                }
+              }
+
+          });
+
+        });
+    })
+
+    $(document).ready(() => {
+      $('#user_actions').click(()=> {
+        $('#display_actions').fadeToggle('fast');
+        $('#actions_for_user').fadeToggle('slow');
+      });
+    })
+
+  </script>
+
 </body>
 
 </html>
