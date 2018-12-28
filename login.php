@@ -1,5 +1,6 @@
 <?php
   require_once('./controller/auth.php');
+  require_once('./controller/session_manager.php');
   /*
 
   // MAP REDUCE EXAMPLE
@@ -21,23 +22,22 @@
   */
 
   $auth = new Auth();
-
-  $usr = $auth->login('Admin','Admin');
-  //echo $usr->phone;
-
-  $cookie_name = "username";
-
   
+  $sessionManager = new SessionManager($auth);
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // case post check username and password
       $email = $_POST['email-login'];
       $password = $_POST['password-login'];
-      if (!($password == "Admin") || !($email == "Admin")) {
+
+      $usr_session = $auth->login($email,$password);
+
+      if ($usr_session == null) {
+        // no such account
         header("Location: ./login.php?notRegistered=true");
       }else {
-        $cookie_value = $email;
-        setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+        // username found
+        $sessionManager->createSession($usr_session['session']);
         header("Location: ./index.php?#");
       }
       die();
@@ -45,7 +45,7 @@
 
   if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       // set username cookie to null with 1 ms expiration (remove cookie)
-      setcookie($cookie_name, null, 1, "/");
+      $sessionManager->clearSession();
   }
 ?>
 <!DOCTYPE html>

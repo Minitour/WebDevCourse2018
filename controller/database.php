@@ -54,7 +54,7 @@
         public function insert($collecctionName, $value) {
             $array = $this->read_data($collecctionName);
             array_push($array,$value);
-            $this->write_data($array);
+            $this->write_data($collecctionName,$array);
         }
 
         private function read_data($collectionName) {

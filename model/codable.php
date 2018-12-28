@@ -3,7 +3,11 @@
         /**
          * Create object from json string.
          */
-        function __construct($json){
+        function __construct($json=null){
+
+            if ($json == null) {
+                return;
+            }
 
             if (gettype($json) == string) {
                 $jsonObj = json_decode($json,false);

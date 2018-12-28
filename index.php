@@ -1,13 +1,16 @@
 <?php
-    $username = "Unknown";
-    // check if user has loging cookies
-    if (isset($_COOKIE["username"])) {
-      //proceed to login
-      $username = $_COOKIE["username"];
-    } else {
-      // redirect to logout page.
-      header("Location: ./login.php");
-      die();
+    require_once('./controller/auth.php');
+    require_once('./controller/session_manager.php');
+    
+    $auth = new Auth();
+    $sessionManager = new SessionManager($auth);
+
+    $usr = $sessionManager->currentUser();
+    
+    if ($usr == null) {
+        // die
+        header("Location: ./login.php");
+        die();
     }
 ?>
 <!DOCTYPE html>
@@ -100,7 +103,7 @@
         <li><a href="index.php" class="nav-item active">Home</a></li>
         <li><a href="login.php">Logout</a></li>
         <li><a href="profile.php">
-            <?php echo $username; ?>
+            <?php echo $usr->username; ?>
         </a></li>
       </ul>
     </div>

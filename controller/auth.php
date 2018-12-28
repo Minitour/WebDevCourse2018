@@ -14,6 +14,44 @@
         }
 
         /**
+         * Get the user of a session object.
+         */
+        public function check_session($session) {
+            
+            $query = function($entry) use ($session) {
+                $record = new Session($entry);
+                return ($record->user_id == $session->user_id &&
+                 $record->session_token == $session->session_token);
+            };
+
+            $sessionEntry = $this->db->findOne('sessions',$query);
+            
+
+            if($sessionEntry == NULL) { return NULL; }
+
+            $session = new Session($sessionEntry);
+
+
+            // find user object
+            $id = $session->user_id;
+
+            
+            $userQuery = function($usrEntry) use ($id){
+                $usr = new User($usrEntry);
+                return ($usr->id == $id);
+            };
+
+            // get the user object
+            $usrObj = $this->db->findOne('users', $userQuery);
+
+            // if findOne returned null then return null.
+            if($usrObj == NULL) { return NULL; }
+
+            // cast to our data model.
+            return new User($usrObj);
+        }
+
+        /**
          * login function
          */
         public function login($username, $password){
@@ -41,7 +79,7 @@
             $new_session->session_token = $this->gen_uuid();
             $new_session->user_id = $user->id;
 
-            $this->$db->insert('sessions',$new_session);
+            $this->db->insert('sessions',$new_session);
 
             return array('user'=> $user, 'session'=> $new_session);
         }
