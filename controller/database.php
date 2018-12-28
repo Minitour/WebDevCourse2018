@@ -4,7 +4,8 @@
         var $collections = array(
             'users' => __DIR__ .'/../storage/accounts_json.json' ,
             'movies' => __DIR__ .'/../storage/movies_info.json' ,
-            'reviews' => __DIR__ .'/../storage/reviews_comments.json'
+            'reviews' => __DIR__ .'/../storage/reviews_comments.json',
+            'sessions' => __DIR__ .'/../storage/sessions.json'
         );
 
         /**
