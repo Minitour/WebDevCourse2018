@@ -1,7 +1,13 @@
 <?php
-  require_once('./model/user.php');
+  require_once('./controller/auth.php');
+  $auth = new Auth();
+
+  $usr = $auth->login('Admin','Admin');
+  echo $usr->phone;
 
   $cookie_name = "username";
+
+  
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // case post check username and password

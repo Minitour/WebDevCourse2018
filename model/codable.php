@@ -3,9 +3,14 @@
         /**
          * Create object from json string.
          */
-        function __construct($json_string){
-        
-            $jsonObj = json_decode($json_string,false);
+        function __construct($json){
+
+            if (gettype($json) == string) {
+                $jsonObj = json_decode($json,false);
+            }else {
+                $jsonObj = json_decode(json_encode($json),false);
+            }
+            
             // foreach($jsonArray as $key=>$value) {
             //     $this->$key = $value;
             // }
