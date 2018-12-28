@@ -1,4 +1,6 @@
 <?php
+  require_once('./model/user.php');
+
   $cookie_name = "username";
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
