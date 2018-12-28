@@ -1,13 +1,18 @@
 <?php
-    $username = "Unknown";
-    // check if user has loging cookies
-    if (isset($_COOKIE["username"])) {
-      //proceed to login
-      $username = $_COOKIE["username"];
-    } else {
-      // redirect to logout page.
-      header("Location: ./login.php");
-      die();
+    require_once('./controller/auth.php');
+    require_once('./controller/session_manager.php');
+
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        $auth = new Auth();
+        $sessionManager = new SessionManager($auth);
+
+        $usr = $sessionManager->currentUser();
+    
+        if ($usr == null) {
+            // die
+            header("Location: ./login.php");
+            die();
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -61,7 +66,7 @@
         <li><a href="index.php?#">Home</a></li>
         <li><a href="login.php">Logout</a></li>
         <li class="nav-item"><a href="profile.php">
-            <?php echo $username; ?>
+            <?php echo $usr->username; ?>
         </a></li>
       </ul>
     </div>
@@ -341,7 +346,7 @@
         let review = $('#textarea1').val();
         let title = $('#review_title').val();
         let stars = parseInt($('input[name=rating]:checked', '#star_rating_form').val())
-        let name = "<?php echo $username; ?>"
+        let name = "<?php echo $usr->username; ?>"
 
         let commentView = construct_comment("https://catking.in/wp-content/uploads/2017/02/default-profile-1.png",title,name,review,stars);
         $('#textarea1').val("");
