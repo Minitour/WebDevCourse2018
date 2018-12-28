@@ -27,6 +27,7 @@
     },
  */
     class User extends Codable{
+        var $id;
         var $username; //string
         var $first_name; //string
         var $last_name; //string

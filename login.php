@@ -1,9 +1,29 @@
 <?php
   require_once('./controller/auth.php');
+  /*
+
+  // MAP REDUCE EXAMPLE
+
+  require_once('./controller/database.php');
+  require_once('./model/review.php');
+  $db = new Database();
+
+  $result = $db->mapReduce('reviews', function($object, $emit) {
+      //map
+      $review = new Review($object);
+      $emit($review->user_id,1);
+
+  }, function($values) {
+      return array_sum($values);
+  });
+
+  var_dump($result);
+  */
+
   $auth = new Auth();
 
   $usr = $auth->login('Admin','Admin');
-  echo $usr->phone;
+  //echo $usr->phone;
 
   $cookie_name = "username";
 
