@@ -16,7 +16,7 @@
     }
     
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+        header("Location: /");
         die();
     }
 ?>
@@ -156,10 +156,10 @@
             // check birthdate -> will be before today
             var date1 = new Date(birthday_field);
             if (date1 < new Date()) {
-            //var birthday_form_message = "<h6 style='color:green;'>Valid Birthday</h6>";
+                var birthday_form_message = "<h6 style='color:green;'>Valid Birthday</h6>";
             } else {
-            checkAllElements = false;
-            var birthday_form_message = "<h6 style='color:red;'>Invalid Birthday</h6>";
+                checkAllElements = false;
+                var birthday_form_message = "<h6 style='color:red;'>Invalid Birthday</h6>";
             }
 
 
@@ -308,7 +308,7 @@
                   <button class="btn waves-effect waves-light" style="width: 100%;" id="user_actions" name="action">Actions</button>
                 </div>
                 <div id="actions_for_user" class="card" style="display:none;">
-                  <div style="padding-bottom:5px;text-align:center;">
+                  <div style="padding:5px;text-align:center;">
                     <h5 style="font-weight:bold;">Actions</h5>
                   </div>
                   <div style="padding-bottom:5px;padding-top:5px;padding-left:5px;padding-right:5px;">
@@ -335,7 +335,7 @@
             </div>
             <div class="col s8">
                 <div id="home">
-                    <form class="form" method="post" action="##" id="registrationForm">
+                    <div  id="registrationForm">
                         <div class="form-group">
 
                             <div class="input-field col s12">
@@ -397,11 +397,11 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <br>
-                                <button id="save_info_button" class="btn btn-lg btn-success" onclick="validateForm()" type="submit" name="action" disabled><i class="glyphicon glyphicon-ok-sign"></i>
+                                <button id="save_info_button" class="btn btn-lg btn-success" onclick="validateForm()" name="action" disabled><i class="glyphicon glyphicon-ok-sign"></i>
                                     SAVE</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
 
 
                 </div>
@@ -427,7 +427,7 @@
                  $reviewsCount = count($reviews);                
             ?>
       <div class="col s12">
-        <h3 style="font-weight:bold;padding-bottom: 20px">Past Reviews <?php echo $reviewsCount?></h3>
+        <h3 style="font-weight:bold;padding-bottom: 20px">Past Reviews: <?php echo $reviewsCount?></h3>
         <ul class="collection" id="past_reviews">
             <?php
                 // construct reviews
@@ -470,24 +470,6 @@
     <h4>test</h4>
   </div> -->
   <script>
-
-    function construct_comment(profile_img,title,name,review,score) {
-        var comment_item = ""
-        comment_item += '<li class="collection-item avatar">'
-        comment_item += '<img src="' + profile_img + '" alt="" class="circle">'
-        comment_item += '<span class="title"><b>' + title + '</b></span>'
-        comment_item += '<p>' + name + '<br><br>'
-        comment_item += review
-        comment_item += '</p>'
-        comment_item += '<a href="#!" class="secondary-content">'
-        for(var i = 0; i < score; i++){
-            comment_item += '<i class="material-icons">grade</i>'
-        }
-        comment_item += '</a>'
-        comment_item += '</li>'
-
-        return comment_item;
-    }
 
     $(document).ready(() => {
         $('#get_reviews').click(()=> {
