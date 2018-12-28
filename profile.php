@@ -2,41 +2,23 @@
     require_once('./controller/auth.php');
     require_once('./controller/session_manager.php');
 
-    $auth = new Auth();
-    $sessionManager = new SessionManager($auth);
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        $auth = new Auth();
+        $sessionManager = new SessionManager($auth);
 
-    $usr = $sessionManager->currentUser();
+        $usr = $sessionManager->currentUser();
     
-    if ($usr == null) {
-        // die
-        header("Location: ./login.php");
+        if ($usr == null) {
+            // die
+            header("Location: ./login.php");
+            die();
+        }
+    }
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
         die();
     }
-
-    /*
-    $first_name_value = "";
-    $last_name_value = "";
-    $phone_value = "";
-    $email_value = "";
-    $birthday_value = "";
-    $password_value = "";
-
-    $string = file_get_contents("accounts_json.json");
-    $accounts = json_decode($string, true);
-    foreach ($accounts["accounts"] as $key => $value) {
-      foreach ($value as $key1 => $value1) {
-        if (($key1 == "username") && ($value1 == $username)) {
-          $first_name_value = $value['first_name'];
-          $last_name_value = $value['last_name'];
-          $phone_value = $value['phone'];
-          $email_value = $value['email'];
-          $birthday_value = $value['birthday'];
-          $password_value = $value['password'];
-        }
-      }
-    }*/
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,9 +69,7 @@
             });
 
             $('#change_picture').click(()=>{
-                // add onchange handler if you wish to get the file :)
-
-                input.trigger("click"); // opening dialog
+                input.trigger("click"); 
                 return false;
             });
         });
@@ -103,9 +83,7 @@
             });
 
             $('#upload_file').click(()=>{
-                // add onchange handler if you wish to get the file :)
-
-                input.trigger("click"); // opening dialog
+                input.trigger("click");
                 return false;
             });
         });
@@ -117,60 +95,20 @@
       function edit_profile() {
         //$('#Button').attr('disabled','disabled');
         //removing the disabled value for editing the info
-        $('#first_name').removeAttr('disabled value');
-        $('#last_name').removeAttr('disabled value');
-        $('#email').removeAttr('disabled value');
-        $('#phone').removeAttr('disabled value');
-        $('#birthday_date').removeAttr('disabled value');
-        $('#password').removeAttr('disabled value');
-        $('#password-confirm').removeAttr('disabled value');
+        $('#first_name').removeAttr('disabled');
+        $('#last_name').removeAttr('disabled');
+        $('#email').removeAttr('disabled');
+        $('#phone').removeAttr('disabled');
+        $('#birthday_date').removeAttr('disabled');
+        $('#password').removeAttr('disabled');
+        $('#password-confirm').removeAttr('disabled');
 
         // removing the disabled button
         $('#save_info_button').removeAttr('disabled');
 
-        get_accounts();
+        //get_accounts();
 
       }
-      function readTextFile(file, callback) {
-          var rawFile = new XMLHttpRequest();
-          rawFile.overrideMimeType("application/json");
-          rawFile.open("GET", file, true);
-          rawFile.onreadystatechange = function() {
-              if (rawFile.readyState === 4 && rawFile.status == "200") {
-                  callback(rawFile.responseText);
-              }
-          }
-          rawFile.send(null);
-      }
-
-      function get_accounts() {
-            readTextFile("accounts_json.json", function(text){
-              var data = JSON.parse(text);
-              var accounts = data.accounts;
-
-              for (var account in accounts) {
-                  var username = accounts[account]['username'];
-                  if (username == "<?php echo $username; ?>"){
-                    //console.log(accounts[account]);
-                    var first_name = accounts[account]['first_name'];
-                    var last_name = accounts[account]['last_name'];
-                    var phone = accounts[account]['phone'];
-                    var email = accounts[account]['email'];
-                    var birthday = accounts[account]['birthday'];
-                    var password = accounts[account]['password'];
-
-                    // adding the info into text area to edit it
-                    $('#first_name').attr('value',first_name);
-                    $('#last_name').attr('value',last_name);
-                    $('#email').attr('value',email);
-                    $('#phone').attr('value',phone);
-                    $('#birthday_date').attr('value',birthday);
-                    $('#password').attr('value',password);
-                    $('#password-confirm').attr('value',password);
-                  }
-              }
-            });
-        }
 
     </script>
 
@@ -306,7 +244,7 @@
         <li><a href="index.php?#">Home</a></li>
         <li><a href="login.php">Logout</a></li>
         <li class="nav-item active"><a href="profile.php">
-            <?php echo $username; ?>
+            <?php echo $usr->username; ?>
         </a></li>
       </ul>
     </div>
@@ -380,14 +318,10 @@
                     function user_has_permissions($user) {
                       // the permissions will change according to the excersize.
                       // for now its for Admin user only
-                      if ($user == "Admin"){
-                        return true;
-                      }
-                      else {
-                        return false;
-                      }
+                      return $user->isAdmin();
                     }
-                    if (user_has_permissions($username)) {
+
+                    if (user_has_permissions($usr)) {
                       echo '<div style="padding-bottom:5px;padding-left:5px;padding-right:5px;">';
                       echo '<button class="btn waves-effect waves-light" style="width: 100%;" id="upload_file" name="action">Upload File</button>';
                       echo '</div>';
@@ -479,9 +413,56 @@
     </div>
   </div>
   <div class="row" id="comments_all" style="display:none;">
+            <?php 
+                require_once('./controller/database.php');
+                require_once('./model/review.php');
+
+                $reviews_db = new Database();
+
+                $reviews = $reviews_db->find('reviews',function($entry) use ($usr) {
+                    $reviewItem = new Review($entry);
+                    
+                    return $reviewItem->user_id == $usr->id;
+                });
+                 $reviewsCount = count($reviews);                
+            ?>
       <div class="col s12">
-        <h3 style="font-weight:bold;padding-bottom: 20px">Past Reviews</h3>
+        <h3 style="font-weight:bold;padding-bottom: 20px">Past Reviews <?php echo $reviewsCount?></h3>
         <ul class="collection" id="past_reviews">
+            <?php
+                // construct reviews
+                function construct_comment($profile_img,$title,$name,$review,$score) {
+                    $comment_item = "";
+                    $comment_item .= '<li class="collection-item avatar">';
+                    $comment_item .= '<img src="' . $profile_img . '" alt="" class="circle">';
+                    $comment_item .= '<span class="title"><b>' . $title . '</b></span>';
+                    $comment_item .= '<p>' . $name . '<br><br>';
+                    $comment_item .= $review;
+                    $comment_item .= '</p>';
+                    $comment_item .= '<a href="#!" class="secondary-content">';
+                    for($i = 0; $i < $score; $i++){
+                        $comment_item .= '<i class="material-icons">grade</i>';
+                    }
+                    $comment_item .= '</a>';
+                    $comment_item .= '</li>';
+            
+                    return $comment_item;
+                } 
+
+                $profile_image = $usr->profile_picture;
+                $name = $usr->first_name . ' ' . $usr->last_name;
+                
+                foreach($reviews as $entry) {
+                    $reviewItem = new Review($entry);
+                    $title = $reviewItem->title;
+                    $reviewText = $reviewItem->comment;
+                    $number_of_stars = $reviewItem->number_of_stars;
+
+                    
+                    $reviewView = construct_comment($profile_image,$title,$name,$reviewText,$number_of_stars);
+                    echo $reviewView;
+                }
+            ?>
         </ul>
       </div>
   </div>
@@ -489,17 +470,6 @@
     <h4>test</h4>
   </div> -->
   <script>
-    function readTextFile(file, callback) {
-      var rawFile = new XMLHttpRequest();
-      rawFile.overrideMimeType("application/json");
-      rawFile.open("GET", file, true);
-      rawFile.onreadystatechange = function() {
-          if (rawFile.readyState === 4 && rawFile.status == "200") {
-              callback(rawFile.responseText);
-          }
-      }
-      rawFile.send(null);
-    }
 
     function construct_comment(profile_img,title,name,review,score) {
         var comment_item = ""
@@ -523,39 +493,6 @@
         $('#get_reviews').click(()=> {
           $('#personal').fadeToggle('fast');
           $('#comments_all').fadeToggle('fast');
-
-          readTextFile("accounts_json.json", function(text){
-              var data = JSON.parse(text);
-              var accounts = data.accounts;
-
-              // iterate over all accounts to find the right one
-              for (var account in accounts) {
-
-                // searching the right account
-                if (accounts[account]['username'] == "<?php echo $username; ?>") {
-
-                  // iterate over the reviews and construct in html
-                  var reviews = accounts[account]['reviews'];
-                  console.log(accounts[account]['reviews']);
-                  var index = 0;
-                  for (var review in reviews) {
-                    let review_comment = reviews[review][index]['comment'];
-                    let title = reviews[review][index]['title'];
-                    let stars = parseInt(reviews[review][index]['number_of_stars']);
-                    let name = reviews[review][index]['commenter'];
-
-                    let commentView = construct_comment("https://catking.in/wp-content/uploads/2017/02/default-profile-1.png",title,name,review_comment,stars);
-                    // $('#textarea1').val("");
-                    // $('#review_title').val("");
-
-                    $('#past_reviews').prepend(commentView);
-                    index += 1;
-                  }
-                }
-              }
-
-          });
-
         });
     })
 

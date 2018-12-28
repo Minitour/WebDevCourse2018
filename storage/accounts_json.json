@@ -7,7 +7,8 @@
     "phone": "12333333",
     "email": "something@wmail.com",
     "birthday": "12/3/16",
-    "password": "Admin"
+    "password": "Admin",
+    "role_id" : 1
   },
   {
     "id" : 1,
@@ -17,7 +18,8 @@
     "phone": "45678456",
     "email": "lorance@gmail.com",
     "birthday": "13/2/14",
-    "password": "45678"
+    "password": "45678",
+    "role_id" : 2
   },
   {
     "id" : 2,
@@ -27,6 +29,7 @@
     "phone": "567898765",
     "email": "natalie@gmail.com",
     "birthday": "15/6/11",
-    "password": "1234567"
+    "password": "1234567",
+    "role_id" : 2
   }
 ]

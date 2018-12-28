@@ -1,12 +1,6 @@
 <?php
     require_once('codable.php');
-    /*
-    "title": "Awesome!",
-            "commenter": "Amy",
-            "comment": "BEST MOVIE EVER",
-            "number_of_stars": "5"
-    */
-
+    
     class Review extends Codable {
         var $id; // comment id
         var $title; // string
