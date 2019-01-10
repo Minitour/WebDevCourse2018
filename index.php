@@ -43,7 +43,10 @@
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
+  <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+  
   <style>
     .checked {
       color: orange;
@@ -87,6 +90,81 @@
       margin:auto;
     }
   </style>
+  
+  <style>
+    div#first_tag {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    div#first_tag .search-wrapper {
+      position: relative;
+    }
+    div#first_tag .search-wrapper input {
+      padding: 4px 12px;
+      color: rgba(0, 0, 0, .70);
+      border: 1px solid rgba(0, 0, 0, .12);
+      transition: 0.15s all ease-in-out;
+      background: white;
+    }
+    div#first_tag .search-wrapper input:focus {
+      outline: none;
+      transform: scale(1.05);
+    }
+    div#first_tag .search-wrapper input::-webkit-input-placeholder {
+      font-size: 14px;
+      color: rgba(0, 0, 0, .50);
+      font-weight: 100;
+    }
+    div#first_tag .wrapper {
+      display: flex;
+      max-width: 1200px;
+      flex-wrap: wrap;
+      padding-top: 12px;
+    }
+    div#first_tag .card {
+      box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+      max-width: 400px;
+      margin: 12px;
+      transition: 0.15s all ease-in-out;
+    }
+    div#first_tag .card:hover {
+      transform: scale(1.1);
+    }
+    div#first_tag .card a {
+      text-decoration: none;
+      padding: 12px;
+      color: black;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+    }
+    div#first_tag .card a img {
+      height: 400px;
+    }
+    div#first_tag .box {
+      width: 100px;
+      height: 100px;
+      border: 1px solid rgba(0, 0, 0, .12);
+    }
+    #master_wrap {
+      text-align: center;
+      width: 600px;
+      margin:auto;
+      overflow:hidden;
+    }
+    #div_wrap_search {
+      width: 300px;
+      float:left;
+    }
+    #div_wrap_categories {
+      width: 200px;
+      padding-top:5px;
+      float:right;
+    }
+  </style>
 </head>
 
 <body>
@@ -111,17 +189,7 @@
 
 
 <div>
-  <div style="text-align:center;padding-top: 20px">
-      <div id="wrapper_div" class="row">
-        <div id="tabs_div_1" class="col s9">
-          <input type="text" id="search-bar" placeholder="What movie are you looking for?">
-          <a class="search-icon" href="#"><i class="fas fa-search"></i></a>
-        </div>
-        <div id="tabs_div_2" class="col s3">
-          <button id="cat_btn" class="waves-effect waves-light btn">Categories</button>
-        </div>
-      </div>
-  </div>
+
   <div>
     <table id="table_tabs" style="display:none;">
       <tbody>
@@ -179,14 +247,6 @@
               <input type="checkbox" name="1" value>
               <span>
                 <a><b>Sport</b></a>
-              </span>
-            </label>
-          </td>
-          <td>
-            <label>
-              <input type="checkbox" name="2" value>
-              <span>
-                <a><b>Romance</b></a>
               </span>
             </label>
           </td>
@@ -248,14 +308,6 @@
               </span>
             </label>
           </td>
-          <td>
-            <label>
-              <input type="checkbox" name="4" value>
-              <span>
-                <a><b>Animation</b></a>
-              </span>
-            </label>
-          </td>
         </tr>
       </tbody>
     </table>
@@ -270,7 +322,22 @@
 
 
     <div class="row" id="first_tag">
-
+      <div id="master_wrap">  
+        <div class="search-wrapper" id="div_wrap_search">
+          <input type="text" v-model="search" placeholder="Search title.."/>
+        </div>
+        <div id="tabs_div_2" id="div_wrap_categories" style="width:200px;">
+          <button id="cat_btn" class="waves-effect waves-light btn">Categories</button>
+        </div>
+      </div>
+      <div class="wrapper">
+        <div class="card" v-for="post in filteredList">
+          <a v-bind:href="post.link" target="_blank">
+          <img v-bind:src="post.img"/>
+            {{ post.name }}
+          </a>
+      </div>
+    </div>
     </div>
     <!-- /.row -->
 
@@ -351,6 +418,7 @@
     card_html += '</div>'
     card_html += '</div>'
     card_html += '</div>'
+
     return card_html;
   }
   function readTextFile(file, callback) {
@@ -364,20 +432,62 @@
     }
     rawFile.send(null);
   }
-  readTextFile("movies_info.json", function(text){
+
+  
+
+  function getCards(){
+    var all_movies = [];
+    readTextFile("movies_info.json", function(text){
       var data = JSON.parse(text);
       var movies = data.movies;
       var index = 0;
       for (var movie in movies) {
         let movie_name = movies[movie]['name'];
         let movie_details = movies[movie];
-        let cardHtml = get_card(index,movie_name,movie_details);
-        $('#first_tag').append(cardHtml);
+        //let cardHtml = get_card(index,movie_name,movie_details);
+        let movie_post = new Post(movie_name, movies[movie]['cover']);
+        //$('#first_tag').append(cardHtml);
+        all_movies.push(movie_post);
         index += 1;
       }
-  });
+    });
+    return all_movies;
+  }
 
+
+  // console.log(all_movies);
+  class Post {
+    constructor(name, img) {
+      this.name = name;
+      this.img = img;
+    }
+  }
+
+const app = new Vue ({
+  el: '#first_tag',
+  data: {
+    search: '',
+    postList : getCards()
+//     [
+//       new Post(
+//         'Vue.js', 
+//         'https://vuejs.org/', 
+//         'Chris', 
+//         'https://vuejs.org//images/logo.png'
+//       )
+// ]
+  },
+  computed: {
+    filteredList() {
+      return this.postList.filter(post => {
+        return post.name.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
+  }
+})
   </script>
+
+
 
   <script>
     $(document).ready(() => {
