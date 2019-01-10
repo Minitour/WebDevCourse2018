@@ -91,6 +91,7 @@
     }
   </style>
   
+  <!-- this is the style for the vueJS -->
   <style>
     div#first_tag {
       display: flex;
@@ -164,6 +165,48 @@
       padding-top:5px;
       float:right;
     }
+  </style>
+
+  <!-- this is the style for the overlay -->
+  <style>
+  .card {
+    position: relative;
+  }
+
+  .image {
+    opacity: 1;
+    display: block;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+
+  .middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%); */
+    /* text-align: center; */
+  }
+
+  .card:hover .image {
+    opacity: 0.3;
+  }
+
+  .card:hover .middle {
+    opacity: 1;
+  }
+
+  .middle p{
+    /* background-color: #4CAF50; */
+    color: black;
+    font-size: 16px;
+    max-width: 255px;
+    /* padding: 16px 32px; */
+  }
   </style>
 </head>
 
@@ -332,12 +375,17 @@
       </div>
       <div class="wrapper">
         <div class="card" v-for="post in filteredList">
-          <a v-bind:href="post.link" target="_blank">
-          <img v-bind:src="post.img"/>
+          <a v-bind:href="post">
+          <img v-bind:src="post.img" class="image"/><br>
             {{ post.name }}
+          <div class="middle">
+            <h5 style="font-weight:bold;">{{ post.name }}</h5>
+            <p v-html="post.stars"><?php echo"{{ post.stars }}";?></p><br>
+            <p>{{ post.info }}</p>
+          </div>
           </a>
+        </div>
       </div>
-    </div>
     </div>
     <!-- /.row -->
 
@@ -379,48 +427,48 @@
   <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
   <!-- <script src="./pictures.js"></script> -->
   <script>
-  function get_card(index,movie_name,movie_details){
-    let cover = movie_details.cover;
-    let title = movie_name;
-    console.log(title);
-    let description = movie_details.plot;
-    let reviews_url = '/reviews.php?movie=' + index;
-    const stars_number = 5;
+  // function get_card(index,movie_name,movie_details){
+  //   let cover = movie_details.cover;
+  //   let title = movie_name;
+  //   console.log(title);
+  //   let description = movie_details.plot;
+  //   let reviews_url = '/reviews.php?movie=' + index;
+  //   const stars_number = 5;
 
-    let star_rating = movie_details.ratings;
-    let number_of_empty_stars = stars_number - star_rating;
+  //   let star_rating = movie_details.ratings;
+  //   let number_of_empty_stars = stars_number - star_rating;
 
-    let ratings = "<p><span style='font-weight:bold;'></span>";
-    for (j=0; j<star_rating; j++) {
-      ratings += "<span class='fa fa-star checked'></span>";
-    }
-    for (j=0; j<number_of_empty_stars; j++) {
-      ratings += "<span class='fa fa-star'></span>";
-    }
-    ratings += "</p>";
+  //   let ratings = "<p><span style='font-weight:bold;'></span>";
+  //   for (j=0; j<star_rating; j++) {
+  //     ratings += "<span class='fa fa-star checked'></span>";
+  //   }
+  //   for (j=0; j<number_of_empty_stars; j++) {
+  //     ratings += "<span class='fa fa-star'></span>";
+  //   }
+  //   ratings += "</p>";
 
-    let card_html = "";
-    card_html += '<div class="col s4">'
-    card_html += '<div class="card">'
-    card_html += '<div class="card-image waves-effect waves-block waves-light">'
-    card_html += '<img class="activator" src="'+ cover + '">'
-    card_html += '</div>'
-    card_html += '<div class="card-content">'
-    card_html += '<span class="card-title activator grey-text text-darken-4">' + title + '<i class="material-icons right">more_vert</i></span>'
-    card_html += ratings
-    card_html += '<br>'
-    card_html += '<p><a href="'+ reviews_url + '">See Reviews</a></p>'
-    card_html += '</div>'
-    card_html += '<div class="card-reveal">'
-    card_html += '<span class="card-title grey-text text-darken-4">' + title + '<i class="material-icons right">close</i></span>'
-    card_html += ratings
-    card_html += '<p>'+ description + '</p>'
-    card_html += '</div>'
-    card_html += '</div>'
-    card_html += '</div>'
+  //   let card_html = "";
+  //   card_html += '<div class="col s4">'
+  //   card_html += '<div class="card">'
+  //   card_html += '<div class="card-image waves-effect waves-block waves-light">'
+  //   card_html += '<img class="activator" src="'+ cover + '">'
+  //   card_html += '</div>'
+  //   card_html += '<div class="card-content">'
+  //   card_html += '<span class="card-title activator grey-text text-darken-4">' + title + '<i class="material-icons right">more_vert</i></span>'
+  //   card_html += ratings
+  //   card_html += '<br>'
+  //   card_html += '<p><a href="'+ reviews_url + '">See Reviews</a></p>'
+  //   card_html += '</div>'
+  //   card_html += '<div class="card-reveal">'
+  //   card_html += '<span class="card-title grey-text text-darken-4">' + title + '<i class="material-icons right">close</i></span>'
+  //   card_html += ratings
+  //   card_html += '<p>'+ description + '</p>'
+  //   card_html += '</div>'
+  //   card_html += '</div>'
+  //   card_html += '</div>'
 
-    return card_html;
-  }
+  //   return card_html;
+  // }
   function readTextFile(file, callback) {
     var rawFile = new XMLHttpRequest();
     rawFile.overrideMimeType("application/json");
@@ -445,8 +493,23 @@
         let movie_name = movies[movie]['name'];
         let movie_details = movies[movie];
         //let cardHtml = get_card(index,movie_name,movie_details);
-        let movie_post = new Post(movie_name, movies[movie]['cover']);
-        //$('#first_tag').append(cardHtml);
+        
+        // adding the stars to the modal
+        let star_rating = movies[movie]['ratings'];
+        let number_of_empty_stars = 5 - star_rating;
+
+        let ratings = "";
+        for (j=0; j<star_rating; j++) {
+          ratings += "<span class='fa fa-star checked'></span>";
+        }
+        for (j=0; j<number_of_empty_stars; j++) {
+          ratings += "<span class='fa fa-star'></span>";
+        }
+        let movie_post = new Post(movie_name, movies[movie]['cover'], ratings, movies[movie]['plot']);
+      
+        //console.log(ratings);
+        //$('#stars_ratings').append(ratings);
+
         all_movies.push(movie_post);
         index += 1;
       }
@@ -457,34 +520,28 @@
 
   // console.log(all_movies);
   class Post {
-    constructor(name, img) {
+    constructor(name, img, stars, info) {
       this.name = name;
       this.img = img;
+      this.stars = stars;
+      this.info = info;
     }
   }
 
-const app = new Vue ({
-  el: '#first_tag',
-  data: {
-    search: '',
-    postList : getCards()
-//     [
-//       new Post(
-//         'Vue.js', 
-//         'https://vuejs.org/', 
-//         'Chris', 
-//         'https://vuejs.org//images/logo.png'
-//       )
-// ]
-  },
-  computed: {
-    filteredList() {
-      return this.postList.filter(post => {
-        return post.name.toLowerCase().includes(this.search.toLowerCase())
-      })
+  const app = new Vue ({
+    el: '#first_tag',
+    data: {
+      search: '',
+      postList : getCards()
+    },
+    computed: {
+      filteredList() {
+        return this.postList.filter(post => {
+          return post.name.toLowerCase().includes(this.search.toLowerCase())
+        })
+      }
     }
-  }
-})
+  })
   </script>
 
 
