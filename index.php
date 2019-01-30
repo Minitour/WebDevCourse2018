@@ -226,6 +226,7 @@
         <li><a href="profile.php">
             <?php echo $usr->username; ?>
         </a></li>
+        <li><a href="cart.php">Cart</a></li>
       </ul>
     </div>
   </nav>
@@ -375,7 +376,7 @@
       </div>
       <div class="wrapper">
         <div class="card" v-for="post in filteredList">
-          <a v-bind:href="post">
+          <a v-bind:href="post.url">
           <img v-bind:src="post.img" class="image"/><br>
             {{ post.name }}
           <div class="middle">
@@ -419,129 +420,84 @@
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Antonio Zaitoun & Tomer Goldfeder Movies 2018</p>
     </div>
-    <!-- /.container -->
   </footer>
 
-  <!-- Bootstrap core JavaScript -->
-
-  <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
-  <!-- <script src="./pictures.js"></script> -->
   <script>
-  // function get_card(index,movie_name,movie_details){
-  //   let cover = movie_details.cover;
-  //   let title = movie_name;
-  //   console.log(title);
-  //   let description = movie_details.plot;
-  //   let reviews_url = '/reviews.php?movie=' + index;
-  //   const stars_number = 5;
 
-  //   let star_rating = movie_details.ratings;
-  //   let number_of_empty_stars = stars_number - star_rating;
-
-  //   let ratings = "<p><span style='font-weight:bold;'></span>";
-  //   for (j=0; j<star_rating; j++) {
-  //     ratings += "<span class='fa fa-star checked'></span>";
-  //   }
-  //   for (j=0; j<number_of_empty_stars; j++) {
-  //     ratings += "<span class='fa fa-star'></span>";
-  //   }
-  //   ratings += "</p>";
-
-  //   let card_html = "";
-  //   card_html += '<div class="col s4">'
-  //   card_html += '<div class="card">'
-  //   card_html += '<div class="card-image waves-effect waves-block waves-light">'
-  //   card_html += '<img class="activator" src="'+ cover + '">'
-  //   card_html += '</div>'
-  //   card_html += '<div class="card-content">'
-  //   card_html += '<span class="card-title activator grey-text text-darken-4">' + title + '<i class="material-icons right">more_vert</i></span>'
-  //   card_html += ratings
-  //   card_html += '<br>'
-  //   card_html += '<p><a href="'+ reviews_url + '">See Reviews</a></p>'
-  //   card_html += '</div>'
-  //   card_html += '<div class="card-reveal">'
-  //   card_html += '<span class="card-title grey-text text-darken-4">' + title + '<i class="material-icons right">close</i></span>'
-  //   card_html += ratings
-  //   card_html += '<p>'+ description + '</p>'
-  //   card_html += '</div>'
-  //   card_html += '</div>'
-  //   card_html += '</div>'
-
-  //   return card_html;
-  // }
-  function readTextFile(file, callback) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.overrideMimeType("application/json");
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function() {
-        if (rawFile.readyState === 4 && rawFile.status == "200") {
-            callback(rawFile.responseText);
-        }
+    function readTextFile(file, callback) {
+      var rawFile = new XMLHttpRequest();
+      rawFile.overrideMimeType("application/json");
+      rawFile.open("GET", file, true);
+      rawFile.onreadystatechange = function() {
+          if (rawFile.readyState === 4 && rawFile.status == "200") {
+              callback(rawFile.responseText);
+          }
+      }
+      rawFile.send(null);
     }
-    rawFile.send(null);
-  }
 
-  
+    
 
-  function getCards(){
-    var all_movies = [];
-    readTextFile("movies_info.json", function(text){
-      var data = JSON.parse(text);
-      var movies = data.movies;
-      var index = 0;
-      for (var movie in movies) {
-        let movie_name = movies[movie]['name'];
-        let movie_details = movies[movie];
-        //let cardHtml = get_card(index,movie_name,movie_details);
+    function getCards(){
+      var all_movies = [];
+      readTextFile("movies_info.json", function(text){
+        var data = JSON.parse(text);
+        var movies = data.movies;
+        var index = 0;
+        for (var movie in movies) {
+          let movie_name = movies[movie]['name'];
+          let movie_details = movies[movie];
+          //let cardHtml = get_card(index,movie_name,movie_details);
+          
+          // adding the stars to the modal
+          let star_rating = movies[movie]['ratings'];
+          let number_of_empty_stars = 5 - star_rating;
+
+          let ratings = "";
+          for (j=0; j<star_rating; j++) {
+            ratings += "<span class='fa fa-star checked'></span>";
+          }
+          for (j=0; j<number_of_empty_stars; j++) {
+            ratings += "<span class='fa fa-star'></span>";
+          }
+          let movie_post = new Post(movie_name, movies[movie]['cover'], ratings, movies[movie]['plot'], index);
         
-        // adding the stars to the modal
-        let star_rating = movies[movie]['ratings'];
-        let number_of_empty_stars = 5 - star_rating;
+          //console.log(ratings);
+          //$('#stars_ratings').append(ratings);
 
-        let ratings = "";
-        for (j=0; j<star_rating; j++) {
-          ratings += "<span class='fa fa-star checked'></span>";
+          all_movies.push(movie_post);
+          index += 1;
         }
-        for (j=0; j<number_of_empty_stars; j++) {
-          ratings += "<span class='fa fa-star'></span>";
-        }
-        let movie_post = new Post(movie_name, movies[movie]['cover'], ratings, movies[movie]['plot']);
-      
-        //console.log(ratings);
-        //$('#stars_ratings').append(ratings);
-
-        all_movies.push(movie_post);
-        index += 1;
-      }
-    });
-    return all_movies;
-  }
-
-
-  // console.log(all_movies);
-  class Post {
-    constructor(name, img, stars, info) {
-      this.name = name;
-      this.img = img;
-      this.stars = stars;
-      this.info = info;
+      });
+      return all_movies;
     }
-  }
 
-  const app = new Vue ({
-    el: '#first_tag',
-    data: {
-      search: '',
-      postList : getCards()
-    },
-    computed: {
-      filteredList() {
-        return this.postList.filter(post => {
-          return post.name.toLowerCase().includes(this.search.toLowerCase())
-        })
+
+    // console.log(all_movies);
+    class Post {
+      constructor(name, img, stars, info, index) {
+        this.name = name;
+        this.img = img;
+        this.stars = stars;
+        this.info = info;
+        this.url = "/reviews.php?movie=" + index;
       }
     }
-  })
+
+    const app = new Vue ({
+      el: '#first_tag',
+      data: {
+        search: '',
+        postList : getCards()
+      },
+      computed: {
+        filteredList() {
+          return this.postList.filter(post => {
+            return post.name.toLowerCase().includes(this.search.toLowerCase())
+          })
+        }
+      }
+    })
   </script>
 
 
