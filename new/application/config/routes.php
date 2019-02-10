@@ -72,10 +72,7 @@ $route['add_review'] = "home/review/add_review";
 $route['remove_review'] = "home/review/remove_review";
 
 // for users
-$route['get_user'] = "home/user/get_user";
-$route['get_by_username'] = "home/user/get_by_username";
-$route['get_by_username_password'] = "home/user/get_by_username_password";
-$route['get_users'] = "home/user/get_users";
-$route['add_user'] = "home/user/add_user";
-$route['update_details'] = "home/user/update_details";
-$route['delete'] = "home/user/delete";
+$route['get_user'] = "home/user/login";
+$route['get_by_username'] = "home/user/register_user";
+$route['get_by_username_password'] = "home/user/delete_user";
+
