@@ -26,8 +26,8 @@ class User extends CI_Model
         will return:
             $user - the user from the db
     */
-    public function get_user(){
-        return $this->db->get_where('users', array('username' => $_POST['id']));
+    public function get_user($id){
+        return $this->db->get_where('users', array('username' => $id));
     }
 
 
@@ -40,8 +40,8 @@ class User extends CI_Model
         will return:
             $user - the user from the db
     */
-    public function get_by_username(){
-        return $this->db->get_where('users', array('username' => $_POST['username']));
+    public function getByUsername($username){
+        return $this->db->get_where('users', array('username' => $username));
     }
 
 
@@ -55,8 +55,8 @@ class User extends CI_Model
         will return:
             $user - the user from the db
     */
-    public function get_by_username_password(){
-        return $this->db->get_where('users', array('username' => $_POST['username'], 'password' => $_POST['password']));
+    public function getByUsernamePass($username, $password){
+        return $this->db->get_where('users', array('username' => $username, 'password' => $password));
     }
 
 
@@ -88,16 +88,16 @@ class User extends CI_Model
         will return:
             True/False - if the user has been added
     */
-    public function add_user()
+    public function add_user($user)
     {
         //TODO: add checks here
-        $this->username = $_POST['username'];
-        $this->password = $_POST['password'];
-        $this->email = $_POST['email'];
-        $this->first_name = $_POST['first_name'];
-        $this->last_name = $_POST['last_name'];
-        $this->phone = $_POST['phone'];
-        $this->birthday = $_POST['birthday'];
+        $this->username = $user['username'];
+        $this->password = $user['password'];
+        $this->email = $user['email'];
+        $this->first_name = $user['first_name'];
+        $this->last_name = $user['last_name'];
+        $this->phone = $user['phone'];
+        $this->birthday = $user['birthday'];
 
         $this->db->insert('users', $this);
 
@@ -121,16 +121,16 @@ class User extends CI_Model
         will return:
             True/False - if the users details has been updated
     */
-    public function update_details()
+    public function update_details($user)
     {
         //TODO: add checks here
-        $this->username = $_POST['username'];
-        $this->password = $_POST['password'];
-        $this->email = $_POST['email'];
-        $this->first_name = $_POST['first_name'];
-        $this->last_name = $_POST['last_name'];
-        $this->phone = $_POST['phone'];
-        $this->birthday = $_POST['birthday'];
+        $this->username = $user['username'];
+        $this->password = $user['password'];
+        $this->email = $user['email'];
+        $this->first_name = $user['first_name'];
+        $this->last_name = $user['last_name'];
+        $this->phone = $user['phone'];
+        $this->birthday = $user['birthday'];
 
         $this->db->update('users', $this, array('username' => $this->username));
 
@@ -147,8 +147,8 @@ class User extends CI_Model
         will return:
             True/False - if the user has been deleted from db
     */
-    public function delete(){
-        $this->db->delete('users', array('username' => $_POST['username']));
+    public function delete($id){
+        $this->db->delete('users', array('username' => $id));
 
         return True;
     }

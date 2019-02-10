@@ -27,8 +27,8 @@ class Review {
         will return:
             $review<Review> - the review requested in form <Review>
     */
-    public function get_review() {
-        return $this->db->get_where('reviews', array('movie' => $_POST['movie'], 'review_id' => $_POST['review_id']));
+    public function get_review($movie, $review_id) {
+        return $this->db->get_where('reviews', array('movie' => $movie, 'review_id' => $review_id));
     }
 
 
@@ -41,24 +41,27 @@ class Review {
         will return:
             $reviews<Array<Review>> - array of reviews requested in form <Review>
     */    
-    public function get_reviews() {
-        return $this->db->get_where('reviews', array('movie' => $_POST['movie']));
+    public function get_reviews($movie) {
+        return $this->db->get_where('reviews', array('movie' => $movie));
     }
 
 
     /*
         this function will add review for a movie
+
+        given params:
+            @param post_review - the review we want to add
         
         will return:
             review_id - if the review has been added to the movie
     */  
-    public function add_review() {
-        $this->movie = $_POST['movie'];
-        $this->$profile_img = $_POST['profile_img'];
-        $this->$title = $_POST['title'];
-        $this->$name = $_POST['name'];
-        $this->$review = $_POST['name'];
-        $this->$score = $_POST['score'];
+    public function add_review($post_review) {
+        $this->movie = $post_review['movie'];
+        $this->$profile_img = $post_review['profile_img'];
+        $this->$title = $post_review['title'];
+        $this->$name = $post_review['name'];
+        $this->$review = $post_review['name'];
+        $this->$score = $post_review['score'];
 
         $review_id_return = $this->db->insert('reviews', $this);
         $this->review_id = $review_id_return;
@@ -75,12 +78,12 @@ class Review {
         will return:
             True/False - is the review has been deleted from the movie
     */  
-    public function remove_review() {
+    public function remove_review($movie, $review_id) {
         // deleting the comments for that review
-        $this->db->delete('comments', array('review_id' => $_POST['review_id']));
+        $this->db->delete('comments', array('review_id' => $review_id));
         
         // deleting the review
-        $this->db->delete('reviews', array('movie' => $_POST['movie'], 'review_id' => $_POST['review_id']));
+        $this->db->delete('reviews', array('movie' => $movie, 'review_id' => $review_id));
     }
 
 
