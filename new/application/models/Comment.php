@@ -1,15 +1,10 @@
 <?php
 
-class Movie {
+class Comment {
 
+    public $review_id;
+    public $comment;
     public $name;
-    public $img;
-    public $stars;
-    public $info;
-    public $url;
-    public $released;
-    public $genre;
-    public $actors;
 
     public function __construct()
     {
