@@ -52,3 +52,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+// for comments
+$route['get_comment'] = "home/comment/get_comment";
+$route['get_comments'] = "home/comment/get_comments";
+$route['add_comment'] = "home/comment/add_comment";
+$route['remove_comment'] = "home/comment/remove_comment";
+
+// for movies
+$route['get_movie'] = "home/movie/get_movie";
+$route['get_movies'] = "home/movie/get_movies";
+$route['add_movie'] = "home/movie/add_movie";
+$route['remove_movie'] = "home/movie/remove_movie";
+
+// for reviews
+$route['get_review'] = "home/review/get_review";
+$route['get_reviews'] = "home/review/get_reviews";
+$route['add_review'] = "home/review/add_review";
+$route['remove_review'] = "home/review/remove_review";
+
+// for users
+$route['get_user'] = "home/user/get_user";
+$route['get_by_username'] = "home/user/get_by_username";
+$route['get_by_username_password'] = "home/user/get_by_username_password";
+$route['get_users'] = "home/user/get_users";
+$route['add_user'] = "home/user/add_user";
+$route['update_details'] = "home/user/update_details";
+$route['delete'] = "home/user/delete";
