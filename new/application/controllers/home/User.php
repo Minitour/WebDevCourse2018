@@ -25,7 +25,40 @@ class User extends CI_Controller {
             True/False - if the user has been authenticated 
 
     */
-    public function login() {}
+    public function login() {
+        session_start();
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $user_query = $this->User->get_by_username_password($username, $password);
+        $username_counter = $user_query->num_rows();
+
+        $row = "";
+        if($username_counter == 1)
+            $row = $user_query->row_array();
+
+        if ($row == "") {
+            $data = array(
+                "success" => 'fail'
+            );
+        } else {
+            $data = array(
+                "success" => 'success',
+                "username" => $row['username'],
+                "password" => $password,
+                "first_name" => $row['first_name'],
+                "last_name" => $row['last_name'],
+                "phone" => $row['phone'],
+                "birthday" => $row['birthday'],
+                "email" =>$row['email']
+            );
+        }
+
+        echo(json_encode($data));
+        return;
+            
+        
+    }
 
 
     /*

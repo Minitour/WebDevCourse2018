@@ -40,7 +40,7 @@ class User extends CI_Model
         will return:
             $user - the user from the db
     */
-    public function getByUsername($username){
+    public function get_by_username($username){
         return $this->db->get_where('users', array('username' => $username));
     }
 
@@ -55,7 +55,7 @@ class User extends CI_Model
         will return:
             $user - the user from the db
     */
-    public function getByUsernamePass($username, $password){
+    public function get_by_username_password($username, $password){
         return $this->db->get_where('users', array('username' => $username, 'password' => $password));
     }
 
