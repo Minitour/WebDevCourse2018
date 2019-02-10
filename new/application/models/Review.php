@@ -28,7 +28,7 @@ class Review {
             $review<Review> - the review requested in form <Review>
     */
     public function get_review($movie, $review_id) {
-        return $this->db->get_where('name', array('movie' => $movie, 'review_id' => $review_id));
+        return $this->db->get_where('reviews', array('movie' => $movie, 'review_id' => $review_id));
     }
 
 
@@ -42,7 +42,7 @@ class Review {
             $reviews<Array<Review>> - array of reviews requested in form <Review>
     */    
     public function get_reviews($movie) {
-        return $this->db->get_where('name', array('movie' => $movie));
+        return $this->db->get_where('reviews', array('movie' => $movie));
     }
 
 
@@ -50,21 +50,21 @@ class Review {
         this function will add review for a movie
 
         given params:
-            @param post_review - the movie id in the db
+            @param post_review - the review we want to add
         
         will return:
-            True/False - is the review has been added to the movie
+            review_id - if the review has been added to the movie
     */  
     public function add_review($post_review) {
         $this->movie = $post_review['movie'];
-        // $this->$review_id;
         $this->$profile_img = $post_review['profile_img'];
         $this->$title = $post_review['title'];
         $this->$name = $post_review['name'];
         $this->$review = $post_review['name'];
         $this->$score = $post_review['score'];
 
-        $this->db->insert('reviews', $this);
+        $review_id_return = $this->db->insert('reviews', $this);
+        $this->review_id = $review_id_return;
     }
 
 
