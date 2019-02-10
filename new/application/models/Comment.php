@@ -24,8 +24,8 @@ class Comment {
         will return:
             $comment<Comment> - the comment requested in form <Comment>
     */
-    public function get_comment($review_id, $comment) {
-        return $this->db->get_where('comments', array('review_id' => $review_id, 'comment_id' => $comment));
+    public function get_comment() {
+        return $this->db->get_where('comments', array('review_id' => $_POST['review_id'], 'comment_id' => $_POST['comment']));
     }
 
     /*
@@ -37,8 +37,8 @@ class Comment {
         will return:
             $comments<Array<Comment>> - array of comments in form <Comment>
     */
-    public function get_comments($review_id) {
-        return $this->db->get_where('comments', array('review_id' => $review_id));
+    public function get_comments() {
+        return $this->db->get_where('comments', array('review_id' => $_POST['review_id']));
     }
 
 
@@ -51,10 +51,10 @@ class Comment {
         will return:
             comment_id - if the comment has been added to the review
     */  
-    public function add_comment($post_comment) {
-        $this->review_id = $post_review['movie'];
-        $this->$comment = $post_review['profile_img'];
-        $this->$name = $post_review['title'];
+    public function add_comment() {
+        $this->review_id = $_POST['movie'];
+        $this->$comment = $_POST['profile_img'];
+        $this->$name = $_POST['title'];
 
         $returned_comment_id = $this->db->insert('comments', $this);
         $this->comment_id = $returned_comment_id;
@@ -71,9 +71,9 @@ class Comment {
         will return:
             True/False - is the comment has been deleted from the review
     */  
-    public function remove_comment($review_id, $comment_id) {
+    public function remove_comment() {
         // deleting the comments for that review
-        $this->db->delete('comments', array('review_id' => $review_id, 'comment_id' => $comment_id));
+    $this->db->delete('comments', array('review_id' => $_POST['review_id'], 'comment_id' => $_POST['comment_id']));
     }
 
 
