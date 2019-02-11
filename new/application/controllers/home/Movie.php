@@ -51,4 +51,16 @@ class Movie extends CI_Controller {
             True/False - if the movie and all his reviews and comments has been removed
     */
     public function remove_movie() {}
+
+    
+    /*
+        this function will add the specific movie to cart
+
+        given params:
+            @param id - the id of the movie
+        
+        will return:
+            True/False - if the movie has been successfuly added to the user's cart
+    */
+    public function add_to_cart($id) {}
 }

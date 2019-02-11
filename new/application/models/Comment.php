@@ -52,9 +52,9 @@ class Comment {
             comment_id - if the comment has been added to the review
     */  
     public function add_comment($post_comment) {
-        $this->review_id = $post_review['movie'];
-        $this->$comment = $post_review['profile_img'];
-        $this->$name = $post_review['title'];
+        $this->review_id = $post_comment['movie'];
+        $this->$comment = $post_comment['profile_img'];
+        $this->$name = $post_comment['title'];
 
         $returned_comment_id = $this->db->insert('comments', $this);
         $this->comment_id = $returned_comment_id;

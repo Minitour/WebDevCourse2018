@@ -55,7 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 // for comments
 $route['get_comment'] = "home/comment/get_comment";
-$route['get_comments'] = "home/comment/get_comments";
+$route['get_comments'] = "home/comment/get_all_comments";
 $route['add_comment'] = "home/comment/add_comment";
 $route['remove_comment'] = "home/comment/remove_comment";
 
@@ -64,6 +64,7 @@ $route['get_movie'] = "home/movie/get_movie";
 $route['get_movies'] = "home/movie/get_movies";
 $route['add_movie'] = "home/movie/add_movie";
 $route['remove_movie'] = "home/movie/remove_movie";
+$route['add_to_cart'] = "home/movie/add_to_cart";
 
 // for reviews
 $route['get_review'] = "home/review/get_review";
@@ -72,7 +73,13 @@ $route['add_review'] = "home/review/add_review";
 $route['remove_review'] = "home/review/remove_review";
 
 // for users
-$route['get_user'] = "home/user/login";
-$route['get_by_username'] = "home/user/register_user";
-$route['get_by_username_password'] = "home/user/delete_user";
+$route['get_user'] = "home/user/$1/get_reviews/$2";
+$route['get_by_username'] = "home/user/$1/get_followers/$2";
+$route['get_by_username_password'] = "home/user/$1/get_following_pages/$2";
+
+// for accounts
+$route['login'] = "home/account/login";
+$route['create'] = "home/account/register_user";
+$route['delete'] = "home/account/delete_user";
+$route['logout'] = "home/account/logout";
 

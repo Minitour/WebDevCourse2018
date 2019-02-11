@@ -15,77 +15,50 @@ class User extends CI_Controller {
     }
 
     /*
-        this function will authenticate the user and his password against the db
+        this function will return the reviews for a given page
 
         given params:
-            @param username - the user's username
-            @param password - the user's password
+            @param id - the id of the user
+            @param page - the id of the page
         
         will return:
-            True/False - if the user has been authenticated 
-
+            $reviews - the reviews requested
     */
-    public function login() {
-        session_start();
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        $user_query = $this->User->get_by_username_password($username, $password);
-        $username_counter = $user_query->num_rows();
-
-        $row = "";
-        if($username_counter == 1)
-            $row = $user_query->row_array();
-
-        if ($row == "") {
-            $data = array(
-                "success" => 'fail'
-            );
-        } else {
-            $data = array(
-                "success" => 'success',
-                "username" => $row['username'],
-                "password" => $password,
-                "first_name" => $row['first_name'],
-                "last_name" => $row['last_name'],
-                "phone" => $row['phone'],
-                "birthday" => $row['birthday'],
-                "email" =>$row['email']
-            );
-        }
-
-        echo(json_encode($data));
-        return;
-            
-        
-    }
-
+    public function get_reviews($id, $page) {}
+    
 
     /*
-        this function will register a new user if he does not exists
-        
+        this function will the followers
+
         given params:
-            @param first_name - first name of user
-            @param last_name - last name of user
-            @param email - email
-            @param phone - phone
-            @param birthday - birthday of user
-            @param password - password the user choose
+            @param id - the id of the user
+            @param page - the id of the page
         
         will return:
-            True/False - is the user has been registered
+            $followers - the followers requested
     */
-    public function register_user() {}
+    public function get_followers($id, $page) {}
+    
+    /*
+        this function will return the user's following pages 
 
+        given param:
+            @param id - the id of the user
+            @param page - the id of the page
+
+        will return:
+            $following - the following pages requested
+    */
+    public function get_following_pages($id, $page) {}
 
     /*
-        this function will delete specific user
+        this function will follow specific user
 
         given params:
-            @param id - the username or email of the user
-
+            @param id - the id of the user
+        
         will return:
-            True/False - if the user has been deleted
+            True/False
     */
-    public function delete_user() {}
+    public function follow($id) {}
 }
