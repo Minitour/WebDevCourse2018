@@ -2,6 +2,7 @@
 
 class User extends CI_Model
 {
+    public $ID;
     public $username;
     public $password;
     public $email;
@@ -9,6 +10,8 @@ class User extends CI_Model
     public $last_name;
     public $phone;
     public $birthday;
+    public $profile_picture;
+    public $role_id;
 
     public function __construct()
     {
@@ -18,7 +21,7 @@ class User extends CI_Model
 
 
     /*
-        thid function will get specific user from db
+        thid function will get user by id from db
 
         given params:
             @param id - the id of the user
@@ -27,48 +30,22 @@ class User extends CI_Model
             $user - the user from the db
     */
     public function get_user($id){
-        return $this->db->get_where('users', array('username' => $id));
+        return $this->db->get_where('users', array('ID' => $id));
     }
 
 
     /*
-        this function will get the user by his username
+        this function will get user by username from db
 
         given params:
             @param username - the username of the user
-        
-        will return:
-            $user - the user from the db
-    */
-    public function get_by_username($username){
-        return $this->db->get_where('users', array('username' => $username));
-    }
-
-
-    /*
-        this function will get the user by his username and password
-
-        given params:
-            @param username - the username of the user
-            @param password - the password of the user
-        
-        will return:
-            $user - the user from the db
-    */
-    public function get_by_username_password($username, $password){
-        return $this->db->get_where('users', array('username' => $username, 'password' => $password));
-    }
-
-
-    /*
-        this function will get all users from db
         
         will return:
             $users<Array> - the users from the db
     */
-    public function get_users()
+    public function get_user_by_username($username)
     {
-        $query = $this->db->get('users');
+        $query = $this->db->get('users', array('username' => $username));
         return $query;
     }
 
@@ -88,7 +65,7 @@ class User extends CI_Model
         will return:
             True/False - if the user has been added
     */
-    public function add_user($user)
+    public function insert_user($user)
     {
         //TODO: add checks here
         $this->username = $user['username'];
@@ -98,8 +75,10 @@ class User extends CI_Model
         $this->last_name = $user['last_name'];
         $this->phone = $user['phone'];
         $this->birthday = $user['birthday'];
+        $this->profile_picture = $user['profile_picture'];
+        $this->role_id = $user['role_id'];
 
-        $this->db->insert('users', $this);
+        $this->ID = $this->db->insert('users', $this);
 
         return True;
     }
@@ -121,7 +100,7 @@ class User extends CI_Model
         will return:
             True/False - if the users details has been updated
     */
-    public function update_details($user)
+    public function update_user($user)
     {
         //TODO: add checks here
         $this->username = $user['username'];
@@ -131,8 +110,10 @@ class User extends CI_Model
         $this->last_name = $user['last_name'];
         $this->phone = $user['phone'];
         $this->birthday = $user['birthday'];
+        $this->profile_picture = $user['profile_picture'];
+        $this->role_id = $user['role_id'];
 
-        $this->db->update('users', $this, array('username' => $this->username));
+        $this->db->update('users', $this, array('ID' => $this->ID));
 
         return True;
     }
@@ -142,15 +123,38 @@ class User extends CI_Model
         this function will delete the user
 
         given params:
-            @param id - can be the username or email of the user
+            @param id - id of the user in the db
 
         will return:
             True/False - if the user has been deleted from db
     */
     public function delete($id){
-        $this->db->delete('users', array('username' => $id));
+        $this->db->delete('users', array('ID' => $id));
 
         return True;
     }
 
+
+    /*
+        this function will get all followers for specific user
+
+        given params:
+            @param user_id - the user id we want to get the followers
+        
+        will return:
+            $followers<Array<User>> - an array of followers
+    */
+    public function get_followers($user_id) {}
+
+
+    /*
+        this function will get all following for specific user
+
+        given params:
+            @param user_id - the user id we want to get the following
+        
+        will return:
+            $followers<Array<User>> - an array of following
+    */
+    public function get_following($user_id) {}
 }

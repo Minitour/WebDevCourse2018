@@ -24,7 +24,7 @@ class User extends CI_Controller {
         will return:
             $reviews - the reviews requested
     */
-    public function get_reviews($id, $page) {}
+    public function get_reviews() {}
     
 
     /*
@@ -37,7 +37,7 @@ class User extends CI_Controller {
         will return:
             $followers - the followers requested
     */
-    public function get_followers($id, $page) {}
+    public function get_followers() {}
     
     /*
         this function will return the user's following pages 
@@ -49,7 +49,7 @@ class User extends CI_Controller {
         will return:
             $following - the following pages requested
     */
-    public function get_following_pages($id, $page) {}
+    public function get_following_pages() {}
 
     /*
         this function will follow specific user
@@ -60,5 +60,5 @@ class User extends CI_Controller {
         will return:
             True/False
     */
-    public function follow($id) {}
+    public function follow() {}
 }

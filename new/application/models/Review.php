@@ -1,14 +1,12 @@
 <?php
 
-class Review {
+class Review extends CI_Model{
 
-    public $movie;
-    public $review_id;
-    public $profile_img;
-    public $title;
-    public $name;
-    public $review;
-    public $score;
+    public $movie_id;
+    public $user_id;
+    public $comment;
+    public $star_rating;
+    public $created_at;
 
     public function __construct()
     {
@@ -56,12 +54,11 @@ class Review {
             review_id - if the review has been added to the movie
     */  
     public function add_review($post_review) {
-        $this->movie = $post_review['movie'];
-        $this->$profile_img = $post_review['profile_img'];
-        $this->$title = $post_review['title'];
-        $this->$name = $post_review['name'];
-        $this->$review = $post_review['name'];
-        $this->$score = $post_review['score'];
+        $this->movie_id = $post_review['movie_id'];
+        $this->user_id = $post_review['user_id'];
+        $this->comment = $post_review['comment'];
+        $this->star_rating = $post_review['star_rating'];
+        $this->created_at = $post_review['created_at'];
 
         $review_id_return = $this->db->insert('reviews', $this);
         $this->review_id = $review_id_return;
