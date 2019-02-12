@@ -26,7 +26,8 @@ class Movie extends CI_Controller {
 
         $query = $this->Movie->get_movie_details($movie);
 
-        echo "movie: ". $query;
+        //$this->load->view("pages/movie");
+        echo $query;
     }
 
 
