@@ -5,6 +5,8 @@ class Movie extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
+        $this->load->database();
+        $this->load->model('Movie');
     }
         
 
@@ -20,14 +22,10 @@ class Movie extends CI_Controller {
     */
     public function get_movie($movie) {
         
-        session_start();
-
-        //$movie = $_POST['movie_id'];
-
+        var_dump($movie);
         $query = $this->Movie->get_movie_details($movie);
-
-        //$this->load->view("pages/movie");
         echo $query;
+        
     }
 
 
