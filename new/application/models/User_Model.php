@@ -1,6 +1,6 @@
 <?php
 
-class User extends CI_Model
+class User_Model extends CI_Model
 {
     public $ID;
     public $username;
@@ -30,7 +30,7 @@ class User extends CI_Model
             $user - the user from the db
     */
     public function get_user($id){
-        $query = $this->db->get_where('users', array('ID' => $id));
+        return $this->db->get_where('users', array('ID' => $id));
     }
 
 
