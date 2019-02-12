@@ -5,6 +5,7 @@ class Comment extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
+        $this->load->model('Comment_model');
     }
         
 
@@ -20,6 +21,7 @@ class Comment extends CI_Controller {
     */
     public function get_comments() {
         $number_of_comments = 5;
+
 
         // SELECT TOP 5 FROM Comments
     }

@@ -22,14 +22,19 @@ class Movie extends CI_Controller {
     */
     public function get_movie($movie) {
         
-        var_dump($movie);
         $query = $this->movie_model->get_movie_details($movie);
         $rows = $query->result();
+        $data = array();
         foreach($rows as $row){
-            $name = $row->name;
-            echo $name;
+            $data['name'] = $row->name;
+            $data['ratings'] = $row->name;
+            $data['released'] = $row->released;
+            $data['plot'] = $row->plot;
+            $data['actors'] = $row->actors;
+            $data['cover'] = $row->cover;
+            $data['info'] = $row->info;
         }
-
+        echo(json_encode($data));
         
     }
 
@@ -41,7 +46,10 @@ class Movie extends CI_Controller {
             $movies<Array<Movie>> - array of all movies in form <Movie>
 
     */
-    public function get_movies() {}
+    public function get_movies() {
+
+        //$query = $this->movie_model->get_movies()
+    }
 
     /*
         this function will add movie to db

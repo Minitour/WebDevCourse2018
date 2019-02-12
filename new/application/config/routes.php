@@ -61,7 +61,7 @@ $route['remove_comment'] = "home/comment/remove_comment";
 
 // for movies
 $route['movie/(:any)'] = "home/movie/get_movie/$1";
-$route['get_movies'] = "home/movie/get_movies";
+$route['movies'] = "home/movie/get_movies";
 $route['add_movie'] = "home/movie/add_movie";
 $route['remove_movie'] = "home/movie/remove_movie";
 $route['add_to_cart'] = "home/movie/add_to_cart";
