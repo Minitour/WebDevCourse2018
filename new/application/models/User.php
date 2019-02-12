@@ -30,7 +30,7 @@ class User extends CI_Model
             $user - the user from the db
     */
     public function get_user($id){
-        return $this->db->get_where('users', array('ID' => $id));
+        $query = $this->db->get_where('users', array('ID' => $id));
     }
 
 
@@ -45,8 +45,15 @@ class User extends CI_Model
     */
     public function get_user_by_username($username)
     {
-        $query = $this->db->get('users', array('username' => $username));
-        return $query;
+        $query = $this->db->get_where('users', array('username' => $username));
+            
+        if ($query->num_rows() > 0) {
+            $row = $query->row_array();
+            return $row;
+    
+        }else {
+            return FALSE;
+        }
     }
 
 

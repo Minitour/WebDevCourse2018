@@ -5,6 +5,7 @@ class Account extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
+        $this->load->model('user');
     }
         
     /*
@@ -25,7 +26,40 @@ class Account extends CI_Controller {
             True/False - if the user has been authenticated 
 
     */
-    public function login() {}
+    public function login() {
+        header('Content-Type: application/json');
+
+        if (!isset($_POST['username'])) {
+            return FALSE;
+        }
+
+        if (!isset($_POST['password'])) {
+            return FALSE;
+        }
+
+        
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        // fetch account
+        $account = $this->user->get_user_by_username($username);
+
+        if($account == FALSE) {
+            // could not find account
+            http_response_code(500);
+            $response = array();
+            echo $response; 
+            return;
+        } 
+
+        // validate password
+
+        // generate session
+
+        $response = array("id"=>$account["id"] ,"session_token"=> "some token"); 
+
+        echo json_encode($response);
+    }
 
 
     /*
