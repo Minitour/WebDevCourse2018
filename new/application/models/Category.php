@@ -20,7 +20,12 @@ class Category extends CI_Model{
         will return:
             True/False - if the category has been added
     */
-    public function add_category($value) {}
+    public function add_category($value) {
+        $this->category_id = $value['id'];
+        $this->category_name = $value['value'];
+
+        $this->db->insert('category', $this);
+    }
 
 
     /*
@@ -32,7 +37,25 @@ class Category extends CI_Model{
         will return:
             True/False - if the category has been added to the movie
     */
-    public function add_category_to_movie($movie) {}
+    public function add_category_to_movie($movie, $category) {
+        $this->db->insert('movie_category', array('movie_id' => $movie, 'category_id' => $category));
+    }
+
+
+    /*
+        thid function will return all categories for specific movie
+
+        given params:
+            @param movie - the movie we want to get the categories from
+        
+        will return:
+            $categories - of specific movie
+    */
+    public function get_categories($movie) {
+        return $this->db->get_where('movie_category', array('movie_id' => $movie));
+    }
+
+    
 
 
 }

@@ -56,10 +56,9 @@ class Comment extends CI_Model{
         $this->reviewer_id = $post_comment['reviewer_id'];
         $this->movie_id = $post_comment['movie_id'];
         $this->comment = $post_comment['comment'];
-        $this->time = $post_comment['time'];
         $this->user_id = $post_comment['user_id'];
 
-        $this->db->insert('comments', $this);
+        $this->time = $this->db->insert('comments', $this);
     }
 
 
@@ -69,6 +68,7 @@ class Comment extends CI_Model{
         given params:
             @param review_id - the review id in the db
             @param comment_id - the comment id in the db
+            @param time - the timestamp of the comment
         
         will return:
             True/False - is the comment has been deleted from the review

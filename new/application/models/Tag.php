@@ -20,7 +20,11 @@ class Tag extends CI_Model{
         will return:
             True/False - if the tag has been added
     */
-    public function add_tag($value) {}
+    public function add_tag($value) {
+        $this->name = $value['name'];
+
+        $this->tag_id = $this->db->insert('tag', $this);
+    }
 
 
     /*
@@ -32,7 +36,11 @@ class Tag extends CI_Model{
         will return:
             $tags<Array<Tag>> - an array of tags for the movie
     */
-    public function get_tags($movie) {}
+    public function get_tags($movie) {
+
+        return $this->db->get_where('tag_movie', array('movie_id' => $movie));
+
+    }
 
 
 }

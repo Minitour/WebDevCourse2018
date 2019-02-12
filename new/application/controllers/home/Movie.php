@@ -18,7 +18,16 @@ class Movie extends CI_Controller {
             $movie<Movie> - the movie we wanted in form of <Movie>
 
     */
-    public function get_movie() {}
+    public function get_movie($movie) {
+        
+        session_start();
+
+        //$movie = $_POST['movie_id'];
+
+        $query = $this->Movie->get_movie_details($movie);
+
+        echo "movie: ". $query;
+    }
 
 
     /*
