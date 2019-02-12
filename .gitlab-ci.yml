@@ -4,8 +4,8 @@ deploy:
         - master
     script:
         - apt-get update -qq && apt-get install -y -qq lftp
-        - echo "define('DB_USERNAME', $DB_USERNAME, true);" >> $FILE_LOCATION
-        - echo "define('DB_PASSWORD', $DB_PASSWORD, true);" >> $FILE_LOCATION
-        - echo "define('DB_HOST', $DB_HOST, true);" >> $FILE_LOCATION
-        - echo "define('DB_NAME', $DB_NAME, true);" >> $FILE_LOCATION
+        - echo "define('DB_USERNAME', '$DB_USERNAME', true);" >> $FILE_LOCATION
+        - echo "define('DB_PASSWORD', '$DB_PASSWORD', true);" >> $FILE_LOCATION
+        - echo "define('DB_HOST', '$DB_HOST', true);" >> $FILE_LOCATION
+        - echo "define('DB_NAME', '$DB_NAME', true);" >> $FILE_LOCATION
         - lftp -c "set ftp:ssl-allow no; open -u $USERNAME,$PASSWORD $HOST; mirror -Rev ./ ./htdocs  --ignore-time --parallel=10 --exclude-glob .git* --exclude .git/"h
