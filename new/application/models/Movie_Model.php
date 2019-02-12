@@ -1,6 +1,6 @@
 <?php
 
-class Movie extends CI_Model{
+class Movie_Model extends CI_Model{
 
     public $id;
     public $name;

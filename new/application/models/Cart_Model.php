@@ -1,6 +1,6 @@
 <?php
 
-class Cart extends CI_Model{
+class Cart_Model extends CI_Model{
 
     public $user_id;
     public $items;
