@@ -1,6 +1,6 @@
 <?php
 
-class Session_Model extends CI_Model{
+class Session_model extends CI_Model{
 
     public $session_id;
     public $user_id;

@@ -1,6 +1,6 @@
 <?php
 
-class Tag_Model extends CI_Model{
+class Tag_model extends CI_Model{
 
     public $tag_id;
     public $name;

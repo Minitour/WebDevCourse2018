@@ -1,6 +1,6 @@
 <?php
 
-class Category_Model extends CI_Model{
+class Category_model extends CI_Model{
 
     public $category_id;
     public $category_name;

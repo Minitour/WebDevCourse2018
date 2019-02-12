@@ -6,7 +6,7 @@ class Movie extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->database();
-        $this->load->model('Movie');
+        $this->load->model('movie_model');
     }
         
 

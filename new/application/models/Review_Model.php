@@ -1,6 +1,6 @@
 <?php
 
-class Review_Model extends CI_Model{
+class Review_model extends CI_Model{
 
     public $movie_id;
     public $user_id;
