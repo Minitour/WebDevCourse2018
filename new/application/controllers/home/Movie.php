@@ -23,7 +23,7 @@ class Movie extends CI_Controller {
     public function get_movie($movie) {
         
         var_dump($movie);
-        $query = $this->Movie->get_movie_details($movie);
+        $query = $this->movie_model->get_movie_details($movie);
         echo $query;
         
     }

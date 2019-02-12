@@ -42,7 +42,7 @@ class Account extends CI_Controller {
         $password = $_POST['password'];
 
         // fetch account
-        $account = $this->user->get_user_by_username($username);
+        $account = $this->user_model->get_user_by_username($username);
 
         if($account == FALSE) {
             // could not find account
