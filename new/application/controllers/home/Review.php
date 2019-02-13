@@ -21,6 +21,8 @@ class Review extends CI_Controller {
 
     */
     public function get_review($movie, $user_id) {
+        var_dump($movie);
+        var_dump($user_id);
         $query = $this->review_model->get_review($movie, $user_id);
         $rows = $query->result();
         $data = araay();
