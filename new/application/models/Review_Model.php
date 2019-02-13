@@ -25,8 +25,8 @@ class Review_model extends CI_Model{
         will return:
             $review<Review> - the review requested in form <Review>
     */
-    public function get_review($movie, $review_id) {
-        return $this->db->get_where('reviews', array('movie' => $movie, 'review_id' => $review_id));
+    public function get_review($movie, $user_id) {
+        return $this->db->get_where('reviews', array('movie_id' => $movie, 'user_id' => $user_id));
     }
 
 
@@ -40,7 +40,7 @@ class Review_model extends CI_Model{
             $reviews<Array<Review>> - array of reviews requested in form <Review>
     */    
     public function get_reviews($movie) {
-        return $this->db->get_where('reviews', array('movie' => $movie));
+        return $this->db->get_where('reviews', array('movie_id' => $movie));
     }
 
 
@@ -60,8 +60,8 @@ class Review_model extends CI_Model{
         $this->star_rating = $post_review['star_rating'];
         $this->created_at = $post_review['created_at'];
 
-        $review_id_return = $this->db->insert('reviews', $this);
-        $this->review_id = $review_id_return;
+        $this->db->insert('reviews', $this);
+        return True;
     }
 
 
@@ -75,12 +75,14 @@ class Review_model extends CI_Model{
         will return:
             True/False - is the review has been deleted from the movie
     */  
-    public function remove_review($movie, $review_id) {
+    public function remove_review($movie_id, $user_id) {
         // deleting the comments for that review
-        $this->db->delete('comments', array('review_id' => $review_id));
+        $this->db->delete('comments', array('reviewer_id' => $user_id, 'movie_id' => $movie_id));
         
         // deleting the review
-        $this->db->delete('reviews', array('movie' => $movie, 'review_id' => $review_id));
+        $this->db->delete('reviews', array('movie_id' => $movie_id, 'user_id' => $user_id));
+
+        return True;
     }
 
 

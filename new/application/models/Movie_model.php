@@ -63,6 +63,7 @@ class Movie_model extends CI_Model{
         $this->actors = $post_movie['actors'];
 
         $this->$id = $this->db->insert('movies', $this);
+        return True;
     }
 
     /*
@@ -91,6 +92,8 @@ class Movie_model extends CI_Model{
 
         // removing the movie from db
         $this->db->delete('movies', array('name' => $movie));
+
+        return True;
     }
 
 
@@ -103,7 +106,9 @@ class Movie_model extends CI_Model{
         will return:
             True/False - if the movie has been updated
     */
-    public function update($movie) {}
+    public function update($movie) {
+        
+    }
 
 
 
