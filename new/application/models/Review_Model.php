@@ -43,6 +43,19 @@ class Review_model extends CI_Model{
         return $this->db->get_where('reviews', array('movie_id' => $movie));
     }
 
+    /*
+        this function will return all reviews for a user
+
+        given params:
+            @param user - the user id in the db
+        
+        will return:
+            $reviews<Array<Review>> - array of reviews requested in form <Review>
+    */  
+    public function get_all_reviews($user) {
+        return $this->db->get_where('reviews', array('user_id' => $user));
+    }
+
 
     /*
         this function will add review for a movie

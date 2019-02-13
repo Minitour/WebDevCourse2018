@@ -164,4 +164,6 @@ class User_model extends CI_Model
             $followers<Array<User>> - an array of following
     */
     public function get_following($user_id) {}
+
+    public function follow() {}
 }

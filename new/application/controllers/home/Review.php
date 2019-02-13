@@ -27,11 +27,11 @@ class Review extends CI_Controller {
         $rows = $query->result();
         $data = araay();
         foreach($rows as $row) {
-            $data['movie_id'];
-            $data['user_id'];
-            $data['comment'];
-            $data['star_rating'];
-            $data['created_at'];
+            $data['movie_id'] = $row['movie_id'];
+            $data['user_id'] = $row['user_id'];
+            $data['comment'] = $row['comment'];
+            $data['star_rating'] = $row['star_rating'];
+            $data['created_at'] = $row['created_at'];
         }
         echo(json_encode($data));
     }
@@ -49,14 +49,17 @@ class Review extends CI_Controller {
         $rows = $query->result();
         $data = araay();
         foreach($rows as $row) {
-            $data['movie_id'];
-            $data['user_id'];
-            $data['comment'];
-            $data['star_rating'];
-            $data['created_at'];
+            $temp_data = array();
+            $temp_data['movie_id'] = $row['movie_id'];
+            $temp_data['user_id'] = $row['user_id'];
+            $temp_data['comment'] = $row['comment'];
+            $temp_data['star_rating'] = $row['star_rating'];
+            $temp_data['created_at'] = $row['created_at'];
+            $data.push($temp_data);
         }
         echo(json_encode($data));
     }
+
 
     /*
         this function will add review to db

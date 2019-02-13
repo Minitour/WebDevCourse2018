@@ -25,7 +25,7 @@ class Comment_model extends CI_Model{
         will return:
             $comment<Comment> - the comment requested in form <Comment>
     */
-    public function get_comment($review_id, $movie_id) {
+    public function get_comments_for_movie($reviewer_id, $movie_id) {
         return $this->db->get_where('comments', array('reviewer_id' => $reviewer_id, 'movie_id' => $movie_id));
     }
 
@@ -38,7 +38,7 @@ class Comment_model extends CI_Model{
         will return:
             $comments<Array<Comment>> - array of comments in form <Comment>
     */
-    public function get_comments($reviewer_id) {
+    public function get_all_comments_for_reviewer($reviewer_id) {
         return $this->db->get_where('comments', array('reviewer_id' => $reviewer_id));
     }
 
@@ -59,6 +59,7 @@ class Comment_model extends CI_Model{
         $this->user_id = $post_comment['user_id'];
 
         $this->time = $this->db->insert('comments', $this);
+        return True;
     }
 
 
@@ -76,6 +77,7 @@ class Comment_model extends CI_Model{
     public function remove_comment($reviewer_id, $movie_id, $time) {
         // deleting the comments for that review
         $this->db->delete('comments', array('reviewer_id' => $reviewer_id, 'movie_id' => $movie_id, 'time' => $time));
+        return True;
     }
 
 

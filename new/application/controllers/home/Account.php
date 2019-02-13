@@ -6,6 +6,7 @@ class Account extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('user_model');
+        $this->load->model('Helper_functions');
     }
         
     /*
@@ -76,7 +77,11 @@ class Account extends CI_Controller {
         will return:
             True/False - is the user has been registered
     */
-    public function register_user() {}
+    public function register_user() {
+        $user = $_POST['user'];
+        $ret = $this->user_model->insert_user($user);
+        $this->helper_functions->post_success_of_fail($ret);
+    }
 
 
     /*
@@ -88,7 +93,11 @@ class Account extends CI_Controller {
         will return:
             True/False - if the user has been deleted
     */
-    public function delete_user() {}
+    public function delete_user() {
+        $user = $_POST['user_id'];
+        $ret = $this->user_model->delete($user);
+        $this->helper_functions->post_success_of_fail($ret);
+    }
 
     
     /*
