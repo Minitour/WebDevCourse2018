@@ -20,10 +20,8 @@ class Review extends CI_Controller {
             $review<Review> - the review we requested
 
     */
-    public function get_review($movie, $user_id) {
-        var_dump($movie);
-        var_dump($user_id);
-        $query = $this->review_model->get_review($movie, $user_id);
+    public function get_reviews_for_user($user_id) {
+        $query = $this->review_model->get_all_reviews($user_id);
         $rows = $query->result();
         $data = araay();
         foreach($rows as $row) {
@@ -44,7 +42,7 @@ class Review extends CI_Controller {
             $reviews<Array<Review>> - the review we requested
 
     */
-    public function get_reviews($movie) {
+    public function get_reviews_for_movie($movie) {
         $query = $this->review_model->get_reviews($movie);
         $rows = $query->result();
         $data = araay();

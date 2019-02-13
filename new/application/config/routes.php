@@ -67,8 +67,8 @@ $route['remove_movie'] = "home/movie/remove_movie";
 $route['add_to_cart'] = "home/movie/add_to_cart";
 
 // for reviews
-$route['movies/(:num)/reviews/(:num)'] = "home/review/get_review/$1$2";
-$route['get_reviews'] = "home/review/get_reviews";
+$route['reviews/movie/(:num)'] = "home/review/get_reviews_for_movie/$1";
+$route['reviews/user/(:num)'] = "home/review/get_reviews_for_user/$1";
 $route['add_review'] = "home/review/add_review";
 $route['remove_review'] = "home/review/remove_review";
 
