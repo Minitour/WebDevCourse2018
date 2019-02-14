@@ -42,14 +42,15 @@ class Movie_model extends CI_Model{
     public function get_movies($tags, $categories) {
         //$array_tags = explode(" ", $tags);
         $array_tags = $tags;
-        $this->db->select('(SELECT * FROM movies WHERE ( 
-                movies.id in ( 
-                    (SELECT tag_movie.movie_id FROM tag_movie, tag WHERE ( tag_movie.tag_id = tag.id AND tag.value in ('. $array_tags .')))
-                    AND
-                    (SELECT movie_category.movie_id FROM movie_category, category WHERE (movie_category.category_id = category.id AND category.value in ('. $categories .') ) )
-                )
-            ) 
-        )', FALSE);
+        // $this->db->select('(SELECT * FROM movies WHERE ( 
+        //         movies.id IN ( 
+        //             (SELECT tag_movie.movie_id FROM tag_movie, tag WHERE ( tag_movie.tag_id = tag.id AND tag.value IN ('. $array_tags .')))
+        //             AND
+        //             (SELECT movie_category.movie_id FROM movie_category, category WHERE (movie_category.category_id = category.id AND category.value IN ('. $categories .') ) )
+        //         )
+        //     ) 
+        // )', FALSE);
+        $this->db->select('(SELECT * FROM movies)', FALSE);
         $query = $this->db->get('movies');
 
         return $query;
