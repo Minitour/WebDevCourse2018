@@ -92,9 +92,9 @@ $route['tags/movie/(:any)'] = "home/tag/get_tags/$1";
 // for categories
 $route['categories/add'] = "home/category/add_category";
 $route['categories/movie/add'] = "home/category/add_category_to_movie";
-$route['categories/movie/get'] = "home/category/get_categories/$1";
+$route['categories/movie/get/(:any)'] = "home/category/get_categories/$1";
 
 // for cart
-$route['cart/user/(:any))'] = "home/cart/get_items/$1";
+$route['cart/user/(:any)'] = "home/cart/get_items/$1";
 $route['cart/user/add'] = "home/cart/insert_item";
 $route['cart/user/remove'] = "home/cart/remove_item";
