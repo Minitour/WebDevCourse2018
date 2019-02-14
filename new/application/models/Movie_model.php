@@ -50,7 +50,7 @@ class Movie_model extends CI_Model{
         //         )
         //     ) 
         // )', FALSE);
-        $this->db->select('(SELECT * FROM movies)', FALSE);
+        //$this->db->select('(SELECT * FROM movies)', FALSE);
         $query = $this->db->get('movies');
 
         return $query;
