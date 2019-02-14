@@ -6,7 +6,7 @@ class User extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('review_model');
-        $this->load->model('rser_model');
+        $this->load->model('user_model');
     }
         
     /*
