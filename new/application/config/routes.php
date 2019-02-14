@@ -95,6 +95,6 @@ $route['categories/movie/add'] = "home/category/add_category_to_movie";
 $route['categories/movie/get/(:any)'] = "home/category/get_categories/$1";
 
 // for cart
-$route['cart/user/(:any)'] = "home/cart/get_items/$1";
+$route['cart/user/(:any)/items'] = "home/cart/get_items/$1";
 $route['cart/user/add'] = "home/cart/insert_item";
 $route['cart/user/remove'] = "home/cart/remove_item";
