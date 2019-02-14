@@ -24,6 +24,8 @@ class Tag_model extends CI_Model{
         $this->name = $value['name'];
 
         $this->tag_id = $this->db->insert('tag', $this);
+
+        return True;
     }
 
 

@@ -52,7 +52,7 @@ class User_model extends CI_Model
             return $row;
     
         }else {
-            return FALSE;
+            return False;
         }
     }
 

@@ -21,10 +21,12 @@ class Category_model extends CI_Model{
             True/False - if the category has been added
     */
     public function add_category($value) {
-        $this->category_id = $value['id'];
-        $this->category_name = $value['value'];
+        $this->category_id = $value['category_id'];
+        $this->category_name = $value['category_name'];
 
         $this->db->insert('category', $this);
+
+        return True;
     }
 
 
@@ -37,8 +39,9 @@ class Category_model extends CI_Model{
         will return:
             True/False - if the category has been added to the movie
     */
-    public function add_category_to_movie($movie, $category) {
-        $this->db->insert('movie_category', array('movie_id' => $movie, 'category_id' => $category));
+    public function add_category_to_movie($movie_id, $category_id) {
+        $this->db->insert('movie_category', array('movie_id' => $movie_id, 'category_id' => $category_id));
+        return True;
     }
 
 
