@@ -50,9 +50,9 @@ class Movie extends CI_Controller {
     public function get_movies() {
         // $tags = $_POST['tags'];
         // $categories = $_POST['categories'];
-        // $tags = array("shit","impossible");
-        // $categories = array("action","comedy");
-        $tags = array();
+
+        // for testing
+        $tags = array("shit");
         $categories = array();
 
         $query = $this->movie_model->get_movies($tags, $categories);
@@ -61,6 +61,7 @@ class Movie extends CI_Controller {
         $data = array();
         foreach($rows as $row){
             $temp_data = array();
+            $temp_data['id'] = $row->id;
             $temp_data['name'] = $row->name;
             $temp_data['ratings'] = $row->ratings;
             $temp_data['release_date'] = $row->release_date;
