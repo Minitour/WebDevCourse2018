@@ -52,7 +52,7 @@ class Movie extends CI_Controller {
         // $categories = $_POST['categories'];
 
         // for testing
-        $tags = array("porn");
+        $tags = array();
         $categories = array();
 
         $query = $this->movie_model->get_movies($tags, $categories);

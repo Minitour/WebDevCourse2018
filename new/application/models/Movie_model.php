@@ -40,7 +40,6 @@ class Movie_model extends CI_Model{
             $movies<Array<Movie>> - all movies in form <Movie>
     */ 
     public function get_movies($tags, $categories) {
-        //$array_tags = explode(" ", $tags);
         
         $string_tags = $this->get_array_to_string($tags);
         $string_categories = $this->get_array_to_string($categories);

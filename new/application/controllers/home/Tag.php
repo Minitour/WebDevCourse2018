@@ -36,8 +36,18 @@ class Tag extends CI_Controller {
             $tags<Array<Tag>> - an array of tags for the movie
     */
     public function get_tags($movie) {
-        $ret = $this->tag_model->get_tags($movie);
-        $this->helper_functions->post_success_of_fail($ret);
+        $query = $this->tag_model->get_tags($movie);
+        $rows = $query->result();
+        $data = array();
+        $counter = 0;
+        foreach($rows as $row) {
+            $temp_data = array();
+            $temp_data['id'] = $row['id'];
+            $temp_data['value'] = $row['value'];
+            $data[$counter] = $temp_data;
+            $counter += 1;
+        }
+        echo(json_encode($data));
     }
 
 }

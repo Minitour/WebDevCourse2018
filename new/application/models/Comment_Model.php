@@ -25,8 +25,8 @@ class Comment_model extends CI_Model{
         will return:
             $comment<Comment> - the comment requested in form <Comment>
     */
-    public function get_comments_for_movie($reviewer_id, $movie_id) {
-        return $this->db->get_where('comments', array('reviewer_id' => $reviewer_id, 'movie_id' => $movie_id));
+    public function get_comments_for_movie($movie_id) {
+        return $this->db->get_where('comments', array('movie_id' => $movie_id));
     }
 
     /*
@@ -55,10 +55,11 @@ class Comment_model extends CI_Model{
     public function add_comment($post_comment) {
         $this->reviewer_id = $post_comment['reviewer_id'];
         $this->movie_id = $post_comment['movie_id'];
+        $this->time = $post_comment['time'];
         $this->comment = $post_comment['comment'];
         $this->user_id = $post_comment['user_id'];
 
-        $this->time = $this->db->insert('comments', $this);
+        $this->db->insert('comments', $this);
         return True;
     }
 

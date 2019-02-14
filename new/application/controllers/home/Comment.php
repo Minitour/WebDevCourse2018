@@ -20,19 +20,10 @@ class Comment extends CI_Controller {
             $comment<Comment> - the comment for a review
 
     */
-    public function get_comments_for_movie($reviewer_id, $movie_id) {
-        $query = $this->comment_model->get_comments_for_movie($reviewer_id, $movie_id);
-        $rows = $query->result();
-        $data = array();
-        foreach($rows as $row) {
-            $temp_data = array();
-            $temp_data['movie_id'] = $row['movie_id'];
-            $temp_data['reviewer_id'] = $row['reviewer_id'];
-            $temp_data['time'] = $row['time'];
-            $temp_data['comment'] = $row['comment'];
-            $temp_data['user_id'] = $row['user_id'];
-            $data.push($temp_data);
-        }
+    public function get_comments_for_movie($movie_id) {
+        $query = $this->comment_model->get_comments_for_movie($movie_id);
+        
+        $data = $this->get_results_from_query($query);
 
         echo (json_encode($data));
     }
@@ -50,17 +41,8 @@ class Comment extends CI_Controller {
     */
     public function get_all_comments($reviewer_id) {
         $query = $this->comment_model->get_all_comments_for_reviewer($reviewer_id);
-        $rows = $query->result();
-        $data = array();
-        foreach($rows as $row) {
-            $temp_data = array();
-            $temp_data['movie_id'] = $row['movie_id'];
-            $temp_data['reviewer_id'] = $row['reviewer_id'];
-            $temp_data['time'] = $row['time'];
-            $temp_data['comment'] = $row['comment'];
-            $temp_data['user_id'] = $row['user_id'];
-            $data.push($temp_data);
-        }
+
+        $data = $this->get_results_from_query($query);
 
         echo (json_encode($data));
     }
@@ -76,11 +58,8 @@ class Comment extends CI_Controller {
             True/False - if the comment has been added
     */
     public function add_comment() {
-        $data = array();
-        $data['reviewer_id'] = $_POST['reviewer_id'];
-        $data['movie_id'] = $_POST['movie_id'];
-        $data['comment'] = $_POST['comment'];
-        $data['user_id'] = $_POST['user_id'];
+        
+        $data = $this->get_row_as_array($_POST['comment']);
 
         $ret = $this->comment_model->add_comment($data);
         
@@ -104,5 +83,28 @@ class Comment extends CI_Controller {
 
         $ret = $this->comment_model->remove_comment($reviewer_id, $movie_id, $time);
         $this->helper_functions->post_success_of_fail($ret);
+    }
+
+    public function get_results_from_query($query) {
+        $rows = $query->result();
+        $data = array();
+        $counter = 0;
+        foreach($rows as $row) {
+            $data[$counter] = $this->get_row_as_array($row);
+            $counter += 1;
+        }
+        return $data;
+    }
+
+
+    public function get_row_as_array($row) {
+        $temp_data = array();
+        $temp_data['movie_id'] = $row['movie_id'];
+        $temp_data['reviewer_id'] = $row['reviewer_id'];
+        $temp_data['time'] = $row['time'];
+        $temp_data['comment'] = $row['comment'];
+        $temp_data['user_id'] = $row['user_id'];
+
+        return $temp_data;
     }
 }

@@ -53,11 +53,13 @@ class Category extends CI_Controller {
         $query = $this->category_model->get_categories($movie);
         $rows = $query->result();
         $data = array();
+        $counter = 0;
         foreach($rows as $row) {
             $temp_data = array();
             $temp_data['category_id'] = $row['category_id'];
             $temp_data['category_name'] = $row['category_name'];
-            $data.push($temp_data);
+            $data[$counter] = $temp_data;
+            $counter += 1;
         }
         echo(json_encode($data));
     }

@@ -55,7 +55,10 @@ class Category_model extends CI_Model{
             $categories - of specific movie
     */
     public function get_categories($movie) {
-        return $this->db->get_where('movie_category', array('movie_id' => $movie));
+        //return $this->db->get_where('movie_category', array('movie_id' => $movie));
+        $query = '(SELECT * FROM category LEFT JOIN movie_category ON category.id = movie_category.category_id AND movie_category.movie_id = '. $movie .')';
+        $result = $this->db->query($query);
+        return $result;
     }
 
     
