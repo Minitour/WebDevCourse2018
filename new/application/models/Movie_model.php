@@ -46,7 +46,7 @@ class Movie_model extends CI_Model{
         $string_categories = $this->get_array_to_string($categories);
         $query_string = "";
 
-        if ($tags != "" && $categories != "") {
+        if ($string_tags != "" && $string_categories != "") {
             // categories and tags are not null
             $query_string = '(SELECT * FROM movies WHERE ( 
                 movies.id IN ( 
@@ -57,14 +57,14 @@ class Movie_model extends CI_Model{
             ))';
             
         } else {
-            if ($tags != "") {
+            if ($string_tags != "") {
                 // tags is not null
                 $query_string = '(SELECT * FROM movies WHERE ( 
                     movies.id IN  
                         (SELECT tag_movie.movie_id FROM tag_movie, tag WHERE ( tag_movie.tag_id = tag.id AND tag.value IN ('. $string_tags .')))
                 ))';
             } else {
-                if ($categories != "") {
+                if ($string_categories != "") {
                     // categories is not null
                     $query_string = '(SELECT * FROM movies WHERE ( 
                         movies.id IN 
