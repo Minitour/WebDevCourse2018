@@ -45,7 +45,7 @@ class Review extends CI_Controller {
     public function get_reviews_for_movie($movie) {
         $query = $this->review_model->get_reviews_movie($movie);
         $rows = $query->result();
-        $data = araay();
+        $data = array();
         foreach($rows as $row) {
             $temp_data = array();
             $temp_data['movie_id'] = $row['movie_id'];
