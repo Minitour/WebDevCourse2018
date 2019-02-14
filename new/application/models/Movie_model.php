@@ -41,33 +41,9 @@ class Movie_model extends CI_Model{
     */ 
     public function get_movies($tags, $categories) {
         //$array_tags = explode(" ", $tags);
-        $array_tags = $tags;
         
-        $string_tags = "";
-        $tags_number = count($tags);
-        $counter = 0;
-        foreach($tags as $tag) {
-            if ($counter - 1 == $tags_number){
-                $string_tags += '"'.$tag.'"';
-            }else {
-                $string_tags += '"'.$tag.'",';
-            }
-            $counter += 1;
-        }
-
-        $string_categories = "";
-        $categories_number = count($categories);
-        $counter = 0;
-        foreach($categories as $category) {
-            if ($counter - 1 == $categories_number){
-                $string_categories += '"'.$category.'"';
-            }else {
-                $string_categories += '"'.$category.'",';
-            }
-            $counter += 1;
-        }
-
-        $array_categories = $categories;
+        $string_tags = get_array_to_string($tags);
+        $string_categories = get_array_to_string($categories);
         $query_string = "";
 
         if ($tags != "" && $categories != "") {
@@ -186,7 +162,21 @@ class Movie_model extends CI_Model{
         
     }
 
+    private function get_array_to_string($values) {
+        $string_to_convert = "";
+        $values_number = count($values);
+        $counter = 0;
+        foreach($values as $value) {
+            if ($counter - 1 == $values_number){
+                $string_to_convert += '"'.$value.'"';
+            }else {
+                $string_to_convert += '"'.$value.'",';
+            }
+            $counter += 1;
+        }
 
+        return $string_to_convert;
+    }
 
 
 
