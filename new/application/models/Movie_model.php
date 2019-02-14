@@ -72,28 +72,28 @@ class Movie_model extends CI_Model{
 
         if ($tags != "" && $categories != "") {
             // categories and tags are not null
-            $query_string = $this->db->get_compiled_select('(SELECT * FROM movies WHERE ( 
+            $query_string = '(SELECT * FROM movies WHERE ( 
                 movies.id IN ( 
                     (SELECT tag_movie.movie_id FROM tag_movie, tag WHERE ( tag_movie.tag_id = tag.id AND tag.value IN ('. $string_tags .')))
                     AND
                     (SELECT movie_category.movie_id FROM movie_category, category WHERE (movie_category.category_id = category.id AND category.value IN ('. $string_categories .') ) )
                 )
-            ))', FALSE);
+            ))';
             
         } else {
             if ($tags != "") {
                 // tags is not null
-                $query_string = $this->db->get_compiled_select('(SELECT * FROM movies WHERE ( 
+                $query_string = '(SELECT * FROM movies WHERE ( 
                     movies.id IN  
                         (SELECT tag_movie.movie_id FROM tag_movie, tag WHERE ( tag_movie.tag_id = tag.id AND tag.value IN ('. $string_tags .')))
-                ))', FALSE);
+                ))';
             } else {
                 if ($categories != "") {
                     // categories is not null
-                    $query_string = $this->db->get_compiled_select('(SELECT * FROM movies WHERE ( 
+                    $query_string = '(SELECT * FROM movies WHERE ( 
                         movies.id IN 
                             (SELECT movie_category.movie_id FROM movie_category, category WHERE (movie_category.category_id = category.id AND category.value IN ('. $string_categories .') ) )
-                    ))', FALSE);
+                    ))';
                 }
             }
         }
