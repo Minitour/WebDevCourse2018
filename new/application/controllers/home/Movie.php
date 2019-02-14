@@ -29,11 +29,11 @@ class Movie extends CI_Controller {
         foreach($rows as $row){
             $data['name'] = $row->name;
             $data['ratings'] = $row->ratings;
-            $data['released'] = $row->released;
+            $data['release_date'] = $row->release_date;
             $data['plot'] = $row->plot;
             $data['actors'] = $row->actors;
-            $data['cover'] = $row->cover;
-            $data['info'] = $row->info;
+            // $data['cover'] = $row->cover;
+            // $data['info'] = $row->info;
         }
         echo(json_encode($data));
         
@@ -48,7 +48,8 @@ class Movie extends CI_Controller {
 
     */
     public function get_movies() {
-
+        $tags = $_POST['tags'];
+        $categories = $_POST['categories'];
         //$query = $this->movie_model->get_movies()
     }
 

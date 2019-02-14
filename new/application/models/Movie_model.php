@@ -5,7 +5,7 @@ class Movie_model extends CI_Model{
     public $id;
     public $name;
     public $ratings;
-    public $released;
+    public $release_date;
     public $plot;
     public $actors;
     public $cover;
@@ -58,7 +58,7 @@ class Movie_model extends CI_Model{
         $this->name = $post_movie['name'];
         $this->ratings = $post_movie['ratings'];
         $this->plot = $post_movie['plot'];
-        $this->released = $post_movie['released'];
+        $this->release_date = $post_movie['release_date'];
         $this->cover = $post_movie['cover'];
         $this->actors = $post_movie['actors'];
 
