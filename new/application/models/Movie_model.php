@@ -106,7 +106,18 @@ class Movie_model extends CI_Model{
         will return:
             True/False - if the movie has been updated
     */
-    public function update($movie) {
+    public function update($post_movie) {
+        $this->info = $post_movie['info'];
+        $this->name = $post_movie['name'];
+        $this->ratings = $post_movie['ratings'];
+        $this->plot = $post_movie['plot'];
+        $this->release_date = $post_movie['release_date'];
+        $this->cover = $post_movie['cover'];
+        $this->actors = $post_movie['actors'];
+
+        $this->db->update('movies', $this);
+
+        return True;
         
     }
 

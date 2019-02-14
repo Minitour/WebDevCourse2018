@@ -84,3 +84,17 @@ $route['create'] = "home/account/register_user";
 $route['delete'] = "home/account/delete_user";
 $route['logout'] = "home/account/logout";
 
+
+// for tags
+$route['tags/add'] = "home/tag/add_tag";
+$route['tags/movie/(:any)'] = "home/tag/get_tags/$1";
+
+// for categories
+$route['categories/add'] = "home/category/add_category";
+$route['categories/movie/add'] = "home/category/add_category_to_movie";
+$route['categories/movie/get'] = "home/category/get_categories/$1";
+
+// for cart
+$route['cart/user/(:any))'] = "home/cart/get_items/$1";
+$route['cart/user/add'] = "home/cart/insert_item";
+$route['cart/user/remove'] = "home/cart/remove_item";

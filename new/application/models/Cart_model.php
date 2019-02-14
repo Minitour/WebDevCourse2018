@@ -20,7 +20,11 @@ class Cart_model extends CI_Model{
         will return:
             $items<Array> - an array of items
     */
-    public function get_items($user_id) {}
+    public function get_items($user_id) {
+        return array('id' => $user_id);
+
+        
+    }
 
 
     /*
@@ -33,7 +37,9 @@ class Cart_model extends CI_Model{
         will return:
             True/False - if the item has been added to cart
     */
-    public function insert_item($user_id, $item_id) {}
+    public function insert_item($user_id, $item_id) {
+        return True;
+    }
 
 
     /*
@@ -46,7 +52,9 @@ class Cart_model extends CI_Model{
         will return:
             True/False - if the item has been removed from cart
     */
-    public function remove_item($user_id, $item_id) {}
+    public function remove_item($user_id, $item_id) {
+        return True;
+    }
 
 
 }
