@@ -5,8 +5,8 @@ class Review extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Review_model');
-        $this->load->model('Helper_functions');
+        $this->load->model('review_model');
+        $this->load->model('helper_functions');
     }
         
 
@@ -43,7 +43,7 @@ class Review extends CI_Controller {
 
     */
     public function get_reviews_for_movie($movie) {
-        $query = $this->review_model->get_reviews($movie);
+        $query = $this->review_model->get_reviews_movie($movie);
         $rows = $query->result();
         $data = araay();
         foreach($rows as $row) {

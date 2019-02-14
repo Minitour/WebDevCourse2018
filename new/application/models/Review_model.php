@@ -16,21 +16,6 @@ class Review_model extends CI_Model{
 
 
     /*
-        this function will return specific review for a movie
-
-        given params:
-            @param movie - the movie id in the db
-            @param review_id - the review id in the db
-        
-        will return:
-            $review<Review> - the review requested in form <Review>
-    */
-    public function get_review($movie, $user_id) {
-        return $this->db->get_where('reviews', array('movie_id' => $movie, 'user_id' => $user_id));
-    }
-
-
-    /*
         this function will return all reviews for a movie
 
         given params:
@@ -39,7 +24,7 @@ class Review_model extends CI_Model{
         will return:
             $reviews<Array<Review>> - array of reviews requested in form <Review>
     */    
-    public function get_reviews($movie) {
+    public function get_reviews_movie($movie) {
         return $this->db->get_where('reviews', array('movie_id' => $movie));
     }
 
