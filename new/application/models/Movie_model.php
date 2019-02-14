@@ -40,7 +40,19 @@ class Movie_model extends CI_Model{
             $movies<Array<Movie>> - all movies in form <Movie>
     */ 
     public function get_movies($tags, $categories) {
-        return $this->db->get('movies');
+        $array_tags = explode(" ", $tags);
+
+        $this->db->select('(SELECT * FROM movies WHERE ( 
+                movies.id in ( 
+                    (SELECT tag_movie.movie_id FROM tag_movie, tag WHERE ( tag_movie.tag_id = tag.id AND tag.value in ('. $array_tags .')))
+                    AND
+                    (SELECT movie_category.movie_id FROM movie_category, category WHERE (movie_category.category_id = category.id AND category.value in ('. $categories .') ) )
+                )
+            ) 
+        )', FALSE);
+        $query = $this->db->get('movies');
+
+        return $query;
     }
 
 
