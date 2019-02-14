@@ -23,7 +23,7 @@ class Review extends CI_Controller {
     public function get_reviews_for_user($user_id) {
         $query = $this->review_model->get_all_reviews($user_id);
         $rows = $query->result();
-        $data = araay();
+        $data = array();
         foreach($rows as $row) {
             $data['movie_id'] = $row['movie_id'];
             $data['user_id'] = $row['user_id'];

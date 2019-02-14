@@ -5,8 +5,8 @@ class User extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-        $this->load->model('Review_model');
-        $this->load->model('User_model');
+        $this->load->model('review_model');
+        $this->load->model('rser_model');
     }
         
     /*
@@ -28,7 +28,7 @@ class User extends CI_Controller {
     public function get_reviews($user) {
         $query = $this->review_model->get_all_reviews($user);
         $rows = $query->result();
-        $data = araay();
+        $data = array();
         foreach($rows as $row) {
             $temp_data = array();
             $temp_data['movie_id'] = $row['movie_id'];
@@ -55,7 +55,7 @@ class User extends CI_Controller {
     public function get_followers($user) {
         $query = $this->user_model->get_followers($user);
         $rows = $query->result();
-        $data = araay();
+        $data = array();
         foreach($rows as $row) {
             $temp_data = array();
             $temp_data['ID'] = $row['ID'];
@@ -86,7 +86,7 @@ class User extends CI_Controller {
     public function get_following_pages($user) {
         $query = $this->user_model->get_following($user);
         $rows = $query->result();
-        $data = araay();
+        $data = array();
         foreach($rows as $row) {
             $temp_data = array();
             $temp_data['ID'] = $row['ID'];
