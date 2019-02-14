@@ -73,9 +73,10 @@ $route['add_review'] = "home/review/add_review";
 $route['remove_review'] = "home/review/remove_review";
 
 // for users
-$route['get_user'] = "home/user/$1/get_reviews/$2";
-$route['get_by_username'] = "home/user/$1/get_followers/$2";
-$route['get_by_username_password'] = "home/user/$1/get_following_pages/$2";
+$route['users/(:any)'] = "home/user/get_user/$1";
+$route['users/(:any)/reviews'] = "home/user/get_reviews/$1";
+$route['users/(:any)/followers'] = "home/user/get_followers/$1";
+$route['users/(:any)/following'] = "home/user/get_following_pages/$1";
 
 // for accounts
 $route['login'] = "home/account/login";

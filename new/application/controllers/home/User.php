@@ -16,6 +16,25 @@ class User extends CI_Controller {
         $this->load->view("pages/login");
     }
 
+    public function get_user($id) {
+        $query = $this->user_model->get_user($id);
+        $rows = $query->result();
+        $data = array();
+        foreach($rows as $row) {
+            $data['ID'] = $row['ID'];
+            $data['username'] = $row['username'];
+            $data['password'] = $row['password'];
+            $data['email'] = $row['email'];
+            $data['first_name'] = $row['first_name'];
+            $data['last_name'] = $row['last_name'];
+            $data['phone'] = $row['phone'];
+            $data['birthday'] = $row['birthday'];
+            $data['profile_picture'] = $row['profile_picture'];
+            $data['role_id'] = $row['role_id'];
+        }
+        echo(json_encode($data));
+    }
+
     /*
         this function will return all reviews for a user
 
