@@ -55,6 +55,7 @@ class Movie extends CI_Controller {
 
         $query = $this->movie_model->get_movies($tags, $categories);
         $rows = $query->result();
+        $counter = 0;
         $data = array();
         foreach($rows as $row){
             $temp_data = array();
@@ -63,7 +64,8 @@ class Movie extends CI_Controller {
             $temp_data['release_date'] = $row->release_date;
             $temp_data['plot'] = $row->plot;
             $temp_data['actors'] = $row->actors;
-            $data.push($temp_data);
+            $data[$counter] = $temp_data;
+            $counter += 1;
             // $data['cover'] = $row->cover;
             // $data['info'] = $row->info;
         }
