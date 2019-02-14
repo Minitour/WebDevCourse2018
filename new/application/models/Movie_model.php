@@ -42,6 +42,31 @@ class Movie_model extends CI_Model{
     public function get_movies($tags, $categories) {
         //$array_tags = explode(" ", $tags);
         $array_tags = $tags;
+        
+        $string_tags = "";
+        $tags_number = count($tags);
+        $counter = 0;
+        foreach($tags as $tag) {
+            if ($counter - 1 == $tags_number){
+                $string_tags += '"'.$tag.'"';
+            }else {
+                $string_tags += '"'.$tag.'",';
+            }
+            $counter += 1;
+        }
+
+        $string_categories = "";
+        $categories_number = count($categories);
+        $counter = 0;
+        foreach($categories as $category) {
+            if ($counter - 1 == $categories_number){
+                $string_categories += '"'.$category.'"';
+            }else {
+                $string_categories += '"'.$category.'",';
+            }
+            $counter += 1;
+        }
+
         $array_categories = $categories;
         $query_string = "";
 
@@ -49,9 +74,9 @@ class Movie_model extends CI_Model{
             // categories and tags are not null
             $query_string = $this->db->get_compiled_select('(SELECT * FROM movies WHERE ( 
                 movies.id IN ( 
-                    (SELECT tag_movie.movie_id FROM tag_movie, tag WHERE ( tag_movie.tag_id = tag.id AND tag.value IN ('. $array_tags .')))
+                    (SELECT tag_movie.movie_id FROM tag_movie, tag WHERE ( tag_movie.tag_id = tag.id AND tag.value IN ('. $string_tags .')))
                     AND
-                    (SELECT movie_category.movie_id FROM movie_category, category WHERE (movie_category.category_id = category.id AND category.value IN ('. $array_categories .') ) )
+                    (SELECT movie_category.movie_id FROM movie_category, category WHERE (movie_category.category_id = category.id AND category.value IN ('. $string_categories .') ) )
                 )
             ))', FALSE);
             
@@ -60,19 +85,26 @@ class Movie_model extends CI_Model{
                 // tags is not null
                 $query_string = $this->db->get_compiled_select('(SELECT * FROM movies WHERE ( 
                     movies.id IN  
-                        (SELECT tag_movie.movie_id FROM tag_movie, tag WHERE ( tag_movie.tag_id = tag.id AND tag.value IN ('. $array_tags .')))
+                        (SELECT tag_movie.movie_id FROM tag_movie, tag WHERE ( tag_movie.tag_id = tag.id AND tag.value IN ('. $string_tags .')))
                 ))', FALSE);
             } else {
-                // categories is not null
-                $query_string = $this->db->get_compiled_select('(SELECT * FROM movies WHERE ( 
-                    movies.id IN 
-                        (SELECT movie_category.movie_id FROM movie_category, category WHERE (movie_category.category_id = category.id AND category.value IN ('. $array_categories .') ) )
-                ))', FALSE);
+                if ($categories != "") {
+                    // categories is not null
+                    $query_string = $this->db->get_compiled_select('(SELECT * FROM movies WHERE ( 
+                        movies.id IN 
+                            (SELECT movie_category.movie_id FROM movie_category, category WHERE (movie_category.category_id = category.id AND category.value IN ('. $string_categories .') ) )
+                    ))', FALSE);
+                }
             }
         }
-        //$query = $this->db->get('movies');
-        $this->db->query($query_string);
-
+        
+        if ($query_string != "") {
+            // no tags or categories
+            $query = $this->db->query($query_string);
+        } else {
+            $query = $this->db->get('movies');
+        }
+        
         return $query;
     }
 
