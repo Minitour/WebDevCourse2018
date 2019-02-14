@@ -162,7 +162,7 @@ class Movie_model extends CI_Model{
         
     }
 
-    private function get_array_to_string($values) {
+    public function get_array_to_string($values) {
         $string_to_convert = "";
         $values_number = count($values);
         $counter = 0;
