@@ -72,14 +72,7 @@ class Review extends CI_Controller {
     */
     public function add_review() {
         $posted_review = $_POST['review'];
-        $data = array();
-        $data['movie_id'] = $posted_review['movie_id'];
-        $data['user_id'] = $posted_review['user_id'];
-        $data['comment'] = $posted_review['comment'];
-        $data['star_rating'] = $posted_review['star_rating'];
-        $data['created_at'] = $posted_review['created_at'];
-
-        $ret = $this->review_model->add_review($data);
+        $ret = $this->review_model->add_review($posted_review);
         $this->helper_functions->post_success_of_fail($ret);
     }
 

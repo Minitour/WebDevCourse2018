@@ -7,6 +7,7 @@ class User extends CI_Controller {
         parent::__construct();
         $this->load->model('review_model');
         $this->load->model('user_model');
+        $this->load->model('helper_functions');
     }
         
     /*
@@ -35,6 +36,19 @@ class User extends CI_Controller {
         echo(json_encode($data));
     }
 
+
+    /*
+        this function will update the user in db
+
+        will return:
+            True/False - if the user has benn updated
+    */
+    public function update_user() {
+        $user = $_POST['user'];
+        $ret = $this->user_model->update_user($user);
+        $this->helper_functions->post_success_of_fail($ret);
+    }
+
     /*
         this function will return all reviews for a user
 
@@ -48,6 +62,7 @@ class User extends CI_Controller {
         $query = $this->review_model->get_all_reviews($user);
         $rows = $query->result();
         $data = array();
+        $counter = 0;
         foreach($rows as $row) {
             $temp_data = array();
             $temp_data['movie_id'] = $row['movie_id'];
@@ -55,7 +70,8 @@ class User extends CI_Controller {
             $temp_data['comment'] = $row['comment'];
             $temp_data['star_rating'] = $row['star_rating'];
             $temp_data['created_at'] = $row['created_at'];
-            $data.push($temp_data);
+            $data[$counter] = $temp_data;
+            $counter += 1;
         }
         echo(json_encode($data));
     }
@@ -75,6 +91,7 @@ class User extends CI_Controller {
         $query = $this->user_model->get_followers($user);
         $rows = $query->result();
         $data = array();
+        $counter = 0;
         foreach($rows as $row) {
             $temp_data = array();
             $temp_data['ID'] = $row['ID'];
@@ -87,7 +104,8 @@ class User extends CI_Controller {
             $temp_data['birthday'] = $row['birthday'];
             $temp_data['profile_picture'] = $row['profile_picture'];
             $temp_data['role_id'] = $row['role_id'];
-            $data.push($temp_data);
+            $data[$counter] = $temp_data;
+            $counter += 1;
         }
         echo(json_encode($data));
     }
@@ -106,6 +124,7 @@ class User extends CI_Controller {
         $query = $this->user_model->get_following($user);
         $rows = $query->result();
         $data = array();
+        $counter = 0;
         foreach($rows as $row) {
             $temp_data = array();
             $temp_data['ID'] = $row['ID'];
@@ -118,7 +137,8 @@ class User extends CI_Controller {
             $temp_data['birthday'] = $row['birthday'];
             $temp_data['profile_picture'] = $row['profile_picture'];
             $temp_data['role_id'] = $row['role_id'];
-            $data.push($temp_data);
+            $data[$counter] = $temp_data;
+            $counter += 1;
         }
         echo(json_encode($data));
     }

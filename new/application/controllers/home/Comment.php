@@ -85,6 +85,15 @@ class Comment extends CI_Controller {
         $this->helper_functions->post_success_of_fail($ret);
     }
 
+    /*
+        helper function to extract the data from query
+
+        given params:
+            $query - the query we want to extract from
+
+        will return:
+            $data - array of records
+    */
     public function get_results_from_query($query) {
         $rows = $query->result();
         $data = array();
@@ -97,6 +106,15 @@ class Comment extends CI_Controller {
     }
 
 
+    /*
+        this function will return an object as an array
+
+        given params:
+            $row - the object we want to convert
+
+        will return:
+            $data - array of the object
+    */
     public function get_row_as_array($row) {
         $temp_data = array();
         $temp_data['movie_id'] = $row['movie_id'];
