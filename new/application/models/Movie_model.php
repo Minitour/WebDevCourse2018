@@ -42,8 +42,8 @@ class Movie_model extends CI_Model{
     public function get_movies($tags, $categories) {
         //$array_tags = explode(" ", $tags);
         
-        $string_tags = get_array_to_string($tags);
-        $string_categories = get_array_to_string($categories);
+        $string_tags = $this->get_array_to_string($tags);
+        $string_categories = $this->get_array_to_string($categories);
         $query_string = "";
 
         if ($tags != "" && $categories != "") {
