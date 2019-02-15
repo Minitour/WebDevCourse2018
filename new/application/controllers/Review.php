@@ -54,6 +54,8 @@ class Review extends CI_Controller {
             $temp_data['comment'] = $row['comment'];
             $temp_data['star_rating'] = $row['star_rating'];
             $temp_data['created_at'] = $row['created_at'];
+            $temp_data['username'] = $row['username'];
+            $temp_data['profile_picture'] = $row['profile_picture'];
             $data[$counter] = $temp_data;
             $counter += 1;
         }

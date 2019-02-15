@@ -4,6 +4,8 @@ class Review_model extends CI_Model{
 
     public $movie_id;
     public $user_id;
+    public $username;
+    public $profile_picture;
     public $comment;
     public $star_rating;
     public $created_at;
@@ -25,7 +27,9 @@ class Review_model extends CI_Model{
             $reviews<Array<Review>> - array of reviews requested in form <Review>
     */    
     public function get_reviews_movie($movie) {
-        return $this->db->get_where('reviews', array('movie_id' => $movie));
+        // SELECT * FROM reviews JOIN 
+        $sql = "(SELECT * FROM reviews INNER JOIN users ON users.id = reviews.user_id WHERE reviews.movie_id = ?)";
+        return $this->db->query($sql, array($movie));
     }
 
     /*
