@@ -40,7 +40,7 @@ function validateForm(){
         // check birthdate -> will be before today
         var date1 = new Date(birthday_field);
         if (date1 < new Date()) {
-            var birthday_form_message = "<h6 style='color:green;'>Valid Birthday</h6>";
+            // var birthday_form_message = "<h6 style='color:green;'>Valid Birthday</h6>";
         } else {
             checkAllElements = false;
             var birthday_form_message = "<h6 style='color:red;'>Invalid Birthday</h6>";
@@ -63,7 +63,7 @@ function validateForm(){
         if ((email_field != "") && (email_field.match(email_regex) != null)) {
 
         //TODO: add ok message
-        var email_form_message = "<h6 style='color:green;'>Valid Email</h6>";
+        // var email_form_message = "<h6 style='color:green;'>Valid Email</h6>";
 
         } else {
         checkAllElements = false;
@@ -87,7 +87,7 @@ function validateForm(){
 
             // checking if the passwords are valid
             if ((password_field.match(password_regex) != null) && (password_confirm_field.match(password_regex) != null)) {
-            var password_form_message = "<h6 style='color:green;'>Valid Password</h6>";
+            // var password_form_message = "<h6 style='color:green;'>Valid Password</h6>";
             } else {
             checkAllElements = false;
             var password_form_message = "<h6 style='color:red;'>InValid Password</h6>";
@@ -112,6 +112,10 @@ function validateForm(){
 
         //$('#first_name').attr("disabled value", first_name_field);
         });
+
+        if (checkAllElements) {
+            
+        }
 
 
     }

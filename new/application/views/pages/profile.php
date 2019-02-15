@@ -202,7 +202,7 @@
 
     <div class="row" id="comments_all" style="display:none;">
         <?php 
-            $reviewsCount = count($reviews['reviews']->result());
+            $reviewsCount = count($reviews);
         ?>
         <div class="col s12">
             <h3 style="font-weight:bold;padding-bottom: 20px">Past Reviews: <?php echo $reviewsCount?></h3>
