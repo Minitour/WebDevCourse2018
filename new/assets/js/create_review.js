@@ -13,43 +13,28 @@ function get_reviews(movie_id, page_num, callback) {
 function setup_movie(movie_data) {
   $("#title").text(movie_data["name"]);
   var final_str = "";
-
+  var i = movie_data['id'];
   // for taging the movies in the modal_first_div var below
 
   var stars_number = 5;
   // constructing a movie
   var first_div = '<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">';
   var second_div = '<div class="card h-100">';
-  var link_to_image =
-    '<img style="width:100%;" class="card-img-top" src="' +
-    movie_data["cover"] +
-    '" alt="">';
+  var link_to_image = `<img style="width:100%;" class="card-img-top" src="${movie_data["cover"]}" alt="">`;
   var third_div = '<div class="card-body">';
   var h4_line = '<h4 class="card-title">';
-  var title = '<a href="#">' + movie_data["name"] + "</a>";
+  var title = `<a href="#"> ${movie_data["name"]} </a>`;
   var close_h4 = "</h4>";
-  var description = '<p class="card-text">' + movie_data["info"] + "</p>";
+  var description = `<p class="card-text">${movie_data["info"]}</p>`;
   var close_third_div = "</div>";
-  var button =
-    '<button type="button" class="btn btn-primary" style="background-color:#353a40;border-color:#353a40;" data-toggle="modal" data-target="#' +
-    i +
-    '">Movie Info</button>';
+  var button = `<button type="button" class="btn btn-primary" style="background-color:#353a40;border-color:#353a40;" data-toggle="modal" data-target="#${i}">Movie Info</button>`;
   var closing_first_second_divs_first = "</div></div>";
 
   // constructing the modal for the movie
-  var modal_first_div =
-    '<div id="' +
-    i +
-    '" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">';
+  var modal_first_div = `<div id="${i}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">`;
   var modal_second_div = '<div class="modal-dialog modal-lg">';
-  var closeButton_modal =
-    '<button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-  var modal_third_div_and_close_div_header =
-    '<div class="modal-content"><div class="modal-header" style="background-color:#353a40;"><h5 class="modal-title" style="color:white;">' +
-    movie +
-    "</h5>" +
-    closeButton_modal +
-    "</div>";
+  var closeButton_modal = '<button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+  var modal_third_div_and_close_div_header = `<div class="modal-content"><div class="modal-header" style="background-color:#353a40;"><h5 class="modal-title" style="color:white;">${movie}</h5>${closeButton_modal}</div>`;
 
   // fetching the info the specific movie
   var fields_for_movie_info = "";
@@ -66,24 +51,16 @@ function setup_movie(movie_data) {
   ratings += "</p>";
   //var ratings = '<p style="font-size:20"><span style="font-weight:bold;">Ratings</span> : ' + movies_infos[movie]['ratings'] + "</p>";
   var released =
-    '<p style="font-size:20"><span style="font-weight:bold;">Released</span> : ' +
-    movie_data["released"] +
-    "</p>";
+    `<p style="font-size:20"><span style="font-weight:bold;">Released</span> : ${movie_data["release_date"]}</p>`;
   var genre =
-    '<p style="font-size:20"><span style="font-weight:bold;">Genre</span> : ' +
-    movie_data["genre"] +
-    "</p>";
+    `<p style="font-size:20"><span style="font-weight:bold;">Genre</span> : ${movie_data["genre"]}</p>`;
   var plot =
-    '<p style="font-size:20"><span style="font-weight:bold;">Plot</span> : ' +
-    movie_data["plot"] +
-    "</p>";
+    `<p style="font-size:20"><span style="font-weight:bold;">Plot</span> : ${movie_data["plot"]} </p>`;
   var actors =
-    '<p style="font-size:20"><span style="font-weight:bold;">Actors</span> : ' +
-    movie_data["actors"] +
-    "</p>";
+    `<p style="font-size:20"><span style="font-weight:bold;">Actors</span> : ${movie_data["actors"]}</p>`;
 
   // appending the fields together
-  fields_for_movie_info = ratings + released + genre + plot + actors;
+  fields_for_movie_info = ratings + released + /*genre*/ plot; /*+ actors;*/
 
   // appending the joined fields to the modal body
   var modalBody =
