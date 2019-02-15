@@ -27,8 +27,8 @@ class Main extends CI_Controller{
         //     return;
         // }
 
-        //$data['username'] = $_SESSION['username'];
-        $this->load->view("pages/index");
+        $data['username'] = 'testname';
+        $this->load->view("pages/index",$data);
     }
 
     public function review_view() {
