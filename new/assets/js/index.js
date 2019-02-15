@@ -59,11 +59,7 @@ const app = new Vue({
   el: "#first_tag",
   data: {
     search: "",
-    moviesList: function() {
-      return {
-        movies: []
-      }
-    }
+    moviesList: []
   },
   computed: {
     filteredList() {
@@ -103,7 +99,7 @@ const app = new Vue({
 
           //console.log(ratings);
           //$('#stars_ratings').append(ratings);
-          moviesList.push(post_item);
+          this.moviesList.push(post_item);
         });
       });
     }
