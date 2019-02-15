@@ -46,8 +46,8 @@ class Account extends CI_Controller {
         }
 
         
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        $username = $_POST['email-login'];
+        $password = $_POST['password-login'];
 
         // fetch account
         $account = $this->user_model->get_user_by_username($username);
