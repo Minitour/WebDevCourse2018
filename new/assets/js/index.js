@@ -75,6 +75,7 @@ const app = new Vue({
   methods: {
     fetchMovies: function(page) {
       $.post("/new/index.php/movie/get_movies/"+page, {}, data => {
+        data = JSON.parse(data);
         data.forEach(i => {
           //id,name,ratings,release_date,plot,actors,conver,info
           let movie_name = i["name"];
