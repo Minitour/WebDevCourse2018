@@ -33,12 +33,13 @@
   <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
 
+  <script src="<?php echo base_url('assets/js/index.js'); ?>"></script>
+
 
 </head>
 
 <body>
 <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/js/index.js'); ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <nav class="blue-grey darken-3" role="navigation">
     <div class="nav-wrapper container">
