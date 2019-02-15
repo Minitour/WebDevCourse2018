@@ -36,7 +36,7 @@ const app = new Vue({
   },
   methods: {
     fetchMovies: function(page) {
-      $.post("/new/index.php/movie/get_movies/" + page, {}, data => {
+      $.post(`/new/index.php/movie/get_movies/${page}`, {}, data => {
         returned_data = JSON.parse(data);
         console.log(returned_data);
         returned_data.forEach(i => {
@@ -58,7 +58,12 @@ const app = new Vue({
 
           let plot = i["plot"];
           if (plot != undefined) {
-            plot = plot.substring(0, Math.min(plot.length, 300));
+            let len = plot.length;
+            plot = plot.substring(0, Math.min(len, 300));
+
+            if (len > 300) {
+              plot += "...";
+            }
           }
 
           let post_item = new Post(
