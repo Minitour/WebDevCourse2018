@@ -9,14 +9,15 @@
 
     <!-- Bootstrap core CSS -->
     <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-    <link href="css/profile.css" rel="stylesheet">
-    <link href="css/reviews.css" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/profile.css');?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/reviews.css');?>" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" >
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
+    <script src="<?php echo base_url('assets/js/toggles.js'); ?>"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
 
     <nav class="blue-grey darken-3" role="navigation">
@@ -240,8 +241,6 @@
       </div>
 
     </div>
-
-<script src="<?php echo base_url('assets/js/toggles.js'); ?>"></script>
 
 
 </body>
