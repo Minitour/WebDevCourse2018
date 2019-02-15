@@ -99,7 +99,7 @@ const app = new Vue({
 
           //console.log(ratings);
           //$('#stars_ratings').append(ratings);
-          this.moviesList.push(post_item);
+          this.data.moviesList.push(post_item);
         });
       });
     }
