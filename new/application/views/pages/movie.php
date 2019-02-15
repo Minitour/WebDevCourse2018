@@ -132,7 +132,7 @@
   <!-- <script src="./pictures.js"></script> -->
   <script>
     
-    var movie_data = JSON.parse('<?php echo json_encode($movie_data);?>');
+    var movie_data = JSON.parse('<?php echo json_encode($movie_data);?>'); 
     setup_movie(movie_data);
     var page = 1;
 
