@@ -5,6 +5,7 @@ function validateForm(){
         var checkAllElements = true;
 
         // getting all elements to check
+        var username_field = document.getElementById("username").value;
         var first_name_field = document.getElementById("first_name").value;
         var last_name_field = document.getElementById("last_name").value;
         var email_field = document.getElementById("email").value;
@@ -14,6 +15,11 @@ function validateForm(){
         var password_confirm_field = document.getElementById("password-confirm").value;
 
         // checking all elements by conditions set before
+        if (username_field != "") {
+            // username is ok
+        } else {
+            var username_error_box = "<h6 style='color:red;'>Invalid Username</h6>";
+        }
 
         // check first and last name
         var names_regex = /^[A-Za-z]*$/;
@@ -101,6 +107,7 @@ function validateForm(){
         var password_form_message = "<h6 style='color:red;'>No Password Entered</h6>";
         }
 
+        $('#username_error_box').html(username_form_message);
         $('#first_name_error_box').html(first_name_form_message);
         $('#last_name_error_box').html(last_name_form_message);
         $('#birthday_error_box').html(birthday_form_message);
@@ -114,6 +121,26 @@ function validateForm(){
         });
 
         if (checkAllElements) {
+
+            var user = {
+                "user": {
+                    "username": username_field,
+                    "first_name": first_name_field,
+                    "last_name": last_name_field,
+                    "email": email_field,
+                    "phone": phone_field,
+                    "birthday": birthday_field,
+                    "password": password_field,
+                    "role_id": 1,
+                    "profile_picture": ""
+                }
+            }
+            var uri = "/new/index.php/account/create";
+            $.post(uri, JSON.stringify(user), data => {
+                returned_data = JSON.parse(data);
+                console.log(returned_data);
+            });
+            
 
         }
 
