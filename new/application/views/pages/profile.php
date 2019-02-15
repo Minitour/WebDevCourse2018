@@ -29,7 +29,7 @@
                 <li><a href="index.php?#">Home</a></li>
                 <li><a href="login.php">Logout</a></li>
                 <li class="nav-item active"><a href="profile.php">
-                    <?php echo $usr->username; ?>
+                    <?php echo "test"; ?>
                 </a></li>
             </ul>
         </div>
@@ -106,11 +106,11 @@
                       return $user->isAdmin();
                     }
 
-                    if (user_has_permissions($usr)) {
+                    //if (user_has_permissions($usr)) {
                       echo '<div style="padding-bottom:5px;padding-left:5px;padding-right:5px;">';
                       echo '<button class="btn waves-effect waves-light" style="width: 100%;" id="upload_file" name="action">Upload File</button>';
                       echo '</div>';
-                    }
+                    //}
                   ?>
                 </div>
             </div>
@@ -124,7 +124,7 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-    					        <input id="first_name" name="first_name" type="text" disabled value="<?php echo $usr->first_name; ?>" required>
+    					        <input id="first_name" name="first_name" type="text" disabled value="<?php echo '$usr->first_name'; ?>" required>
                                 <label for="first_name">First Name</label>
                                 <div id="first_name_error_box" name="first_name_error_box">
                             </div>
@@ -132,7 +132,7 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-  						        <input id="last_name" name="last_name" type="text" class="validate" disabled value="<?php echo $usr->last_name; ?>" required>
+  						        <input id="last_name" name="last_name" type="text" class="validate" disabled value="<?php echo '$usr->last_name'; ?>" required>
   						        <label for="last_name">Last Name</label>
                                 <div id="last_name_error_box" name="last_name_error_box"></div>
   					        </div>
@@ -141,7 +141,7 @@
                         <div class="form-group">
 
                            <div class="input-field col s12">
-  						        <input id="phone" type="text" class="validate" disabled value="<?php echo $usr->phone; ?>" required>
+  						        <input id="phone" type="text" class="validate" disabled value="<?php echo '$usr->phone'; ?>" required>
   						        <label for="phone-confirm">Phone Confirmation</label>
                                 <div id="phone_error_box" name="phone_error_box"></div>
   					        </div>
@@ -149,14 +149,14 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-  						        <input id="email" type="text" class="validate" disabled value="<?php echo $usr->email; ?>" required>
+  						        <input id="email" type="text" class="validate" disabled value="<?php echo '$usr->email'; ?>" required>
   						        <label for="email">Email</label>
                                 <div id="email_error_box" name="email_error_box"></div>
   					        </div>
                         </div>
                         <div class="form-group">
                             <div class='input-field col s12'>
-                                <input id="birthday_date" type="text" class="datepicker" disabled value="<?php echo $usr->birthday; ?>">
+                                <input id="birthday_date" type="text" class="datepicker" disabled value="<?php echo '$usr->birthday'; ?>">
                                 <label for="birthday_date">Birthday</label>
                                 <div id="birthday_error_box" name="birthday_error_box"></div>
                             </div>
@@ -165,7 +165,7 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-  						        <input id="password" name="location" type="password" class="validate" disabled value="<?php echo $usr->password; ?>" required>
+  						        <input id="password" name="location" type="password" class="validate" disabled value="<?php echo '$usr->password'; ?>" required>
   						        <label for="password">Password</label>
                             <div id="password_error_box" name="password_error_box"></div>
   					</div>
@@ -173,7 +173,7 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-  						        <input id="password-confirm" name="password-confirm" type="password" class="validate" disabled value="<?php echo $usr->password; ?>" required>
+  						        <input id="password-confirm" name="password-confirm" type="password" class="validate" disabled value="<?php echo '$usr->password'; ?>" required>
                                 <label for="password-confirm">Password Confirmation</label>
                                 <div id="password_confirm_error_box" name="password_confirm_error_box"></div>
                             </div>
