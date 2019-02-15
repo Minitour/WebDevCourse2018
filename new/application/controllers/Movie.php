@@ -25,7 +25,7 @@ class Movie extends CI_Controller {
     public function get_movie($movie) {
         
         $query = $this->movie_model->get_movie_details($movie);
-        $rows = $query->result();
+        $rows = $query->result_array();
         $data = array();
         foreach($rows as $row){
             $data['name'] = $row->name;

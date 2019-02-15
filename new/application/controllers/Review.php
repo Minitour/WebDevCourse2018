@@ -24,7 +24,7 @@ class Review extends CI_Controller {
     */
     public function get_reviews_for_user($user_id) {
         $query = $this->review_model->get_all_reviews($user_id);
-        $rows = $query->result();
+        $rows = $query->result_array();
         $data1 = array();
         foreach($rows as $row) {
             $data1['movie_id'] = $row['movie_id'];
@@ -46,9 +46,9 @@ class Review extends CI_Controller {
     */
     public function get_reviews_for_movie($movie,$page) {
         $query = $this->review_model->get_reviews_movie($movie,$page);
-        $rows = $query->result();
+        $rows = $query->result_array();
         $data = array();
-        foreach($rows -> result_array() as $row) {
+        foreach($rows as $row) {
             $temp_data = array();
             $temp_data['movie_id'] = $row['movie_id'];
             $temp_data['user_id'] = $row['user_id'];

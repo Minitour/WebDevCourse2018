@@ -38,7 +38,7 @@ class Tag extends CI_Controller {
     */
     public function get_tags($movie) {
         $query = $this->tag_model->get_tags($movie);
-        $rows = $query->result();
+        $rows = $query->result_array();
         $data = array();
         $counter = 0;
         foreach($rows as $row) {
