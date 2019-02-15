@@ -56,7 +56,7 @@ $route['translate_uri_dashes'] = FALSE;
 // views
 $route['login']['get'] = 'main/login_view';
 $route['home']['get'] = 'main/index';
-
+$route['movies/(:any)']['get'] = "main/review_view/$1"; // $1: movie id.
 
 // for comments
 $route['comments/movie/(:any)'] = "comment/get_comments_for_movie/$1";
@@ -65,21 +65,20 @@ $route['comments/add']['post'] = "comment/add_comment";
 $route['comments/remove']['post'] = "comment/remove_comment";
 
 // for movies
-$route['movies/(:any)'] = "movie/get_movie/$1";
-$route['movies']['post'] = "movie/get_movies";
+$route['movies/(:num)']['post'] = "movie/get_movies/$1"; // $1: page number
 $route['movies/add']['post'] = "movie/add_movie";
 $route['movies/remove']['post'] = "movie/remove_movie";
 $route['movies/cart/add']['post'] = "movie/add_to_cart";
 $route['movies/update']['post'] = "movie/update";
 
 // for reviews
-$route['reviews/movie/(:any)'] = "review/get_reviews_for_movie/$1";
-$route['reviews/user/(:any)'] = "review/get_reviews_for_user/$1";
+$route['reviews/movie/(:num)/(:num)']['post'] = "review/get_reviews_for_movie/$1/$2"; // $1 movie id. $2 page number
+$route['reviews/user/(:num)/(:num)']['post'] = "review/get_reviews_for_user/$1/$2"; // $1 user id, $2 page id
 $route['reviews/add']['post'] = "review/add_review";
 $route['reviews/remove']['post'] = "review/remove_review";
 
 // for users
-$route['users/user/(:any)'] = "user/get_user/$1";
+$route['users/user/(:num)'] = "user/get_user/$1"; //$1 user id.
 $route['users/(:num)/reviews'] = "user/get_reviews/$1";
 $route['users/(:num)/followers'] = "user/get_followers/$1";
 $route['users/(:num)/following'] = "user/get_following_pages/$1";

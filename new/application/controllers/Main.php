@@ -31,7 +31,21 @@ class Main extends CI_Controller{
         $this->load->view("pages/index",$data);
     }
 
-    public function review_view() {
+    public function review_view($movie_id) {
+
+        // fetch movie details
+        $query = $this->movie_model->get_movie_details($movie_id);
+        $res = $query->result();
+
+        
+        if (sizeof($res) > 0) {
+            $data['movie'] = $res[0];
+            // load movie view
+            $this->load->view('movie',$data);
+        }else {
+            // page not found
+            show_404();
+        }
     }
 
     public function cart_view() {
