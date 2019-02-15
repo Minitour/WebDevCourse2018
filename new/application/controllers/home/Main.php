@@ -18,52 +18,36 @@ class Main extends CI_Controller{
  
     }
 
-    public function start_session() {
+
+    public function index_view() {
         session_start();
+        
         if(!isset($_SESSION['username'])){
             $this->load->view("pages/login");
             return;
         }
-    }
 
-    public function pre_load() {
-        start_session();
-        $this->load->view("template/nav_bar");
-    }
-
-    public function index_view() {
-        pre_load();
-        $this->load->view("pages/index");
-
-        after_load();
+        $data['username'] = $_SESSION['username'];
+        $this->load->view("pages/index",$data);
     }
 
     public function review_view() {
-        pre_load();
-        after_load();
     }
 
     public function cart_view() {
-        pre_load();
         $this->load->view("pages/cart");
-        after_load();
     }
 
     public function profile_view() {
-        pre_load();
         $this->load->view("pages/profile");
-        after_load();
     }
 
     public function login_view() {
-        start_session();
+        session_destroy();
         $this->load->view("pages/login");
     }
 
     public function after_load() {
         $this->load->view("template/footer");
     }
-
-
-
 }
