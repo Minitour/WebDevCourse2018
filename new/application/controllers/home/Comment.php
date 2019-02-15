@@ -76,7 +76,7 @@ class Comment extends CI_Controller {
         will return:
             True/False - if the comment has been removed
     */
-    public function remove_comment($reviewer_id, $movie_id, $time) {
+    public function remove_comment() {
         $reviewer_id = $_POST['reviewer_id'];
         $movie_id = $_POST['movie_id'];
         $time = $_POST['time'];
