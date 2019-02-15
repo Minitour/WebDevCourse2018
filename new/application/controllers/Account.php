@@ -70,7 +70,7 @@ class Account extends CI_Controller {
         $_SESSION['role'] = $account['role'];
         $response = array("message" => 'Success', "code" => 200); 
         http_response_code(200);
-        header('Location: /');
+        header('Location: /new');
         echo json_encode($response);
     }
 

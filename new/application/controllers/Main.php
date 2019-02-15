@@ -20,6 +20,7 @@ class Main extends CI_Controller{
 
 
     public function index() {
+        redirectIfNeeded();
         // session_start();
         
         // if(!isset($_SESSION['username'])){
@@ -27,7 +28,7 @@ class Main extends CI_Controller{
         //     return;
         // }
 
-        $data['username'] = 'testname';
+        $data['username'] = $_SESSION['username'];
         $this->load->view("pages/index",$data);
     }
 
