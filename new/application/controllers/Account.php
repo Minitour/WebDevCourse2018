@@ -37,11 +37,11 @@ class Account extends CI_Controller {
             die();
         }
 
-        if (!isset($_POST['username'])) {
+        if (!isset($_POST['email-login'])) {
             error('Username not specified!');
         }
 
-        if (!isset($_POST['password'])) {
+        if (!isset($_POST['password-login'])) {
             error('Password not specified!');
         }
 
