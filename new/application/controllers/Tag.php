@@ -6,6 +6,7 @@ class Tag extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->database();
+        $this->load->library('session');
         $this->load->model('tag_model');
         $this->load->model('helper_functions');
     }
