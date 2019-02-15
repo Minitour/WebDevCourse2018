@@ -86,7 +86,7 @@ $route['users/(:num)/following'] = "user/get_following_pages/$1";
 $route['users/(:num)/follow'] = "user/follow";
 
 // for accounts
-$route['login']['post'] = "account/login";
+$route['signin']['post'] = "account/login";
 $route['create']['post'] = "account/register_user";
 $route['delete']['post'] = "account/delete_user";
 $route['logout']['post'] = "account/logout";
