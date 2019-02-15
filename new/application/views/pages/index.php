@@ -33,7 +33,7 @@
   <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
 
-  <!-- <script src="<?php echo base_url('assets/js/index.js'); ?>"></script> -->
+
 
 
 </head>
@@ -246,79 +246,8 @@
     </div>
   </footer>
   
-  <script type="text/javascript">
-    class Post {
-  //id,name,ratings,release_date,plot,actors,conver,info
-  constructor(name, img, stars, info, index) {
-    this.name = name; // name
-    this.img = img; // cover
-    this.stars = stars; // ratings
-    this.info = info; // plot
-    this.url = "/reviews.php?movie=" + index; //id
-  }
-}
-
-const app = new Vue({
-  el: "#first_tag",
-  data: {
-    search: "",
-    moviesList: []
-  },
-  computed: {
-    filteredList() {
-      return this.moviesList.filter(post => {
-        return post.name.toLowerCase().includes(this.search.toLowerCase());
-      });
-    }
-  },
-  methods: {
-    fetchMovies: function(page) {
-      $.post("/new/index.php/movie/get_movies/"+page, {}, data => {
-        returned_data = JSON.parse(data);
-        console.log(returned_data);
-        returned_data.forEach(i => {
-          //id,name,ratings,release_date,plot,actors,conver,info
-          let movie_name = i["name"];
-          let movie_details = i['info'];
-          //let cardHtml = get_card(index,movie_name,movie_details);
-
-          // adding the stars to the modal
-          let star_rating = i["ratings"];
-          let number_of_empty_stars = 5 - star_rating;
-
-          let ratings = "";
-          for (j = 0; j < star_rating; j++) {
-            ratings += "<span class='fa fa-star checked'></span>";
-          }
-          for (j = 0; j < number_of_empty_stars; j++) {
-            ratings += "<span class='fa fa-star'></span>";
-          }
-          let post_item = new Post(
-            movie_name,
-            i["cover"],
-            ratings,
-            i["plot"],
-            i["id"]
-          );
-
-          //console.log(ratings);
-          //$('#stars_ratings').append(ratings);
-          this.moviesList.push(post_item);
-        });
-      });
-    }
-  }
-});
-
-$(document).ready(() => {
-  $("#cat_btn").click(() => {
-    $("#table_tabs").fadeToggle("fast");
-  });
-  app.fetchMovies(1);
-});
-    </script>
-
-
+  
+  <script src="<?php echo base_url('assets/js/index.js'); ?>"></script>
 </body>
 
 </html>
