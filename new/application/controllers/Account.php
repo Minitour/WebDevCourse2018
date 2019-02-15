@@ -58,7 +58,7 @@ class Account extends CI_Controller {
         } 
 
         // validate password
-        if($account['password'] != password) {
+        if($account['password'] != $password) {
             error('Password does not match!');
         }
 
