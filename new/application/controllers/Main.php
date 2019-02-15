@@ -22,12 +22,6 @@ class Main extends CI_Controller{
 
     public function index() {
         $this->redirectIfNeeded();
-        // session_start();
-        
-        // if(!isset($_SESSION['username'])){
-        //     $this->load->view("pages/login");
-        //     return;
-        // }
 
         $data['username'] = $_SESSION['username'];
         $this->load->view("pages/index",$data);
@@ -74,10 +68,9 @@ class Main extends CI_Controller{
     }
 
     public function redirectIfNeeded() {
-        echo json_encode($_SESSION);
-        // if (session_id() == '' || !isset($_SESSION)) {
-        //     header('Location: /new/index.php/login');
-        //     die();
-        // }
+        if (!isset($_SESSION['username'])) {
+            header('Location: /new/index.php/login');
+            die();
+        }
     }
 }
