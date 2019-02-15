@@ -26,10 +26,12 @@ class Review_model extends CI_Model{
         will return:
             $reviews<Array<Review>> - array of reviews requested in form <Review>
     */    
-    public function get_reviews_movie($movie) {
+    public function get_reviews_movie($movie,$page) {
         // SELECT * FROM reviews JOIN 
-        $sql = "(SELECT * FROM reviews INNER JOIN users ON users.id = reviews.user_id WHERE reviews.movie_id = ?)";
-        return $this->db->query($sql, array($movie));
+        // SELECT * FROM reviews WHERE movie_id = ? LIMIT 20 OFFSET X
+        $sql = "(SELECT * FROM reviews INNER JOIN users ON users.id = reviews.user_id WHERE reviews.movie_id = ? LIMIT 20 OFFSET ?)";
+        $offset = ($page-1) * 20;
+        return $this->db->query($sql, array($movie,$offset));
     }
 
     /*
