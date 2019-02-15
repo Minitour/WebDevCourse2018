@@ -63,9 +63,6 @@ class Main extends CI_Controller{
     }
 
     public function login_view() {
-        if (session_status() == PHP_SESSION_ACTIVE) {
-            session_destroy();
-        }
         $this->load->view("pages/login");
     }
 
@@ -74,9 +71,10 @@ class Main extends CI_Controller{
     }
 
     public function redirectIfNeeded() {
-        if (session_id() == '' || !isset($_SESSION)) {
-            header('Location: /new/index.php/login');
-            die();
-        }
+        echo json_encode($_SESSION);
+        // if (session_id() == '' || !isset($_SESSION)) {
+        //     header('Location: /new/index.php/login');
+        //     die();
+        // }
     }
 }
