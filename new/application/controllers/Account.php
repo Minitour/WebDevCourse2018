@@ -54,11 +54,23 @@ class Account extends CI_Controller {
         } 
 
         // validate password
+        if($account['password'] != password) {
+            http_response_code(500);
+            $response = array();
+            echo $response; 
+            return;
+        }
 
+        http_response_code(200);
+        
         // generate session
-
-        $response = array("id"=>$account["id"] ,"session_token"=> "some token"); 
-
+        session_start();
+        $_SESSION['id'] = $account['id'];
+        $_SESSION['username'] = $account['username'];
+        $_SESSION['profile_picture'] = $account['profile_picture'];
+        $_SESSION['role'] = $account['role'];
+        
+        $response = array("message" => 'Success', "code" => 200); 
         echo json_encode($response);
     }
 

@@ -40,6 +40,7 @@ class Main extends CI_Controller{
         
         if (sizeof($res) > 0) {
             $data['movie'] = $res[0];
+            $data['username'] = 'testname';
             // load movie view
             $this->load->view("pages/movie",$data);
         }else {
@@ -65,5 +66,16 @@ class Main extends CI_Controller{
 
     public function after_load() {
         $this->load->view("template/footer");
+    }
+
+    function redirectIfNeeded() {
+        if (session_status() == PHP_SESSION_ACTIVE) {
+            // session is good
+            return;
+        }
+
+        // redirect to login view
+        header('Location: /new/index.php/login');
+        die();
     }
 }
