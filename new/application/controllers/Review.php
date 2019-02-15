@@ -48,8 +48,7 @@ class Review extends CI_Controller {
         $query = $this->review_model->get_reviews_movie($movie,$page);
         $rows = $query->result();
         $data = array();
-        $counter = 0;
-        foreach($rows as $row) {
+        foreach($rows -> result_array() as $row) {
             $temp_data = array();
             $temp_data['movie_id'] = $row['movie_id'];
             $temp_data['user_id'] = $row['user_id'];
@@ -58,10 +57,9 @@ class Review extends CI_Controller {
             $temp_data['created_at'] = $row['created_at'];
             $temp_data['username'] = $row['username'];
             $temp_data['profile_picture'] = $row['profile_picture'];
-            $data[$counter] = $temp_data;
-            $counter += 1;
+            array_push($data,$temp_data);
         }
-        echo(json_encode($data));
+        echo json_encode($data);
     }
 
 
