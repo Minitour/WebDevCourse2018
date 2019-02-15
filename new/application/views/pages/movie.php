@@ -157,7 +157,7 @@
 
         // load comments
         reviews.forEach( r => {
-          var review_item = construct_review(r['profile_picture'],r['username'],r['created_at'],r['comment'],parseInt(r['star_rating']);
+          var review_item = construct_review(r['profile_picture'],r['username'],r['created_at'],r['comment'],parseInt(r['star_rating']));
           $('#comments').append(review_item);
         });
 
