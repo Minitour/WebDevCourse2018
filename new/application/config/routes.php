@@ -54,29 +54,31 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 // for comments
-$route['get_comment'] = "home/comment/get_comment";
-$route['get_comments'] = "home/comment/get_all_comments";
-$route['add_comment'] = "home/comment/add_comment";
-$route['remove_comment'] = "home/comment/remove_comment";
+$route['comments/movie/(:any)'] = "home/comment/get_comments_for_movie/$1";
+$route['comments/user/(:any)'] = "home/comment/get_all_comments/$1";
+$route['comments/add'] = "home/comment/add_comment";
+$route['comments/remove'] = "home/comment/remove_comment";
 
 // for movies
-$route['movie/(:any)'] = "home/movie/get_movie/$1";
+$route['movies/(:any)'] = "home/movie/get_movie/$1";
 $route['movies'] = "home/movie/get_movies";
-$route['add_movie'] = "home/movie/add_movie";
-$route['remove_movie'] = "home/movie/remove_movie";
-$route['add_to_cart'] = "home/movie/add_to_cart";
+$route['movies/add'] = "home/movie/add_movie";
+$route['movies/remove'] = "home/movie/remove_movie";
+$route['movies/cart/add'] = "home/movie/add_to_cart";
+$route['movies/update'] = "home/movie/update";
 
 // for reviews
 $route['reviews/movie/(:any)'] = "home/review/get_reviews_for_movie/$1";
 $route['reviews/user/(:any)'] = "home/review/get_reviews_for_user/$1";
-$route['add_review'] = "home/review/add_review";
-$route['remove_review'] = "home/review/remove_review";
+$route['reviews/add'] = "home/review/add_review";
+$route['reviews/remove'] = "home/review/remove_review";
 
 // for users
-$route['users/(:any)'] = "home/user/get_user/$1";
-$route['users/(:any)/reviews'] = "home/user/get_reviews/$1";
-$route['users/(:any)/followers'] = "home/user/get_followers/$1";
-$route['users/(:any)/following'] = "home/user/get_following_pages/$1";
+$route['users/user/(:any)'] = "home/user/get_user/$1";
+$route['users/(:num)/reviews'] = "home/user/get_reviews/$1";
+$route['users/(:num)/followers'] = "home/user/get_followers/$1";
+$route['users/(:num)/following'] = "home/user/get_following_pages/$1";
+$route['users/(:num)/follow'] = "home/user/follow";
 
 // for accounts
 $route['login'] = "home/account/login";
