@@ -57,6 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['login']['get'] = 'main/login_view';
 $route['home']['get'] = 'main/index';
 $route['movies/(:any)']['get'] = "main/review_view/$1"; // $1: movie id.
+$route['profile/(:any)']['get'] = 'main/profile_view/$1'; // $1: username
 
 // for comments
 $route['comments/movie/(:any)'] = "comment/get_comments_for_movie/$1";
