@@ -10,40 +10,6 @@ function readTextFile(file, callback) {
   rawFile.send(null);
 }
 
-// function getCards(){
-//     var all_movies = [];
-//     $.post('/movie/get_movies',{}, function(data){
-//       data = JSON.parse(data);
-//       var movies = data.movies;
-//       var index = 0;
-//       for (var movie in movies) {
-//         let movie_name = movies[movie]['name'];
-//         let movie_details = movies[movie];
-//         //let cardHtml = get_card(index,movie_name,movie_details);
-
-//         // adding the stars to the modal
-//         let star_rating = movies[movie]['ratings'];
-//         let number_of_empty_stars = 5 - star_rating;
-
-//         let ratings = "";
-//         for (j=0; j<star_rating; j++) {
-//           ratings += "<span class='fa fa-star checked'></span>";
-//         }
-//         for (j=0; j<number_of_empty_stars; j++) {
-//           ratings += "<span class='fa fa-star'></span>";
-//         }
-//         let movie_post = new Post(movie_name, movies[movie]['cover'], ratings, movies[movie]['plot'], index);
-
-//         //console.log(ratings);
-//         //$('#stars_ratings').append(ratings);
-
-//         all_movies.push(movie_post);
-//         index += 1;
-//       }
-//     });
-//   }
-
-// console.log(all_movies);
 class Post {
   //id,name,ratings,release_date,plot,actors,conver,info
   constructor(name, img, stars, info, index) {
@@ -51,7 +17,7 @@ class Post {
     this.img = img; // cover
     this.stars = stars; // ratings
     this.info = info; // plot
-    this.url = "/reviews.php?movie=" + index; //id
+    this.url = `/new/index.php/movies/${index}`; //id
   }
 }
 
@@ -70,13 +36,12 @@ const app = new Vue({
   },
   methods: {
     fetchMovies: function(page) {
-      $.post("/new/index.php/movie/get_movies/"+page, {}, data => {
+      $.post("/new/index.php/movie/get_movies/" + page, {}, data => {
         returned_data = JSON.parse(data);
         console.log(returned_data);
         returned_data.forEach(i => {
           //id,name,ratings,release_date,plot,actors,conver,info
           let movie_name = i["name"];
-          let movie_details = i['info'];
           //let cardHtml = get_card(index,movie_name,movie_details);
 
           // adding the stars to the modal
@@ -90,11 +55,17 @@ const app = new Vue({
           for (j = 0; j < number_of_empty_stars; j++) {
             ratings += "<span class='fa fa-star'></span>";
           }
+
+          let plot = i["plot"];
+          if (plot != undefined) {
+            plot = plot.substring(0, Math.min(plot.length, 300));
+          }
+
           let post_item = new Post(
             movie_name,
             i["cover"],
             ratings,
-            i["plot"],
+            plot,
             i["id"]
           );
 

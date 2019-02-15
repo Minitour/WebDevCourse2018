@@ -16,10 +16,11 @@ class Main extends CI_Controller{
         $this->load->model('cart_model');
         $this->load->model('category_model');
         $this->load->model('tag_model');
- 
     }
 
-
+    /**
+     * Loads the home page.
+     */
     public function index() {
         $this->redirectIfNeeded();
 
@@ -27,7 +28,11 @@ class Main extends CI_Controller{
         $this->load->view("pages/index",$data);
     }
 
+    /**
+     * Loads a page with information about a specifc movie.
+     */
     public function review_view($movie_id) {
+        $this->redirectIfNeeded();
 
         // fetch movie details
         $query = $this->movie_model->get_movie_details($movie_id);
@@ -35,8 +40,8 @@ class Main extends CI_Controller{
 
         
         if (sizeof($res) > 0) {
-            $data['movie'] = $res[0];
-            $data['username'] = 'testname';
+            $data['movie_data'] = $res[0];
+            $data['username'] = $_SESSION['username'];
             // load movie view
             $this->load->view("pages/movie",$data);
         }else {
@@ -45,6 +50,9 @@ class Main extends CI_Controller{
         }
     }
 
+    /**
+     * Loads the user's cart.
+     */
     public function cart_view() {
         $this->load->view("pages/cart");
     }
