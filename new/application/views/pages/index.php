@@ -198,7 +198,7 @@
         </div>
       </div>
       <div class="wrapper">
-        <div class="card" v-for="post in moviesList">
+        <div class="card" v-for="post in filteredList">
           <!--id,name,ratings,release_date,plot,actors,conver,info  -->
           <a v-bind:href="post.url">
           <img v-bind:src="post.img" class="image"/><br>
