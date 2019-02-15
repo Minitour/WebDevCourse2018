@@ -18,6 +18,7 @@
 
 <body>
     <script src="<?php echo base_url('assets/js/toggles.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/validate_form.js'); ?>"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
 
     <nav class="blue-grey darken-3" role="navigation">
@@ -201,7 +202,7 @@
 
     <div class="row" id="comments_all" style="display:none;">
         <?php 
-            $reviewsCount = count($reviews['reviews']);
+            $reviewsCount = count($reviews['reviews']->result());
         ?>
         <div class="col s12">
             <h3 style="font-weight:bold;padding-bottom: 20px">Past Reviews: <?php echo $reviewsCount?></h3>
