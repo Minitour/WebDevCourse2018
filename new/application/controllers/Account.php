@@ -53,6 +53,8 @@ class Account extends CI_Controller {
         // fetch account
         $account = $this->user_model->get_user_by_username($username);
 
+        echo json_encode($account);
+
         if($account == FALSE) {
             // could not find account
             error('No such username!');
