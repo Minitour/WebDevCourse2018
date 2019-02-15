@@ -23,7 +23,7 @@
 	<div id="login" class="col s12">
 		<form class="col s12" method="POST" action="signin">
 			<div class="form-container">
-				<h3>Hello</h3>
+				<h3>Hello</h3> 
         <?php
           if (isset($_GET['notRegistered'])) {
             //var_dump($_GET['notRegistered']);
