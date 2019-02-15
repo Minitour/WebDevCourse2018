@@ -20,7 +20,7 @@ class Main extends CI_Controller{
 
 
     public function index() {
-        redirectIfNeeded();
+        $this->redirectIfNeeded();
         // session_start();
         
         // if(!isset($_SESSION['username'])){
@@ -73,7 +73,7 @@ class Main extends CI_Controller{
         $this->load->view("template/footer");
     }
 
-    function redirectIfNeeded() {
+    public function redirectIfNeeded() {
         if (session_status() == PHP_SESSION_ACTIVE) {
             // session is good
             return;
