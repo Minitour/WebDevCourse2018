@@ -41,7 +41,7 @@ class Main extends CI_Controller{
         if (sizeof($res) > 0) {
             $data['movie'] = $res[0];
             // load movie view
-            $this->load->view('movie',$data);
+            $this->load->view('pages/movie',$data);
         }else {
             // page not found
             show_404();
