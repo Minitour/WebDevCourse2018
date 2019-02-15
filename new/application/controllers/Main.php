@@ -58,21 +58,33 @@ class Main extends CI_Controller{
     }
 
     public function profile_view() {
-        // $user = $this->user_model->get_user_by_username($_SESSION['username']);
-        // $user_id = $user->ID;
-        $user_id = '2';
+        $user = $this->user_model->get_user_by_username($_SESSION['username']);
+        $user_id = $user->ID;
         $query = $this->review_model->get_all_reviews($user_id);
         $reviews = $query->result();
-        $data['reviews'] = $reviews;
-        $this->load->view("pages/profile", $data);
+        if (sizeof($reviews) > 0) {
+            $data['reviews'] = $reviews;
+            $this->load->view("pages/profile", $data);
+        } else {
+            show_404();
+        }
+
+    }
+
+    public function comment_view($movie_id) {
+        $values = $this->comment_model->get_comments_for_movie($movie_id);
+        $result = $values->result();
+        if (sizeof($result) > 0) {
+            $data['comments'] = $result;
+            $this->load->view("pages/review", $data);
+        } else {
+            show_404();
+        }
+        
     }
 
     public function login_view() {
         $this->load->view("pages/login");
-    }
-
-    public function after_load() {
-        $this->load->view("template/footer");
     }
 
     public function redirectIfNeeded() {

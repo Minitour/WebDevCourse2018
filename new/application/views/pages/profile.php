@@ -127,9 +127,17 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
+                                <input id="username" name="username" type="text" disabled value="<?php echo '$usr->username'; ?>" required>
+                                <label for="username">First Name</label>
+                                <div id="username_error_box" name="username_error_box"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="input-field col s12">
     					        <input id="first_name" name="first_name" type="text" disabled value="<?php echo '$usr->first_name'; ?>" required>
                                 <label for="first_name">First Name</label>
-                                <div id="first_name_error_box" name="first_name_error_box">
+                                <div id="first_name_error_box" name="first_name_error_box"></div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -170,8 +178,8 @@
                             <div class="input-field col s12">
   						        <input id="password" name="location" type="password" class="validate" disabled value="<?php echo '$usr->password'; ?>" required>
   						        <label for="password">Password</label>
-                            <div id="password_error_box" name="password_error_box"></div>
-  					</div>
+                                <div id="password_error_box" name="password_error_box"></div>
+  					        </div>
                         </div>
                         <div class="form-group">
 
