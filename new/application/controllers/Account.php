@@ -30,12 +30,19 @@ class Account extends CI_Controller {
     public function login() {
         header('Content-Type: application/json');
 
+        function error($message){
+            http_response_code(500);
+            $response = array('message' => $message);
+            echo json_encode($response);
+            die();
+        }
+
         if (!isset($_POST['username'])) {
-            return FALSE;
+            error('Username not specified!');
         }
 
         if (!isset($_POST['password'])) {
-            return FALSE;
+            error('Password not specified!');
         }
 
         
@@ -47,21 +54,14 @@ class Account extends CI_Controller {
 
         if($account == FALSE) {
             // could not find account
-            http_response_code(500);
-            $response = array();
-            echo $response; 
-            return;
+            error('No such username!');
         } 
 
         // validate password
         if($account['password'] != password) {
-            http_response_code(500);
-            $response = array();
-            echo $response; 
-            return;
+            error('Password does not match!');
         }
 
-        
         // generate session
         session_start();
         $_SESSION['id'] = $account['id'];
