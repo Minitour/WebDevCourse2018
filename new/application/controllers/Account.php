@@ -61,7 +61,6 @@ class Account extends CI_Controller {
             return;
         }
 
-        http_response_code(200);
         
         // generate session
         session_start();
@@ -69,8 +68,9 @@ class Account extends CI_Controller {
         $_SESSION['username'] = $account['username'];
         $_SESSION['profile_picture'] = $account['profile_picture'];
         $_SESSION['role'] = $account['role'];
-        
         $response = array("message" => 'Success', "code" => 200); 
+        http_response_code(200);
+        header('Location: /');
         echo json_encode($response);
     }
 

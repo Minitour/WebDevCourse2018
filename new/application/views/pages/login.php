@@ -11,24 +11,17 @@
 </head>
 
 <body>
-  <script src="<?php echo base_url('assets/vendor/jquery.validate.js'); ?>"></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
+	<script src="<?php echo base_url('assets/vendor/jquery.validate.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/login.js'); ?>"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
 
-  <script>
-    
-  </script>
-<script>
-
-
-
-</script>
   <div class="container white z-depth-2">
 	<ul class="tabs">
 		<li class="tab col s3"><a class="white-text active" href="#login">login</a></li>
 		<li class="tab col s3"><a class="white-text" href="#register">register</a></li>
 	</ul>
 	<div id="login" class="col s12">
-		<form class="col s12" method="POST" action="login.php">
+		<form class="col s12" method="POST" action="new/index.php/login">
 			<div class="form-container">
 				<h3>Hello</h3>
         <?php
