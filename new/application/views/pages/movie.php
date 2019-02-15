@@ -148,18 +148,23 @@
       // fetch reviews for movie with id.
       isMakingRequest = true;
       get_reviews(movie_data['id'],page, (reviews) => {
+        
+        // reached the final page.
         if (reviews.length == 0) {
           should_load_more = false;
           return;
         }
 
+        // load comments
         reviews.forEach( r => {
-          // movie_id, user_id, comment, star_rating, created_at
-          var review_item = construct_review();
+          var review_item = construct_review(r['profile_picture'],r['username'],r['created_at'],r['comment'],parseInt(r['star_rating']);
           $('#comments').append(review_item);
         });
 
+        // increment page for next load.
         page += 1;
+
+        // disable flag
         isMakingRequest = false;
       });
     }

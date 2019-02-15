@@ -97,12 +97,12 @@ function setup_movie(movie_data) {
   first_tag_element.insertAdjacentHTML("beforeend", modalBody);
 }
 
-function construct_review(profile_img, title, name, review, score) {
+function construct_review(profile_img, name,time, review, score) {
   var review_item = "";
   review_item += '<li class="collection-item avatar">';
   review_item += '<img src="' + profile_img + '" alt="" class="circle">';
-  review_item += '<span class="title"><b>' + title + "</b></span>";
-  review_item += "<p>" + name + "<br><br>";
+  review_item += '<span class="title"><b>' + name + "</b></span>";
+  review_item += "<p>" + time + "<br><br>";
   review_item += review;
   review_item += "</p>";
   review_item += '<a href="#!" class="secondary-content">';
