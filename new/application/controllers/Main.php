@@ -16,10 +16,11 @@ class Main extends CI_Controller{
         $this->load->model('cart_model');
         $this->load->model('category_model');
         $this->load->model('tag_model');
- 
     }
 
-
+    /**
+     * Loads the home page.
+     */
     public function index() {
         $this->redirectIfNeeded();
 
@@ -27,6 +28,9 @@ class Main extends CI_Controller{
         $this->load->view("pages/index",$data);
     }
 
+    /**
+     * Loads a page with information about a specifc movie.
+     */
     public function review_view($movie_id) {
         $this->redirectIfNeeded();
 
@@ -46,6 +50,9 @@ class Main extends CI_Controller{
         }
     }
 
+    /**
+     * Loads the user's cart.
+     */
     public function cart_view() {
         $this->load->view("pages/cart");
     }
