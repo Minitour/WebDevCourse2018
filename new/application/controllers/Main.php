@@ -60,7 +60,8 @@ class Main extends CI_Controller{
         $user_id = '2';
         $query = $this->review_model->get_all_reviews($user_id);
         $reviews = $query->result();
-        $this->load->view("pages/profile", $reviews);
+        $data_profile['reviews'] = $reviews;
+        $this->load->view("pages/profile", $data_profile);
     }
 
     public function login_view() {
