@@ -55,6 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 // views
 $route['login']['get'] = 'main/login_view';
+$route['home']['get'] = 'main/index';
 
 
 // for comments
