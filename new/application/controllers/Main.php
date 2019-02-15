@@ -28,6 +28,7 @@ class Main extends CI_Controller{
     }
 
     public function review_view($movie_id) {
+        $this->redirectIfNeeded();
 
         // fetch movie details
         $query = $this->movie_model->get_movie_details($movie_id);
@@ -35,8 +36,8 @@ class Main extends CI_Controller{
 
         
         if (sizeof($res) > 0) {
-            $data['movie'] = $res[0];
-            $data['username'] = 'testname';
+            $data['movie_data'] = $res[0];
+            $data['username'] = $_SESSION['username'];
             // load movie view
             $this->load->view("pages/movie",$data);
         }else {
