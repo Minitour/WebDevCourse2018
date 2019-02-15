@@ -37,17 +37,17 @@ class Account extends CI_Controller {
             die();
         }
 
-        if (!isset($_POST['username'])) {
+        if (!isset($_POST['email-login'])) {
             error('Username not specified!');
         }
 
-        if (!isset($_POST['password'])) {
+        if (!isset($_POST['password-login'])) {
             error('Password not specified!');
         }
 
         
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        $username = $_POST['email-login'];
+        $password = $_POST['password-login'];
 
         // fetch account
         $account = $this->user_model->get_user_by_username($username);
@@ -58,7 +58,7 @@ class Account extends CI_Controller {
         } 
 
         // validate password
-        if($account['password'] != password) {
+        if($account['password'] != $password) {
             error('Password does not match!');
         }
 
@@ -70,7 +70,7 @@ class Account extends CI_Controller {
         $_SESSION['role'] = $account['role'];
         $response = array("message" => 'Success', "code" => 200); 
         http_response_code(200);
-        header('Location: /');
+        header('Location: /new');
         echo json_encode($response);
     }
 
