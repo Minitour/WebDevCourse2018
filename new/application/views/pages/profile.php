@@ -202,7 +202,7 @@
 
     <div class="row" id="comments_all" style="display:none;">
         <?php 
-            $reviewsCount = count($data_profile['reviews']);
+            $reviewsCount = count($reviews);
         ?>
         <div class="col s12">
             <h3 style="font-weight:bold;padding-bottom: 20px">Past Reviews: <?php echo $reviewsCount?></h3>
@@ -226,7 +226,7 @@
                         return $comment_item;
                     } 
                     
-                    foreach($data_reviews['reviews'] as $entry) {
+                    foreach($reviews as $entry) {
                         //$reviewItem = new Review($entry);
                         $reviewText = $entry['comment'];
                         $number_of_stars = $entry['star_rating'];
