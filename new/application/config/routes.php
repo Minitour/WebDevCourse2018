@@ -49,58 +49,58 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'main';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 // views
-$route['login']['get'] = 'home/main/login_view';
+$route['login']['get'] = 'main/login_view';
 
 
 // for comments
-$route['comments/movie/(:any)'] = "home/comment/get_comments_for_movie/$1";
-$route['comments/user/(:any)'] = "home/comment/get_all_comments/$1";
-$route['comments/add']['post'] = "home/comment/add_comment";
-$route['comments/remove']['post'] = "home/comment/remove_comment";
+$route['comments/movie/(:any)'] = "comment/get_comments_for_movie/$1";
+$route['comments/user/(:any)'] = "comment/get_all_comments/$1";
+$route['comments/add']['post'] = "comment/add_comment";
+$route['comments/remove']['post'] = "comment/remove_comment";
 
 // for movies
-$route['movies/(:any)'] = "home/movie/get_movie/$1";
-$route['movies']['post'] = "home/movie/get_movies";
-$route['movies/add']['post'] = "home/movie/add_movie";
-$route['movies/remove']['post'] = "home/movie/remove_movie";
-$route['movies/cart/add']['post'] = "home/movie/add_to_cart";
-$route['movies/update']['post'] = "home/movie/update";
+$route['movies/(:any)'] = "movie/get_movie/$1";
+$route['movies']['post'] = "movie/get_movies";
+$route['movies/add']['post'] = "movie/add_movie";
+$route['movies/remove']['post'] = "movie/remove_movie";
+$route['movies/cart/add']['post'] = "movie/add_to_cart";
+$route['movies/update']['post'] = "movie/update";
 
 // for reviews
-$route['reviews/movie/(:any)'] = "home/review/get_reviews_for_movie/$1";
-$route['reviews/user/(:any)'] = "home/review/get_reviews_for_user/$1";
-$route['reviews/add']['post'] = "home/review/add_review";
-$route['reviews/remove']['post'] = "home/review/remove_review";
+$route['reviews/movie/(:any)'] = "review/get_reviews_for_movie/$1";
+$route['reviews/user/(:any)'] = "review/get_reviews_for_user/$1";
+$route['reviews/add']['post'] = "review/add_review";
+$route['reviews/remove']['post'] = "review/remove_review";
 
 // for users
-$route['users/user/(:any)'] = "home/user/get_user/$1";
-$route['users/(:num)/reviews'] = "home/user/get_reviews/$1";
-$route['users/(:num)/followers'] = "home/user/get_followers/$1";
-$route['users/(:num)/following'] = "home/user/get_following_pages/$1";
-$route['users/(:num)/follow'] = "home/user/follow";
+$route['users/user/(:any)'] = "user/get_user/$1";
+$route['users/(:num)/reviews'] = "user/get_reviews/$1";
+$route['users/(:num)/followers'] = "user/get_followers/$1";
+$route['users/(:num)/following'] = "user/get_following_pages/$1";
+$route['users/(:num)/follow'] = "user/follow";
 
 // for accounts
-$route['login']['post'] = "home/account/login";
-$route['create']['post'] = "home/account/register_user";
-$route['delete']['post'] = "home/account/delete_user";
-$route['logout']['post'] = "home/account/logout";
+$route['login']['post'] = "account/login";
+$route['create']['post'] = "account/register_user";
+$route['delete']['post'] = "account/delete_user";
+$route['logout']['post'] = "account/logout";
 
 
 // for tags
-$route['tags/add']['post'] = "home/tag/add_tag";
-$route['tags/movie/(:any)'] = "home/tag/get_tags/$1";
+$route['tags/add']['post'] = "tag/add_tag";
+$route['tags/movie/(:any)'] = "tag/get_tags/$1";
 
 // for categories
-$route['categories/add']['post'] = "home/category/add_category";
-$route['categories/movie/add']['post'] = "home/category/add_category_to_movie";
-$route['categories/movie/get/(:any)'] = "home/category/get_categories/$1";
+$route['categories/add']['post'] = "category/add_category";
+$route['categories/movie/add']['post'] = "category/add_category_to_movie";
+$route['categories/movie/get/(:any)'] = "category/get_categories/$1";
 
 // for cart
-$route['cart/user/(:num)'] = "home/cart/get_items/$1";
-$route['cart/user/add']['post'] = "home/cart/insert_item";
-$route['cart/user/remove']['post'] = "home/cart/remove_item";
+$route['cart/user/(:num)'] = "cart/get_items/$1";
+$route['cart/user/add']['post'] = "cart/insert_item";
+$route['cart/user/remove']['post'] = "cart/remove_item";
