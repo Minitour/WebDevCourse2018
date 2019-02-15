@@ -44,8 +44,8 @@ class Review extends CI_Controller {
             $reviews<Array<Review>> - the review we requested
 
     */
-    public function get_reviews_for_movie($movie) {
-        $query = $this->review_model->get_reviews_movie($movie);
+    public function get_reviews_for_movie($movie,$page) {
+        $query = $this->review_model->get_reviews_movie($movie,$page);
         $rows = $query->result();
         $data = array();
         $counter = 0;

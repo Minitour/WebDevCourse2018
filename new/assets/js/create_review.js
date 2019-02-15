@@ -34,7 +34,7 @@ function setup_movie(movie_data) {
   var modal_first_div = `<div id="${i}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">`;
   var modal_second_div = '<div class="modal-dialog modal-lg">';
   var closeButton_modal = '<button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-  var modal_third_div_and_close_div_header = `<div class="modal-content"><div class="modal-header" style="background-color:#353a40;"><h5 class="modal-title" style="color:white;">${movie}</h5>${closeButton_modal}</div>`;
+  var modal_third_div_and_close_div_header = `<div class="modal-content"><div class="modal-header" style="background-color:#353a40;"><h5 class="modal-title" style="color:white;">${movie_data["name"]}</h5>${closeButton_modal}</div>`;
 
   // fetching the info the specific movie
   var fields_for_movie_info = "";
@@ -52,12 +52,10 @@ function setup_movie(movie_data) {
   //var ratings = '<p style="font-size:20"><span style="font-weight:bold;">Ratings</span> : ' + movies_infos[movie]['ratings'] + "</p>";
   var released =
     `<p style="font-size:20"><span style="font-weight:bold;">Released</span> : ${movie_data["release_date"]}</p>`;
-  var genre =
-    `<p style="font-size:20"><span style="font-weight:bold;">Genre</span> : ${movie_data["genre"]}</p>`;
+  //var genre = `<p style="font-size:20"><span style="font-weight:bold;">Genre</span> : ${movie_data["genre"]}</p>`;
   var plot =
     `<p style="font-size:20"><span style="font-weight:bold;">Plot</span> : ${movie_data["plot"]} </p>`;
-  var actors =
-    `<p style="font-size:20"><span style="font-weight:bold;">Actors</span> : ${movie_data["actors"]}</p>`;
+  //var actors =`<p style="font-size:20"><span style="font-weight:bold;">Actors</span> : ${movie_data["actors"]}</p>`;
 
   // appending the fields together
   fields_for_movie_info = ratings + released + /*genre*/ plot; /*+ actors;*/
