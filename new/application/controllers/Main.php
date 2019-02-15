@@ -74,13 +74,9 @@ class Main extends CI_Controller{
     }
 
     public function redirectIfNeeded() {
-        if (session_status() == PHP_SESSION_ACTIVE) {
-            // session is good
-            return;
+        if (session_id() == '' || !isset($_SESSION)) {
+            header('Location: /new/index.php/login');
+            die();
         }
-
-        // redirect to login view
-        header('Location: /new/index.php/login');
-        die();
     }
 }
