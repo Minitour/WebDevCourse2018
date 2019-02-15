@@ -21,7 +21,7 @@
 		<li class="tab col s3"><a class="white-text" href="#register">register</a></li>
 	</ul>
 	<div id="login" class="col s12">
-		<form class="col s12" method="POST" action="new/index.php/login">
+		<form class="col s12" method="POST" action="login">
 			<div class="form-container">
 				<h3>Hello</h3>
         <?php
