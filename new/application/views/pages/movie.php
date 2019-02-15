@@ -113,17 +113,16 @@
         </div>
     </div>
 
-
-
-
-    <div class="row" style="display: flex;align-items: center;justify-content: center;">
-        <ul class="pagination">
-            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-            <li class="active"><a href="#!">1</a></li>
-            <li class="waves-effect"><a href="#!">2</a></li>
-            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-        </ul>
-    </div>
+    <div id="loading_indicator" class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
   </div>
 
   <!-- Bootstrap core JavaScript -->
@@ -147,6 +146,7 @@
 
       // fetch reviews for movie with id.
       isMakingRequest = true;
+      $('#loading_indicator').show();
       get_reviews(movie_data['id'],page, (reviews) => {
         
         // reached the final page.
@@ -166,6 +166,7 @@
 
         // disable flag
         isMakingRequest = false;
+        $('#loading_indicator').hide();
       });
     }
 
