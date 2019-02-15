@@ -309,6 +309,13 @@ const app = new Vue({
     }
   }
 });
+
+$(document).ready(() => {
+  $("#cat_btn").click(() => {
+    $("#table_tabs").fadeToggle("fast");
+  });
+  app.fetchMovies(1);
+});
     </script>
 
 
