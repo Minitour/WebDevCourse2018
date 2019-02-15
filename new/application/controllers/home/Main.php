@@ -6,7 +6,7 @@ class Main extends CI_Controller{
 
     public function __construct() {
         parent::__construct();
-
+        $this->load->helper('url');
         $this->load->database();
         $this->load->model('user_model');
         $this->load->model('movie_model');
