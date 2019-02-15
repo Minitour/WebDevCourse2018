@@ -32,8 +32,8 @@ class Movie extends CI_Controller {
             $data['release_date'] = $row->release_date;
             $data['plot'] = $row->plot;
             $data['actors'] = $row->actors;
-            // $data['cover'] = $row->cover;
-            // $data['info'] = $row->info;
+            $data['cover'] = $row->cover;
+            $data['info'] = $row->info;
         }
         echo(json_encode($data));
         
@@ -67,10 +67,11 @@ class Movie extends CI_Controller {
             $temp_data['release_date'] = $row->release_date;
             $temp_data['plot'] = $row->plot;
             $temp_data['actors'] = $row->actors;
+            $temp_data['cover'] = $row->cover;
+            $temp_data['info'] = $row->info;
             $data[$counter] = $temp_data;
             $counter += 1;
-            // $data['cover'] = $row->cover;
-            // $data['info'] = $row->info;
+
         }
         echo(json_encode($data));
 

@@ -38,8 +38,8 @@
 
 <body>
 <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/index.js'); ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
   <nav class="blue-grey darken-3" role="navigation">
     <div class="nav-wrapper container">
       <a href="/" class="brand-logo" style="float: left;text-align: center;white-space: nowrap;padding: 5px 10px;">
@@ -198,7 +198,8 @@
         </div>
       </div>
       <div class="wrapper">
-        <div class="card" v-for="post in filteredList">
+        <div class="card" v-for="post in moviesList">
+          <!--id,name,ratings,release_date,plot,actors,conver,info  -->
           <a v-bind:href="post.url">
           <img v-bind:src="post.img" class="image"/><br>
             {{ post.name }}
@@ -236,7 +237,6 @@
   main {
     flex: 1 0 auto;
   }
-
   </style>
   <!-- Footer -->
   <footer class="page-footer blue-grey darken-3">
@@ -244,7 +244,7 @@
       <p class="m-0 text-center text-white">Copyright &copy; Antonio Zaitoun & Tomer Goldfeder Movies 2018</p>
     </div>
   </footer>
-
+  
 </body>
 
 </html>
