@@ -29,7 +29,7 @@ class Category extends CI_Controller {
         //     $temp_data = array();
         //     $data.push($temp_data);
         // }
-        echo($query);
+        echo(json_encode($query));
     }
 
 
