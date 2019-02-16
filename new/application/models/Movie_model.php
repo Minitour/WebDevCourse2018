@@ -106,6 +106,21 @@ class Movie_model extends CI_Model{
         return True;
     }
 
+    public function insert_from_tmdb($id,$title,$poster_path,$backdrop_path,$overview,$release_date){
+        $data = array(
+            "info" => $overview,
+            "name" => $title,
+            "ratings" => 5,
+            "plot" => $overview,
+            "release_date" => date('Y-m-d',strtotime($release_date)),
+            "cover" => $poster_path,
+            "mdb_id" => $id
+        );
+
+        $this->$id = $this->db->insert('movies', $data);
+        return True;
+    }
+
     /*
         this function will remove movie
 
