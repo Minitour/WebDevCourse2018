@@ -1,4 +1,4 @@
-function validateForm(){
+function validateForm(update){
     $(document).ready(function(){
 
         // set boolean flag to False -> to check if all elements are ok
@@ -122,6 +122,12 @@ function validateForm(){
 
         if (checkAllElements) {
 
+            if (update) {
+                // need to update the user
+            } else {
+                // need to create new user
+            }
+
             var user = {
                 "user": {
                     "username": username_field,
@@ -143,6 +149,4 @@ function validateForm(){
             
 
         }
-
-
     }

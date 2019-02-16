@@ -235,10 +235,10 @@
                 
                         return $comment_item;
                     } 
-                    var_dump($reviews);
+                    // var_dump($reviews);
                     foreach($reviews as $entry) {
                         //$reviewItem = new Review($entry);
-                        var_dump($entry);
+                        // var_dump($entry);
                         $reviewText = $entry['comment'];
                         $number_of_stars = $entry['star_rating'];
                         $created_at = $entry['created_at'];
