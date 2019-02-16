@@ -74,7 +74,7 @@
          <!-- comment box -->
          <div class="row justify-content-center" id="comment_box">
             <!-- review input -->
-            <div class="input-field col s9">
+            <div class="input-field col s6">
                <textarea id="textarea1" data-length="500" class="materialize-textarea"></textarea>
                <label for="textarea1">Comment</label>
             </div>
@@ -83,9 +83,7 @@
                <a id="create_comment" class="waves-effect blue waves-light btn" style="width: 100%">Post</a>
             </div>
          </div>
-
          <h4>All Comments</h4>
-
          <div class="row" id="comments_all">
             <div class="col s12">
                <ul class="collection" id="comments">
@@ -93,5 +91,24 @@
             </div>
          </div>
       </div>
+      <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
+      <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
+      <script src="<?php echo base_url('assets/js/comments.js'); ?>"></script>
+      <script>
+         var review_data = JSON.parse('<?php echo json_encode($review_data);?>'); 
+         
+         var movie_id = review_data['id'];
+         var reviewer_id = review_data['reviewer_id'];
+         var username = '<?php echo $_SESSION["username"]; ?>';
+         var user_id = '<?php echo $_SESSION["id"]; ?>'
+         var profile_picture = '<?php echo $_SESSION["profile_picture"]; ?>'
+         
+         var page = 1;
+         var should_load_more = true;
+         var isMakingRequest = false;
+         
+         // load first reviews page.
+         load_more();
+      </script>
    </body>
 </html>

@@ -13,12 +13,83 @@ this.construct_comment = function(user_id,profile_img, name,time, comment) {
     review_item += "<p>" + time + "<br><br>";
     review_item += comment;
     review_item += "</p>";
-    review_item += '<a class="secondary-content">';
-    for (var i = 0; i < score; i++) {
-      review_item += '<i class="material-icons">grade</i>';
-    }
-    review_item += "</a>";
     review_item += "</li>";
   
     return review_item;
   }
+
+
+  $(document).ready(() => {
+    $("#create_comment").click(() => {
+      let comment = $("#textarea1").val();
+      // let title = $("#review_title").val();
+  
+      let commentView = construct_comment(
+        user_id,
+        profile_picture,
+        username,
+        new Date(),
+        comment
+      );
+  
+      $("#textarea1").val("");
+  
+      $("#comments").prepend(commentView);
+  
+      let payload = {
+        'movie_id' : movie_id,
+        'reviewer_id' : reviewer_id,
+        'comment' : review
+      }
+  
+      $.post('/new/index.php/comments/add',payload,(res) => {
+        console.log(res)
+        M.toast({html: 'Review Published.'})
+      })
+    });
+  });
+
+  function load_more() {
+      
+    // if we reached the end return.
+    if(!should_load_more){
+      return;
+    }
+  
+    // fetch reviews for movie with id.
+    isMakingRequest = true;
+    $('#loading_indicator').show();
+    get_comments(review_data['movie_id'],review_data['user_id'], page, (comments) => {
+      $('#loading_indicator').hide();
+      // reached the final page.
+      if (comments.length == 0) {
+        should_load_more = false;
+        return;
+      }
+  
+      // load comments
+      comments.forEach( r => {
+        var commentsView = construct_comment(r['user_id'],r['profile_picture'],r['username'],r['time'],r['comment'],parseInt(r['star_rating']));
+        $('#comments').append(commentsView);
+      });
+  
+      // increment page for next load.
+      page += 1;
+  
+      // disable flag
+      isMakingRequest = false;
+      
+    });
+  }
+  
+  // load the first page of reviews.
+  
+  
+  // setup scroll listner
+  $(window).scroll(function() {
+    // if we reached the eng of the page
+    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+         //make api call to server to load more.
+         if (page > 1 && !isMakingRequest) { load_more(); }
+    }
+  });
