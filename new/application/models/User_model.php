@@ -118,7 +118,7 @@ class User_model extends CI_Model
         $this->profile_picture = $user['profile_picture'];
         $this->role_id = $user['role_id'];
 
-        $this->db->update('users', $this, array('id' => $this->id));
+        $this->db->update('users', $this, array('id' => $user['id']));
 
         return True;
     }
