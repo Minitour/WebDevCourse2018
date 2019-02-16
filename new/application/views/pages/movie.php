@@ -129,58 +129,19 @@
   <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
   <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
   <script src="<?php echo base_url('assets/js/create_review.js'); ?>"></script>
+  
   <script>
-    
-    var movie_data = JSON.parse('<?php echo json_encode($movie_data);?>'); 
-    setup_movie(movie_data);
     var page = 1;
     var should_load_more = true;
     var isMakingRequest = false;
-
-    function load_more() {
-      
-      // if we reached the end return.
-      if(!should_load_more){
-        return;
-      }
-
-      // fetch reviews for movie with id.
-      isMakingRequest = true;
-      $('#loading_indicator').show();
-      get_reviews(movie_data['id'],page, (reviews) => {
-        $('#loading_indicator').hide();
-        // reached the final page.
-        if (reviews.length == 0) {
-          should_load_more = false;
-          return;
-        }
-
-        // load comments
-        reviews.forEach( r => {
-          var review_item = construct_review(r['profile_picture'],r['username'],r['created_at'],r['comment'],parseInt(r['star_rating']));
-          $('#comments').append(review_item);
-        });
-
-        // increment page for next load.
-        page += 1;
-
-        // disable flag
-        isMakingRequest = false;
-        
-      });
-    }
-
-    // load the first page of reviews.
-    load_more();
     
-    // setup scroll listner
-    $(window).scroll(function() {
-      // if we reached the eng of the page
-      if($(window).scrollTop() == $(document).height() - $(window).height()) {
-           //make api call to server to load more.
-           if (page > 1 && !isMakingRequest) { load_more(); }
-      }
-    });
+    var movie_data = JSON.parse('<?php echo json_encode($movie_data);?>'); 
+    
+    // load movie
+    setup_movie(movie_data);
+
+    // load first reviews page.
+    load_more();
   </script>
 
 </body>

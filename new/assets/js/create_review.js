@@ -115,6 +115,8 @@ function construct_review(profile_img, name,time, review, score) {
   return review_item;
 }
 
+
+
 $(document).ready(() => {
   $("#create_review").click(() => {
     let review = $("#textarea1").val();
@@ -136,4 +138,49 @@ $(document).ready(() => {
 
     $("#reviews").prepend(reviewView);
   });
+});
+
+function load_more() {
+      
+  // if we reached the end return.
+  if(!should_load_more){
+    return;
+  }
+
+  // fetch reviews for movie with id.
+  isMakingRequest = true;
+  $('#loading_indicator').show();
+  get_reviews(movie_data['id'],page, (reviews) => {
+    $('#loading_indicator').hide();
+    // reached the final page.
+    if (reviews.length == 0) {
+      should_load_more = false;
+      return;
+    }
+
+    // load comments
+    reviews.forEach( r => {
+      var review_item = construct_review(r['profile_picture'],r['username'],r['created_at'],r['comment'],parseInt(r['star_rating']));
+      $('#comments').append(review_item);
+    });
+
+    // increment page for next load.
+    page += 1;
+
+    // disable flag
+    isMakingRequest = false;
+    
+  });
+}
+
+// load the first page of reviews.
+
+
+// setup scroll listner
+$(window).scroll(function() {
+  // if we reached the eng of the page
+  if($(window).scrollTop() == $(document).height() - $(window).height()) {
+       //make api call to server to load more.
+       if (page > 1 && !isMakingRequest) { load_more(); }
+  }
 });
