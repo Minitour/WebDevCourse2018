@@ -71,6 +71,7 @@ class Main extends CI_Controller{
         }
 
         $user_id = $user['id'];
+        
         $query = $this->review_model->get_all_reviews($user_id);
         $reviews = $query->result();
         if (sizeof($reviews) > 0) {

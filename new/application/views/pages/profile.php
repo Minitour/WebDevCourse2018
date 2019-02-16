@@ -219,11 +219,11 @@
             <ul class="collection" id="past_reviews">
                 <?php
                     // construct reviews
-                    function construct_comment($movie_name,$review,$score) {
+                    function construct_comment($movie_name,$review,$score,$picture,$username){
                         $comment_item = "";
                         $comment_item .= '<li class="collection-item avatar">';
-                        $comment_item .= '<img src="' . $usr['profile_picture'] . '" alt="" class="circle">';
-                        $comment_item .= '<p>' . $usr['username'] . '<br>';
+                        $comment_item .= '<img src="' . $picture . '" alt="" class="circle">';
+                        $comment_item .= '<p>' . $username . '<br>';
                         $comment_item .= '<h5>' . $movie_name . '</h5><br><br>';
                         $comment_item .= $review;
                         $comment_item .= '</p>';
@@ -244,9 +244,10 @@
                         $number_of_stars = $entry['star_rating'];
                         $created_at = $entry['created_at'];
                         $movie_name = $entry['movie_name'];
-
+                        $picture = $usr['profile_picture'];
+                        $username = $usr['username'];
                         
-                        $reviewView = construct_comment($movie_name,$reviewText,$number_of_stars);
+                        $reviewView = construct_comment($movie_name,$reviewText,$number_of_stars,$picture,$username);
                         echo $reviewView;
                     }
                 ?>
