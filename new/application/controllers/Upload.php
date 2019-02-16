@@ -34,8 +34,8 @@ class Upload extends CI_Controller {
 
                 // load lib
                 $this->load->library('upload', $config);
-
-                if ( ! $this->upload->do_upload_json('userfile'))
+                
+                if (!$this->upload->do_upload('userfile'))
                 {
                     $error = array('error' => $this->upload->display_errors());
                     $this->load->view('pages/upload_form', $error);
