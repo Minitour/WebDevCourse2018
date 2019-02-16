@@ -35,51 +35,54 @@ class Movie_model extends CI_Model{
 
     /*
         this function will get all movies
-        
-        will return:
-            $movies<Array<Movie>> - all movies in form <Movie>
-    */ 
-    public function get_movies($tags, $categories) {
-        
-        $string_tags = $this->get_array_to_string($tags);
-        $string_categories = $this->get_array_to_string($categories);
-        $query_string = "";
 
-        if ($string_tags != "" && $string_categories != "") {
-            // categories and tags are not null
-            $query_string = '(SELECT * FROM movies WHERE ( 
-                movies.id IN ( 
-                    (SELECT tag_movie.movie_id FROM tag_movie, tag WHERE ( tag_movie.tag_id = tag.id AND tag.value IN ('. $string_tags .')))
-                    AND
-                    (SELECT movie_category.movie_id FROM movie_category, category WHERE (movie_category.category_id = category.id AND category.value IN ('. $string_categories .') ) )
-                )
-            ))';
+        SELECT * FROM MOVIES WHERE (
+            movies.id IN (
+                SELECT tag_movie.movie_id FROM tag_movie INNER JOIN tag ON tag_movie.tag_id = tag.id 
+                WHERE tag.value IN (%)
+            )
             
-        } else {
-            if ($string_tags != "") {
-                // tags is not null
-                $query_string = '(SELECT * FROM movies WHERE ( 
-                    movies.id IN  
-                        (SELECT tag_movie.movie_id FROM tag_movie, tag WHERE ( tag_movie.tag_id = tag.id AND tag.value IN ('. $string_tags .')))
-                ))';
-            } else {
-                if ($string_categories != "") {
-                    // categories is not null
-                    $query_string = '(SELECT * FROM movies WHERE ( 
-                        movies.id IN 
-                            (SELECT movie_category.movie_id FROM movie_category, category WHERE (movie_category.category_id = category.id AND category.value IN ('. $string_categories .') ) )
-                    ))';
-                }
-            }
+            OR
+
+            movies.id IN (
+                SELECT movie_category.movie_id FROM movie_category 
+                WHERE category.id IN (%)
+            )
+        ) LIMIT 20 OFFSET ?
+
+    */ 
+    public function get_movies($page, $tags, $categories) {
+       
+        $query_string = "( SELECT * FROM movies WHERE ";
+
+        $offset = ($page-1) * 20;
+
+        $params = array();
+        foreach($tags as $tag){
+            array_push($params,$tag);
         }
-        
-        if ($query_string != "") {
-            // no tags or categories
-            $query = $this->db->query($query_string);
-        } else {
-            $query = $this->db->get('movies');
+
+        foreach($categories as $category) {
+            array_push($params,$category);
         }
-        
+
+        array_push($params,$offset);
+
+        $tags_query = $this->tags_clause();
+        $categories_query = $this->categories_clause();
+
+        if ($tags_query == '0' && $categories_query == '0') {
+            $query_string .= '1';
+        }
+        else {
+            $query_string .= $tags_query; // n parameters
+            $query_string .= ' OR ';
+            $query_string .= $categories_query; // m parameters
+        }
+        $query_string .= ' ) LIMIT 20 OFFSET ?'; // 1 parameter
+
+        $query = $this->db->query($query_string, $params);
+
         return $query;
     }
 
@@ -190,6 +193,24 @@ class Movie_model extends CI_Model{
         }
 
         return $string_to_convert;
+    }
+
+    public function tags_clause($values) {
+        if (count($values) == 0) {
+            return '0';
+        }
+        $clause = implode(',', array_fill(0, count($values), '?'));
+        $template = 'movies.id IN (SELECT tag_movie.movie_id FROM tag_movie INNER JOIN tag ON tag_movie.tag_id = tag.id WHERE tag.value IN (' . $clause . '))';
+        return $template;
+    }
+
+    public function categories_clause($values) {
+        if (count($values) == 0) {
+            return '0';
+        }
+        $clause = implode(',', array_fill(0, count($values), '?'));
+        $template = 'movies.id IN (SELECT movie_category.movie_id FROM movie_category WHERE category.id IN ('. $clause . '))';
+        return $template;
     }
 
 

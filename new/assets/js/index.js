@@ -23,8 +23,23 @@ const app = new Vue({
     }
   },
   methods: {
-    fetchMovies: function(page) {
-      $.post(`/new/index.php/movie/get_movies/${page}`, {}, data => {
+    fetchMovies: function(page,search_query,categories) {
+
+      if (search_query == undefined) {
+          search_query = [];
+      }
+
+      if (categories == undefined) {
+        categories = [];
+      }
+
+      var query_obj = {
+        'search' : search_query,
+        'categories' : categories
+      }
+
+      // use $_POST['query'] on backend
+      $.post(`/new/index.php/movie/get_movies/${page}`, { 'query' : JSON.stringify(query_obj) }, data => {
         returned_data = JSON.parse(data);
         console.log(returned_data);
         returned_data.forEach(i => {
