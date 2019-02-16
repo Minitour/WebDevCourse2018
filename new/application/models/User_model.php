@@ -121,7 +121,15 @@ class User_model extends CI_Model
 
         $this->db->update('users', $data, array('id' => $user['id']));
 
-        return True;
+        return true;
+    }
+
+    public function update_picture($user_id, $path_to_pic) {
+        $this->db->update('users',
+                            array('profile_picture' => $path_to_pic),
+                            array('id' => $user['id'])
+        );
+        return true;
     }
 
 

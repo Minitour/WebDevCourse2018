@@ -156,7 +156,9 @@ class Account extends CI_Controller {
         {
             $data = array('upload_data' => $this->upload->data());
             $file_path = $this->upload->data(0)->full_path;
+            $this->user_model->update_picture($_SESSION['id'],$file_path);
             http_response_code(200);
+            header('Location: /new/index.php/myprofile');
             echo json_encode(array('message' => 'ok'));
         }
     }
