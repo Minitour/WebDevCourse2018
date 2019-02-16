@@ -80,9 +80,9 @@ class Movie_model extends CI_Model{
             $query_string .= $categories_query; // m parameters
         }
         $query_string .= ' ) LIMIT 20 OFFSET ?'; // 1 parameter
-
+        
         $query = $this->db->query($query_string, $params);
-
+        
         return $query;
     }
 
@@ -119,9 +119,8 @@ class Movie_model extends CI_Model{
             "cover" => 'https://image.tmdb.org/t/p/w500/' . $poster_path,
             "mdb_id" => $id
         );
-
         $this->$id = $this->db->insert('movies', $data);
-        return True;
+        return TRUE;
     }
 
     /*

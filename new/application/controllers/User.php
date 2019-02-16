@@ -65,7 +65,6 @@ class User extends CI_Controller {
         $query = $this->review_model->get_all_reviews($user);
         $rows = $query->result();
         $data = array();
-        $counter = 0;
         foreach($rows as $row) {
             $temp_data = array();
             $temp_data['movie_id'] = $row['movie_id'];
@@ -73,8 +72,7 @@ class User extends CI_Controller {
             $temp_data['comment'] = $row['comment'];
             $temp_data['star_rating'] = $row['star_rating'];
             $temp_data['created_at'] = $row['created_at'];
-            $data[$counter] = $temp_data;
-            $counter += 1;
+            array_push($data, $temp_data);
         }
         echo(json_encode($data));
     }
@@ -127,7 +125,7 @@ class User extends CI_Controller {
         $query = $this->user_model->get_following($user);
         $rows = $query->result();
         $data = array();
-        $counter = 0;
+        
         foreach($rows as $row) {
             $temp_data = array();
             $temp_data['id'] = $row['id'];
@@ -140,8 +138,7 @@ class User extends CI_Controller {
             $temp_data['birthday'] = $row['birthday'];
             $temp_data['profile_picture'] = $row['profile_picture'];
             $temp_data['role_id'] = $row['role_id'];
-            $data[$counter] = $temp_data;
-            $counter += 1;
+            array_push($data,$temp_data);
         }
         echo(json_encode($data));
     }

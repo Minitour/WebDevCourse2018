@@ -28,7 +28,7 @@ class Upload extends CI_Controller {
 
                 // configure upload settings
                 $config['upload_path'] = './uploads/';
-                $config['allowed_types'] = 'json';
+                $config['allowed_types'] = '*';
                 $config['file_name'] = '_tmp.json';
                 $config['overwrite'] = TRUE;
 
@@ -57,8 +57,12 @@ class Upload extends CI_Controller {
                     // insert to database
                     foreach($movie_data as $movie) {
                         try{
-                            $this->movie_model->insert_from_tmdb($movie['id'],$movie['title'],$movie['poster_path'],$movie['backdrop_path'],$movie['overview'],$movie['release_date']);
-                            $counter += 1;
+                            $result = $this->movie_model->insert_from_tmdb($movie['id'],$movie['title'],$movie['poster_path'],$movie['backdrop_path'],$movie['overview'],$movie['release_date']);
+                            if ($result) {
+                                $counter += 1;
+                            }else {
+                                $failure += 1;
+                            } 
                         }catch (Exception $e) {
                             $failure += 1;
                         }
