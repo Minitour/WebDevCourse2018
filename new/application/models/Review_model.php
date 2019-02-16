@@ -47,6 +47,11 @@ class Review_model extends CI_Model{
         return $this->db->get_where('reviews', array('user_id' => $user));
     }
 
+    public function user_has_review($user_id, $movie_id) {
+        $res = $this->db->query('(SELECT * FROM reviews WHERE user_id = ? AND movie_id = ?)', array($user_id,$movie_id))->result();
+        return sizeof($res) != 0;
+    }
+
 
     /*
         this function will add review for a movie
@@ -64,9 +69,14 @@ class Review_model extends CI_Model{
             "comment" => $comment,
             "star_rating" => $star_rating
         );
-
-        $this->db->insert('reviews', $data);
-        return True;
+        try {
+            $this->db->insert('reviews', $data);
+            return True;
+        }catch (Exception $e){
+            return false;
+        }
+        
+        
     }
 
 

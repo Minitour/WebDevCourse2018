@@ -23,6 +23,7 @@ class Review extends CI_Controller {
 
     */
     public function get_reviews_for_user($user_id) {
+        header('Content-Type: application/json');
         $query = $this->review_model->get_all_reviews($user_id);
         $rows = $query->result_array();
         $data1 = array();
@@ -45,6 +46,7 @@ class Review extends CI_Controller {
 
     */
     public function get_reviews_for_movie($movie,$page) {
+        header('Content-Type: application/json');
         $query = $this->review_model->get_reviews_movie($movie,$page);
         $rows = $query->result_array();
         $data = array();
@@ -73,10 +75,10 @@ class Review extends CI_Controller {
             success/fail - if the review has been added
     */
     public function add_review() {
-        
+        header('Content-Type: application/json');
         $movie_id = $_POST['movie_id'];
         $posted_review = $_POST['comment'];
-        $star_rating = $star_rating['star_rating'];
+        $star_rating = $_POST['star_rating'];
         $user_id = $_SESSION['id'];
 
 
@@ -95,6 +97,7 @@ class Review extends CI_Controller {
 
     */
     public function remove_review() {
+        header('Content-Type: application/json');
         $movie_id = $_POST['movie_id'];
         $user_id = $_POST['user_id'];
         $ret = $this->review_model->remove_review($movie_id, $user_id);

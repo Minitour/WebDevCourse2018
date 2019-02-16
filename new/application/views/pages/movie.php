@@ -29,6 +29,8 @@
     .checked {
       color: orange;
     }
+
+    
   </style>
 </head>
 
@@ -66,7 +68,7 @@
 
     </div>
 
-    <div class="row justify-content-center" id="comment_box">        
+    <div class="row justify-content-center" id="comment_box" <?php if ($did_comment) { echo 'style="display: none;"';}?>>        
         <!-- star input -->
         <div class="col s3">
           <form id="star_rating_form">

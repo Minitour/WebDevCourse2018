@@ -40,8 +40,10 @@ class Main extends CI_Controller{
 
         
         if (sizeof($res) > 0) {
+            $data['did_comment'] = $this->review_model->user_has_review($user_id,$movie_id);
             $data['movie_data'] = $res[0];
             $data['username'] = $_SESSION['username'];
+            
             // load movie view
             $this->load->view("pages/movie",$data);
         }else {

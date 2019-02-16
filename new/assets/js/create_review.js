@@ -144,7 +144,8 @@ $(document).ready(() => {
     }
 
     $.post('/new/index.php/reviews/add',payload,(res) => {
-      console.log(res);
+      console.log(res)
+      M.toast({html: 'Review Published.'})
     })
   });
 });

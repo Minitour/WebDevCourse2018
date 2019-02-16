@@ -36,6 +36,7 @@ class Account extends CI_Controller {
             http_response_code(500);
             $response = array('message' => $message);
             echo json_encode($response);
+            header('Location: /new/index.php/login?messageError=' . $message);
             die();
         }
 
@@ -53,8 +54,6 @@ class Account extends CI_Controller {
 
         // fetch account
         $account = $this->user_model->get_user_by_username($username);
-
-        echo json_encode($account);
 
         if($account == FALSE) {
             // could not find account
