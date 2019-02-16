@@ -24,7 +24,6 @@ const app = new Vue({
   },
   methods: {
     fetchMovies: function(page,search_query,categories) {
-
       if (search_query == undefined) {
           search_query = '';
       }
