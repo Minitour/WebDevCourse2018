@@ -98,7 +98,7 @@ this.setup_movie = function(movie_data) {
   first_tag_element.insertAdjacentHTML("beforeend", modalBody);
 }
 
-this.construct_review = function(profile_img, name,time, review, score) {
+this.construct_review = function(movie_id,user_id,profile_img, name,time, review, score) {
   var review_item = "";
   review_item += '<li class="collection-item avatar">';
   review_item += '<img src="' + profile_img + '" alt="" class="circle">';
@@ -111,15 +111,19 @@ this.construct_review = function(profile_img, name,time, review, score) {
     review_item += '<i class="material-icons">grade</i>';
   }
   review_item += "</a>";
-  review_item += '<div class="wrapper">'
-  review_item += `<a class="waves-effect waves-light btn" style="width: 100%">Comments</a>`
+  review_item += '<div class="row">'
+  review_item += `<div class="col s12 m6"><a href="/new/index.php/comments/${movie_id}/${user_id}" class="waves-effect waves-light btn" style="width: 100%"><i class="material-icons">comment</i></a></div>`
   if (name == username) {
-    review_item += `<a class="waves-effect waves-light btn" style="width: 100%">Delete</a>`
+    review_item += `<div class="col s12 m6"><a onclick="did_select_delete(${movie_id})" class="waves-effect waves-light btn" style="width: 100%"><i class="material-icons">delete</i><</a></div>`
   }
   review_item += "</div>"
   review_item += "</li>";
 
   return review_item;
+}
+
+function did_select_delete(movie_id) {
+  //make api call to delete the review
 }
 
 
@@ -133,6 +137,8 @@ $(document).ready(() => {
     );
 
     let reviewView = construct_review(
+      movie_id,
+      user_id,
       profile_picture,
       username,
       new Date(),
@@ -177,7 +183,7 @@ function load_more() {
 
     // load comments
     reviews.forEach( r => {
-      var review_item = construct_review(r['profile_picture'],r['username'],r['created_at'],r['comment'],parseInt(r['star_rating']));
+      var review_item = construct_review(r['movie_id'],r['user_id'],r['profile_picture'],r['username'],r['created_at'],r['comment'],parseInt(r['star_rating']));
       $('#comments').append(review_item);
     });
 

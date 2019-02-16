@@ -57,10 +57,11 @@ $route['translate_uri_dashes'] = FALSE;
 $route['login']['get'] = 'main/login_view';
 $route['home']['get'] = 'main/index';
 $route['movies/(:any)']['get'] = "main/review_view/$1"; // $1: movie id.
-$route['profile/(:any)']['get'] = 'main/profile_view/$1'; // $1: username
+$route['profile/(:any)']['get'] = "main/profile_view/$1"; // $1: username
+$route['comments/(:num)/(:num)'] = "main/comments_view/$1/$2"; //$1: movie id, $2: user_id
 
 // for comments
-$route['comments/movie/(:any)'] = "comment/get_comments_for_movie/$1";
+$route['comments/movie/(:num)/(:num)/(:num)']['post'] = "comment/get_comments_for_review/$1/$2/$3"; //$1: movie_id, $2: user_id, $3: page
 $route['comments/user/(:any)'] = "comment/get_all_comments/$1";
 $route['comments/add']['post'] = "comment/add_comment";
 $route['comments/remove']['post'] = "comment/remove_comment";

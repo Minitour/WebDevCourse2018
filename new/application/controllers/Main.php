@@ -74,23 +74,25 @@ class Main extends CI_Controller{
         } else {
             show_404();
         }
-
-    }
-
-    public function comment_view($movie_id) {
-        $values = $this->comment_model->get_comments_for_movie($movie_id);
-        $result = $values->result();
-        if (sizeof($result) > 0) {
-            $data['comments'] = $result;
-            $this->load->view("pages/review", $data);
-        } else {
-            show_404();
-        }
-        
     }
 
     public function login_view() {
         $this->load->view("pages/login");
+    }
+
+    /**
+     * show comments view.
+     */
+    public function comments_view($movie_id, $user_id){
+        $query = $this->review_model->get_review($movie_id, $user_id);
+        if ($query->num_rows() > 0) {
+            $row = $query->row_array();
+            $data['review'] = $row;
+
+            $this->load->view("pages/review", $data);
+        }else {
+            show_404();
+        }
     }
 
     public function redirectIfNeeded() {

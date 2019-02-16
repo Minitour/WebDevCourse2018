@@ -22,8 +22,8 @@ class Comment extends CI_Controller {
             $comment<Comment> - the comment for a review
 
     */
-    public function get_comments_for_movie($movie_id) {
-        $query = $this->comment_model->get_comments_for_movie($movie_id);
+    public function get_comments_for_review($movie_id,$user_id,$page) {
+        $query = $this->comment_model->get_comments_for_review($movie_id,$user_id,$page);
         
         $data = $this->get_results_from_query($query);
 

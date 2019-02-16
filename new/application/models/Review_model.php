@@ -52,6 +52,10 @@ class Review_model extends CI_Model{
         return sizeof($res) != 0;
     }
 
+    public function get_review($movie_id, $user_id) {
+        return $this->db->query('(SELECT * FROM reviews INNER JOIN users ON users.id = reviews.user_id WHERE user_id = ? AND movie_id = ?)', array($user_id,$movie_id));
+    }
+
 
     /*
         this function will add review for a movie
