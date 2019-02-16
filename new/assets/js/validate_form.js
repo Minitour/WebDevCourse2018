@@ -118,28 +118,27 @@ function validateForm() {
         //test_func();
 
         //$('#first_name').attr("disabled value", first_name_field);
-    });
+        if (checkAllElements) {
 
-    if (checkAllElements) {
-
-        var user = {
-            "user": {
-                "username": username_field,
-                "first_name": first_name_field,
-                "last_name": last_name_field,
-                "email": email_field,
-                "phone": phone_field,
-                "birthday": birthday_field,
-                "password": password_field,
-                "role_id": 1,
-                "profile_picture": ""
+            var user = {
+                "user": {
+                    "username": username_field,
+                    "first_name": first_name_field,
+                    "last_name": last_name_field,
+                    "email": email_field,
+                    "phone": phone_field,
+                    "birthday": birthday_field,
+                    "password": password_field,
+                    "role_id": 1,
+                    "profile_picture": ""
+                }
             }
+            var uri = "/new/index.php/update";
+            $.post(uri, user, data => {
+                returned_data = JSON.parse(data);
+                console.log(returned_data);
+            });
+    
         }
-        var uri = "/new/index.php/update";
-        $.post(uri, user, data => {
-            returned_data = JSON.parse(data);
-            console.log(returned_data);
-        });
-
-    }
+    });
 }
