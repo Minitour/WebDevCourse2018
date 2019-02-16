@@ -4,13 +4,13 @@ This function will create and append the new comment to the list of comments
 
 */
 
-function get_reviews(movie_id, page_num, callback) {
+this.get_reviews = function(movie_id, page_num, callback) {
     $.post(`/new/index.php/reviews/movie/${movie_id}/${page_num}`,{}, (data) => {
         callback(JSON.parse(data));
     });
 }
 
-function setup_movie(movie_data) {
+this.setup_movie = function(movie_data) {
   $("#title").text(movie_data["name"]);
   var final_str = "";
   var i = movie_data['id'];
@@ -97,7 +97,7 @@ function setup_movie(movie_data) {
   first_tag_element.insertAdjacentHTML("beforeend", modalBody);
 }
 
-function construct_review(profile_img, name,time, review, score) {
+this.construct_review = function(profile_img, name,time, review, score) {
   var review_item = "";
   review_item += '<li class="collection-item avatar">';
   review_item += '<img src="' + profile_img + '" alt="" class="circle">';
@@ -138,7 +138,7 @@ $(document).ready(() => {
     $("#reviews").prepend(reviewView);
 
     let payload = {
-      'movie_id' : movie_id;
+      'movie_id' : movie_id,
       'comment' : review,
       'star_rating' : stars
     }
