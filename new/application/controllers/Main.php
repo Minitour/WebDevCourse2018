@@ -62,11 +62,11 @@ class Main extends CI_Controller{
 
     public function profile_view_self() {
         $this->redirectIfNeeded();
-        
+
         $user = $this->user_model->get_user_by_username($_SESSION['username']);
         if ($user == FALSE) {
             show_404();
-            die;
+            die();
         }
         $user_id = $user->ID;
         $query = $this->review_model->get_all_reviews($user_id);
