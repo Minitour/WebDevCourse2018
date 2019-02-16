@@ -22,13 +22,13 @@
             </a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-               <li><a href="index.php?#">Home</a></li>
-               <li><a href="login.php">Logout</a></li>
-               <li ><a href="profile.php">
+               <li><a href="/new/index.php/">Home</a></li>
+               <li><a href="/new/index.php/login">Logout</a></li>
+               <li ><a href="/new/index.php/myprofile">
                   <?php echo $usr->username; ?>
                   </a>
                </li>
-               <li class="nav-item active"><a href="cart.php">Cart</a></li>
+               <li class="nav-item active"><a>Cart</a></li>
             </ul>
          </div>
       </nav>

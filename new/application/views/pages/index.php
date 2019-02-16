@@ -53,7 +53,7 @@
         <li><a href="/new/index.php/myprofile">
             <?php echo $username; ?>
         </a></li>
-        <li><a href="new/index.php/cart">Cart</a></li>
+        <li><a href="/new/index.php/cart">Cart</a></li>
       </ul>
     </div>
   </nav>
