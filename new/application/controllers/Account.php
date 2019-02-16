@@ -94,6 +94,8 @@ class Account extends CI_Controller {
             True/False - is the user has been registered
     */
     public function register_user() {
+        header('Content-Type: application/json');
+        
         $username = $_POST['username'];
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
@@ -103,7 +105,22 @@ class Account extends CI_Controller {
         $password = $_POST['password'];
 
         $ret = $this->user_model->insert_user($username, $first_name, $last_name, $email, $phone, $birthday_date, $password);
-        $this->helper_functions->post_success_of_fail($ret);
+        if ($ret == FALSE) {
+            $this->helper_functions->post_success_of_fail(FALSE);
+            die();
+        }
+
+        $account = $this->user_model->get_user_by_username($username);
+        // generate session
+        session_start();
+        $_SESSION['id'] = $account['id'];
+        $_SESSION['username'] = $account['username'];
+        $_SESSION['profile_picture'] = $account['profile_picture'];
+        $_SESSION['role'] = $account['role'];
+        $response = array("message" => 'Success', "code" => 200); 
+        http_response_code(200);
+        header('Location: /new');
+        echo json_encode($response);
     }
 
 
@@ -125,9 +142,6 @@ class Account extends CI_Controller {
     public function do_upload() {
         $config['upload_path']          = './uploads/';
         $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 100;
-        $config['max_width']            = 1024;
-        $config['max_height']           = 768;
         $config['file_name'] = 'profile_' . $_SESSION['id'];
         $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);
