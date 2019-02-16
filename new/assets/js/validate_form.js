@@ -18,7 +18,7 @@ function validateForm() {
         if (username_field != "") {
             // username is ok
         } else {
-            var username_error_box = "<h6 style='color:red;'>Invalid Username</h6>";
+            var username_form_message = "<h6 style='color:red;'>Invalid Username</h6>";
         }
 
         // check first and last name
