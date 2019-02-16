@@ -5,23 +5,25 @@ This function will create and append the new comment to the list of comments
 */
 
 this.get_reviews = function(movie_id, page_num, callback) {
-    $.post(`/new/index.php/reviews/movie/${movie_id}/${page_num}`,{}, (data) => {
-        if(data == undefined) return;
-        callback(data);
-    });
-}
+  $.post(`/new/index.php/reviews/movie/${movie_id}/${page_num}`, {}, data => {
+    if (data == undefined) return;
+    callback(data);
+  });
+};
 
 this.setup_movie = function(movie_data) {
   $("#title").text(movie_data["name"]);
   var final_str = "";
-  var i = movie_data['id'];
+  var i = movie_data["id"];
   // for taging the movies in the modal_first_div var below
 
   var stars_number = 5;
   // constructing a movie
   var first_div = '<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">';
   var second_div = '<div class="card h-100">';
-  var link_to_image = `<img style="width:100%;" class="card-img-top" src="${movie_data["cover"]}" alt="">`;
+  var link_to_image = `<img style="width:100%;" class="card-img-top" src="${
+    movie_data["cover"]
+  }" alt="">`;
   var third_div = '<div class="card-body">';
   var h4_line = '<h4 class="card-title">';
   var title = `<a href="#"> ${movie_data["name"]} </a>`;
@@ -34,8 +36,11 @@ this.setup_movie = function(movie_data) {
   // constructing the modal for the movie
   var modal_first_div = `<div id="${i}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">`;
   var modal_second_div = '<div class="modal-dialog modal-lg">';
-  var closeButton_modal = '<button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-  var modal_third_div_and_close_div_header = `<div class="modal-content"><div class="modal-header" style="background-color:#353a40;"><h5 class="modal-title" style="color:white;">${movie_data["name"]}</h5>${closeButton_modal}</div>`;
+  var closeButton_modal =
+    '<button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+  var modal_third_div_and_close_div_header = `<div class="modal-content"><div class="modal-header" style="background-color:#353a40;"><h5 class="modal-title" style="color:white;">${
+    movie_data["name"]
+  }</h5>${closeButton_modal}</div>`;
 
   // fetching the info the specific movie
   var fields_for_movie_info = "";
@@ -51,11 +56,13 @@ this.setup_movie = function(movie_data) {
   }
   ratings += "</p>";
   //var ratings = '<p style="font-size:20"><span style="font-weight:bold;">Ratings</span> : ' + movies_infos[movie]['ratings'] + "</p>";
-  var released =
-    `<p style="font-size:20"><span style="font-weight:bold;">Released</span> : ${movie_data["release_date"]}</p>`;
+  var released = `<p style="font-size:20"><span style="font-weight:bold;">Released</span> : ${
+    movie_data["release_date"]
+  }</p>`;
   //var genre = `<p style="font-size:20"><span style="font-weight:bold;">Genre</span> : ${movie_data["genre"]}</p>`;
-  var plot =
-    `<p style="font-size:20"><span style="font-weight:bold;">Plot</span> : ${movie_data["plot"]} </p>`;
+  var plot = `<p style="font-size:20"><span style="font-weight:bold;">Plot</span> : ${
+    movie_data["plot"]
+  } </p>`;
   //var actors =`<p style="font-size:20"><span style="font-weight:bold;">Actors</span> : ${movie_data["actors"]}</p>`;
 
   // appending the fields together
@@ -96,9 +103,17 @@ this.setup_movie = function(movie_data) {
 
   // attach the string we constructed above to the div we taged as "first_tag".
   first_tag_element.insertAdjacentHTML("beforeend", modalBody);
-}
+};
 
-this.construct_review = function(movie_id,user_id,profile_img, name,time, review, score) {
+this.construct_review = function(
+  movie_id,
+  user_id,
+  profile_img,
+  name,
+  time,
+  review,
+  score
+) {
   var review_item = "";
   review_item += '<li class="collection-item avatar">';
   review_item += '<img src="' + profile_img + '" alt="" class="circle">';
@@ -111,23 +126,21 @@ this.construct_review = function(movie_id,user_id,profile_img, name,time, review
     review_item += '<i class="material-icons">grade</i>';
   }
   review_item += "</a>";
-  review_item += '<br>'
-  review_item += '<div class="row">'
-  review_item += `<div class="col s2 m1"><a href="/new/index.php/comments/${movie_id}/${user_id}" class="waves-effect blue waves-light btn"><i class="material-icons">comment</i></a></div>`
-  if (this.user_id = user_id) {
-    review_item += `<div class="col s2 m1"><a onclick="did_select_delete(${movie_id})" class="waves-effect red waves-light btn"><i class="material-icons">delete</i></a></div>`
+  review_item += "<br>";
+  review_item += '<div class="row">';
+  review_item += `<div class="col s2 m1"><a href="/new/index.php/comments/${movie_id}/${user_id}" class="waves-effect blue waves-light btn"><i class="material-icons">comment</i></a></div>`;
+  if (this.user_id == user_id) {
+    review_item += `<div class="col s2 m1"><a onclick="did_select_delete(${movie_id})" class="waves-effect red waves-light btn"><i class="material-icons">delete</i></a></div>`;
   }
-  review_item += "</div>"
+  review_item += "</div>";
   review_item += "</li>";
 
   return review_item;
-}
+};
 
 function did_select_delete(movie_id) {
   //make api call to delete the review
 }
-
-
 
 $(document).ready(() => {
   $("#create_review").click(() => {
@@ -152,30 +165,29 @@ $(document).ready(() => {
     $("#reviews").prepend(reviewView);
 
     let payload = {
-      'movie_id' : movie_id,
-      'comment' : review,
-      'star_rating' : stars
-    }
+      movie_id: movie_id,
+      comment: review,
+      star_rating: stars
+    };
 
-    $.post('/new/index.php/reviews/add',payload,(res) => {
-      console.log(res)
-      M.toast({html: 'Review Published.'})
-    })
+    $.post("/new/index.php/reviews/add", payload, res => {
+      console.log(res);
+      M.toast({ html: "Review Published." });
+    });
   });
 });
 
 function load_more() {
-      
   // if we reached the end return.
-  if(!should_load_more){
+  if (!should_load_more) {
     return;
   }
 
   // fetch reviews for movie with id.
   isMakingRequest = true;
-  $('#loading_indicator').show();
-  get_reviews(movie_data['id'],page, (reviews) => {
-    $('#loading_indicator').hide();
+  $("#loading_indicator").show();
+  get_reviews(movie_data["id"], page, reviews => {
+    $("#loading_indicator").hide();
     // reached the final page.
     if (reviews.length == 0) {
       should_load_more = false;
@@ -183,9 +195,17 @@ function load_more() {
     }
 
     // load comments
-    reviews.forEach( r => {
-      var review_item = construct_review(r['movie_id'],r['user_id'],r['profile_picture'],r['username'],r['created_at'],r['comment'],parseInt(r['star_rating']));
-      $('#comments').append(review_item);
+    reviews.forEach(r => {
+      var review_item = construct_review(
+        r["movie_id"],
+        r["user_id"],
+        r["profile_picture"],
+        r["username"],
+        r["created_at"],
+        r["comment"],
+        parseInt(r["star_rating"])
+      );
+      $("#comments").append(review_item);
     });
 
     // increment page for next load.
@@ -193,18 +213,18 @@ function load_more() {
 
     // disable flag
     isMakingRequest = false;
-    
   });
 }
 
 // load the first page of reviews.
 
-
 // setup scroll listner
 $(window).scroll(function() {
   // if we reached the eng of the page
-  if($(window).scrollTop() == $(document).height() - $(window).height()) {
-       //make api call to server to load more.
-       if (page > 1 && !isMakingRequest) { load_more(); }
+  if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    //make api call to server to load more.
+    if (page > 1 && !isMakingRequest) {
+      load_more();
+    }
   }
 });
