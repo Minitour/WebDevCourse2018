@@ -95,7 +95,8 @@ class Main extends CI_Controller{
                 "star_rating" => $row['star_rating'],
                 "user_id" => $row['user_id'],
                 "profile_picture" => $row['profile_picture'],
-                "movie_id" => $row['movie_id']
+                "movie_id" => $row['movie_id'],
+                "name" => $row['name']
             );
 
             $this->load->view("pages/review", $data);

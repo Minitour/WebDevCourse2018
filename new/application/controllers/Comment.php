@@ -7,7 +7,7 @@ class Comment extends CI_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->library('session');
-        $this->load->model('Comment_model');
+        $this->load->model('comment_model');
         $this->load->model('Helper_functions');
     }
         

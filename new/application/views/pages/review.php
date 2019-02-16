@@ -43,22 +43,16 @@
          </div>
       </nav>
       <div class="container">
-         <nav>
+         <br>
+         <nav class="blue-grey darken-3">
             <div class="nav-wrapper">
                <div class="col s12">
                   <a href="/new" class="breadcrumb">Home</a>
-                  <a href="<?php /* movie route*/?>" class="breadcrumb"><?php /* movie name*/ ?></a>
-                  <a href="<?php /*current page location */?>" class="breadcrumb"><?php /* review id*/?></a>
+                  <a href="<?php echo "/new/index.php/movies/" . $review_data['movie_id'] ?>" class="breadcrumb"><?php echo $review_data['name']; ?></a>
+                  <a class="breadcrumb"><?php echo '#' . $review_data['user_id']; ?></a>
                </div>
             </div>
          </nav>
-         <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/new">Home</a></li>
-    <li class="breadcrumb-item"><a href="<?php echo "/new/index.php/movies/" . $review_data['movie_id'] ?>">Library</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data</li>
-  </ol>
-</nav>
          <!-- The review -->
          <div class="row">
             <div class="col s12">
