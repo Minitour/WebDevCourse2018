@@ -80,8 +80,8 @@ class Main extends CI_Controller{
                 $temp_data = array();
                 $query = $this->movie_model->get_movie_details($review->movie_id);
                 $movie = $query->result();
-                var_dump($movie);
-                $temp_data['movie_name'] = '';
+                //var_dump($movie);
+                $temp_data['movie_name'] = $movie->name;
                 $temp_data['comment'] = $review->comment;
                 $temp_data['star_rating'] = $review->star_rating;
                 $temp_data['created_at'] = $review->created_at;
