@@ -10,7 +10,6 @@ class Movie extends CI_Controller {
         $this->load->model('movie_model');
         $this->load->model('Cart_model');
     }
-        
 
     /*
         this function will a specific movie from db
