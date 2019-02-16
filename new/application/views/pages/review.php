@@ -108,7 +108,7 @@
          var should_load_more = true;
          var isMakingRequest = false;
          
-         // load first reviews page.
+         // load first comments page.
          load_more();
       </script>
    </body>

@@ -8,7 +8,7 @@ class Comment extends CI_Controller {
         $this->load->database();
         $this->load->library('session');
         $this->load->model('comments_model');
-        $this->load->model('Helper_functions');
+        $this->load->model('helper_functions');
     }
         
 
@@ -61,7 +61,7 @@ class Comment extends CI_Controller {
             True/False - if the comment has been added
     */
     public function add_comment() {
-        
+        header('Content-Type: application/json');
         // $data = $this->get_row_as_array($_POST['comment']);
 
         $movie_id = $_POST['movie_id'];
@@ -85,6 +85,7 @@ class Comment extends CI_Controller {
             True/False - if the comment has been removed
     */
     public function remove_comment() {
+        header('Content-Type: application/json');
         $reviewer_id = $_POST['reviewer_id'];
         $movie_id = $_POST['movie_id'];
         $time = $_POST['time'];
