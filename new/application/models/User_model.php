@@ -114,7 +114,7 @@ class User_model extends CI_Model
         $this->first_name = $user['first_name'];
         $this->last_name = $user['last_name'];
         $this->phone = $user['phone'];
-        $this->birthdate = $user['birthdate'];
+        $this->birthdate = $user['birthday'];
         $this->profile_picture = $user['profile_picture'];
         $this->role_id = $user['role_id'];
 
