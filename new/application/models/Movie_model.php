@@ -116,7 +116,7 @@ class Movie_model extends CI_Model{
             "ratings" => 5,
             "plot" => $overview,
             "release_date" => date('Y-m-d',strtotime($release_date)),
-            "cover" => $poster_path,
+            "cover" => 'https://image.tmdb.org/t/p/w500/' . $poster_path,
             "mdb_id" => $id
         );
 
