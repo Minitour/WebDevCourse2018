@@ -106,11 +106,17 @@ this.construct_review = function(profile_img, name,time, review, score) {
   review_item += "<p>" + time + "<br><br>";
   review_item += review;
   review_item += "</p>";
-  review_item += '<a href="#!" class="secondary-content">';
+  review_item += '<a class="secondary-content">';
   for (var i = 0; i < score; i++) {
     review_item += '<i class="material-icons">grade</i>';
   }
   review_item += "</a>";
+  review_item += '<div class="wrapper">'
+  review_item += `<a class="waves-effect waves-light btn" style="width: 100%">Comments</a>`
+  if (name == username) {
+    review_item += `<a class="waves-effect waves-light btn" style="width: 100%">Delete</a>`
+  }
+  review_item += "</div>"
   review_item += "</li>";
 
   return review_item;

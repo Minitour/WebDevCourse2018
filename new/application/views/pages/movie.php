@@ -134,6 +134,7 @@
     
     var movie_id = movie_data['id'];
     var username = '<?php echo $_SESSION["username"]; ?>';
+    var user_id = '<?php echo $_SESSION["id"]; ?>'
     var profile_picture = '<?php echo $_SESSION["profile_picture"]; ?>'
 
     var page = 1;
