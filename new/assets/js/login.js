@@ -10,10 +10,10 @@ function validateForm(){
     // getting all elements to check
     var first_name_field = document.getElementById("first_name").value;
     var last_name_field = document.getElementById("last_name").value;
-    var email_field = document.getElementById("email").value;
-    var phone_field = document.getElementById("phone").value;
+    var email_field = document.getElementById("email-register").value;
+    var phone_field = document.getElementById("phone-register").value;
     var birthday_field = document.getElementById("birthday_date").value;
-    var password_field = document.getElementById("password").value;
+    var password_field = document.getElementById("password-register").value;
     var password_confirm_field = document.getElementById("password-confirm").value;
 
     // checking all elements by conditions set before

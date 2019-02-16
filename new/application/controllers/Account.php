@@ -96,10 +96,10 @@ class Account extends CI_Controller {
         $username = $_POST['username'];
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
+        $email = $_POST['email-register'];
+        $phone = $_POST['phone-register'];
         $birthday_date = $_POST['birthday_date'];
-        $password = $_POST['password'];
+        $password = $_POST['password-register'];
 
         $ret = $this->user_model->insert_user($username, $first_name, $last_name, $email, $phone, $birthday_date, $password);
         $this->helper_functions->post_success_of_fail($ret);

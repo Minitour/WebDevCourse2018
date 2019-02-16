@@ -82,14 +82,14 @@
   				</div>
   				<div class="row">
   					<div class="input-field col s12">
-  						<input id="email" type="text" class="validate" required>
+  						<input id="email-register" type="text" class="validate" required>
   						<label for="email">Email</label>
               <div id="email_error_box" name="email_error_box"></div>
   					</div>
   				</div>
   				<div class="row">
   					<div class="input-field col s12">
-  						<input id="phone" type="text" class="validate" required>
+  						<input id="phone-register" type="text" class="validate" required>
   						<label for="phone-confirm">Phone Confirmation</label>
               <div id="phone_error_box" name="phone_error_box"></div>
   					</div>
@@ -103,8 +103,8 @@
           </div>
   				<div class="row">
   					<div class="input-field col s12">
-  						<input id="password" type="password" class="validate" required>
-  						<label for="password">Password</label>
+  						<input id="password-register" type="password" class="validate" required>
+  						<label for="password-register">Password</label>
               <div id="password_error_box" name="password_error_box">
   					</div>
             </div>
