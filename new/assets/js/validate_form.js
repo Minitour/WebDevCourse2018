@@ -1,4 +1,4 @@
-function validateForm(update){
+function validateForm(){
     $(document).ready(function(){
 
         // set boolean flag to False -> to check if all elements are ok
@@ -122,12 +122,6 @@ function validateForm(update){
 
         if (checkAllElements) {
 
-            if (update) {
-                // need to update the user
-            } else {
-                // need to create new user
-            }
-
             var user = {
                 "user": {
                     "username": username_field,
@@ -141,8 +135,8 @@ function validateForm(update){
                     "profile_picture": ""
                 }
             }
-            var uri = "/new/index.php/account/create";
-            $.post(uri, JSON.stringify(user), data => {
+            var uri = "/new/index.php/update";
+            $.post(uri, user, data => {
                 returned_data = JSON.parse(data);
                 console.log(returned_data);
             });
