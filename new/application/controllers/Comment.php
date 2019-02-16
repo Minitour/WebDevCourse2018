@@ -7,7 +7,7 @@ class Comment extends CI_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->library('session');
-        $this->load->model('comment_model');
+        $this->load->model('comments_model');
         $this->load->model('Helper_functions');
     }
         
@@ -24,7 +24,7 @@ class Comment extends CI_Controller {
     */
     public function get_comments_for_review($movie_id,$user_id,$page) {
         header('Content-Type: application/json');
-        $query = $this->comment_model->get_comments_for_review($movie_id,$user_id,$page);
+        $query = $this->comments_model->get_comments_for_review($movie_id,$user_id,$page);
         
         $data = $this->get_results_from_query($query);
 
@@ -43,7 +43,7 @@ class Comment extends CI_Controller {
 
     */
     public function get_all_comments($reviewer_id) {
-        $query = $this->comment_model->get_all_comments_for_reviewer($reviewer_id);
+        $query = $this->comments_model->get_all_comments_for_reviewer($reviewer_id);
 
         $data = $this->get_results_from_query($query);
 
@@ -69,7 +69,7 @@ class Comment extends CI_Controller {
         $comment = $_POST['comment'];
         $user_id = $_SESSION['id'];
 
-        $ret = $this->comment_model->add_comment($movie_id,$reviewer_id,$comment,$user_id);
+        $ret = $this->comments_model->add_comment($movie_id,$reviewer_id,$comment,$user_id);
         
         // post fail or success
         $this->helper_functions->post_success_of_fail($ret);
@@ -89,7 +89,7 @@ class Comment extends CI_Controller {
         $movie_id = $_POST['movie_id'];
         $time = $_POST['time'];
 
-        $ret = $this->comment_model->remove_comment($reviewer_id, $movie_id, $time);
+        $ret = $this->comments_model->remove_comment($reviewer_id, $movie_id, $time);
         $this->helper_functions->post_success_of_fail($ret);
     }
 

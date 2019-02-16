@@ -12,7 +12,7 @@ class Main extends CI_Controller{
         $this->load->model('user_model');
         $this->load->model('movie_model');
         $this->load->model('review_model');
-        $this->load->model('comment_model');
+        $this->load->model('comments_model');
         $this->load->model('cart_model');
         $this->load->model('category_model');
         $this->load->model('tag_model');
