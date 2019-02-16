@@ -72,21 +72,19 @@ class User_model extends CI_Model
         will return:
             True/False - if the user has been added
     */
-    public function insert_user($user)
-    {
+    public function insert_user($username, $first_name, $last_name, $email, $phone, $birthday_date, $password){
         //TODO: add checks here
-        $this->username = $user['username'];
-        $this->password = $user['password'];
-        $this->email = $user['email'];
-        $this->first_name = $user['first_name'];
-        $this->last_name = $user['last_name'];
-        $this->phone = $user['phone'];
-        $this->birthday = $user['birthday'];
-        $this->profile_picture = $user['profile_picture'];
-        $this->role_id = $user['role_id'];
+        $data = array(
+            'username' => $username,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'email' => $email,
+            'phone' => $phone,
+            'birthday_date' => $birthday_date,
+            'password' => $password //TODO hash password.
+        );
 
-        $this->ID = $this->db->insert('users', $this);
-
+        $this->ID = $this->db->insert('users', $data);
         return True;
     }
 

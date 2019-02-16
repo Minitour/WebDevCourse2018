@@ -93,8 +93,16 @@ class Account extends CI_Controller {
             True/False - is the user has been registered
     */
     public function register_user() {
+        $username = $_POST['username'];
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $birthday_date = $_POST['birthday_date'];
+        $password = $_POST['password'];
+
         $user = $_POST['user'];
-        $ret = $this->user_model->insert_user($user);
+        $ret = $this->user_model->insert_user($username,$first_name,$last_name,$email,$phone,$birthday_date,$password);
         $this->helper_functions->post_success_of_fail($ret);
     }
 

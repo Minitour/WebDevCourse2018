@@ -54,15 +54,22 @@
 		</form>
 	</div>
 	<div id="register" class="col s12" style="display:flex;flex-direction: column;min-height: 110vh;">
-		<form id="register-form" name="register-form" method="post" action="login.php#register" class="col s12">
+		<form id="register-form" name="register-form" method="post" action="create" class="col s12">
 			<div class="form-container">
-  				<h3>Welcome</h3>
+					<h3>Welcome</h3>
+					<div class="row">
+    				<div class="input-field col s12">
+    					<input id="username" name="username" type="text" required>
+              <label for="username">Username</label>
+              <div id="username_error_box" name="username_error_box">
+              </div>
+            </div>
+          </div>
   				<div class="row">
     				<div class="input-field col s12">
     					<input id="first_name" name="first_name" type="text" required>
               <label for="first_name">First Name</label>
               <div id="first_name_error_box" name="first_name_error_box">
-
               </div>
             </div>
           </div>
