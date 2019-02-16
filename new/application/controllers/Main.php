@@ -64,7 +64,9 @@ class Main extends CI_Controller{
         $this->redirectIfNeeded();
         
         $user = $this->user_model->get_user_by_username($_SESSION['username']);
-        echo $user;
+        foreach($user as $u){
+            var_dump($u);
+        }
         if ($user == FALSE) {
             show_404();
             die;
