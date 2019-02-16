@@ -167,7 +167,7 @@
                         </div>
                         <div class="form-group">
                             <div class='input-field col s12'>
-                                <input id="birthday_date" type="text" class="datepicker" disabled value="<?php echo $usr['birthday']; ?>">
+                                <input id="birthday_date" type="text" class="datepicker" disabled value="<?php echo $usr['birthdate']; ?>">
                                 <label for="birthday_date">Birthday</label>
                                 <div id="birthday_error_box" name="birthday_error_box"></div>
                             </div>
@@ -193,7 +193,7 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <br>
-                                <button id="save_info_button" class="btn btn-lg btn-success" onclick="validateForm()" name="action" disabled><i class="glyphicon glyphicon-ok-sign"></i>
+                                <button id="save_info_button" class="btn btn-lg btn-success" onclick="validateForm(1)" name="action" disabled><i class="glyphicon glyphicon-ok-sign"></i>
                                     SAVE</button>
                             </div>
                         </div>
@@ -218,11 +218,12 @@
             <ul class="collection" id="past_reviews">
                 <?php
                     // construct reviews
-                    function construct_comment($profile_img,$name,$review,$score) {
+                    function construct_comment($movie_name,$review,$score) {
                         $comment_item = "";
                         $comment_item .= '<li class="collection-item avatar">';
-                        $comment_item .= '<img src="' . $profile_img . '" alt="" class="circle">';
-                        $comment_item .= '<p>' . $name . '<br><br>';
+                        $comment_item .= '<img src="' . $usr->profile_img . '" alt="" class="circle">';
+                        $comment_item .= '<p>' . $usr->username . '<br>';
+                        $comment_item .= '<h5>' . $movie_name . '</h5><br><br>';
                         $comment_item .= $review;
                         $comment_item .= '</p>';
                         $comment_item .= '<a href="#!" class="secondary-content">';
@@ -238,13 +239,13 @@
                     foreach($reviews as $entry) {
                         //$reviewItem = new Review($entry);
                         var_dump($entry);
-                        $reviewText = $entry->comment;
-                        $number_of_stars = $entry->star_rating;
-                        $profile_image = $entry->profile_picture;
-                        $name = $entry->username;
+                        $reviewText = $entry['comment'];
+                        $number_of_stars = $entry['star_rating'];
+                        $created_at = $entry['created_at'];
+                        $movie_name = $entry['movie_name'];
 
                         
-                        $reviewView = construct_comment($profile_image,$name,$reviewText,$number_of_stars);
+                        $reviewView = construct_comment($movie_name,$reviewText,$number_of_stars);
                         echo $reviewView;
                     }
                 ?>
