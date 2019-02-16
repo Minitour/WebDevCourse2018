@@ -221,8 +221,8 @@
                     function construct_comment($movie_name,$review,$score) {
                         $comment_item = "";
                         $comment_item .= '<li class="collection-item avatar">';
-                        $comment_item .= '<img src="' . $usr->profile_img . '" alt="" class="circle">';
-                        $comment_item .= '<p>' . $usr->username . '<br>';
+                        $comment_item .= '<img src="' . $usr['profile_img'] . '" alt="" class="circle">';
+                        $comment_item .= '<p>' . $usr['username'] . '<br>';
                         $comment_item .= '<h5>' . $movie_name . '</h5><br><br>';
                         $comment_item .= $review;
                         $comment_item .= '</p>';
