@@ -103,7 +103,7 @@ $(document).ready(() => {
     // if we reached the eng of the page
     if ($(window).scrollTop() == $(document).height() - $(window).height()) {
       //make api call to server to load more.
-      if (page > 1 && !isMakingRequest) {
+      if (current_page > 1 && !isMakingRequest) {
         app.fetchMovies(current_page);
       }
     }
