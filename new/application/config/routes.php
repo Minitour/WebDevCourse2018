@@ -92,6 +92,7 @@ $route['signin']['post'] = "account/login";
 $route['create']['post'] = "account/register_user";
 $route['delete']['post'] = "account/delete_user";
 $route['logout']['post'] = "account/logout";
+$route['update']['post'] = "user/update_user";
 
 
 // for tags
