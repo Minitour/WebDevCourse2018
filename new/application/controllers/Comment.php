@@ -26,9 +26,19 @@ class Comment extends CI_Controller {
         header('Content-Type: application/json');
         $query = $this->comments_model->get_comments_for_review($movie_id,$user_id,$page);
         
-        $data = $this->get_results_from_query($query);
+        $rows = $query->result_array();
+        $data = array();
+        foreach($rows as $row) {
+            $temp_data = array();
+            $temp_data['user_id'] = $row['user_id'];
+            $temp_data['comment'] = $row['comment'];
+            $temp_data['time'] = $row['time'];
+            $temp_data['username'] = $row['username'];
+            $temp_data['profile_picture'] = $row['profile_picture'];
 
-        echo (json_encode($data));
+            array_push($data, $temp_data);
+        }
+        echo json_encode($data);
     }
 
 

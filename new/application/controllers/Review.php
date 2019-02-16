@@ -26,15 +26,18 @@ class Review extends CI_Controller {
         header('Content-Type: application/json');
         $query = $this->review_model->get_all_reviews($user_id);
         $rows = $query->result_array();
-        $data1 = array();
+        $result = array();
         foreach($rows as $row) {
+            $data1 = array();
             $data1['movie_id'] = $row['movie_id'];
             $data1['user_id'] = $row['user_id'];
             $data1['comment'] = $row['comment'];
             $data1['star_rating'] = $row['star_rating'];
             $data1['created_at'] = $row['created_at'];
+
+            array_push($result, $data1);
         }
-        echo(json_encode($data1));
+        echo(json_encode($result));
     }
 
 

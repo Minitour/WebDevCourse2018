@@ -69,7 +69,7 @@ this.construct_comment = function(user_id,profile_img, name,time, comment) {
   
       // load comments
       comments.forEach( r => {
-        var commentsView = construct_comment(r['user_id'],r['profile_picture'],r['username'],r['time'],r['comment'],parseInt(r['star_rating']));
+        var commentsView = construct_comment(r['user_id'],r['profile_picture'],r['username'],r['time'],r['comment']);
         $('#comments').append(commentsView);
       });
   
