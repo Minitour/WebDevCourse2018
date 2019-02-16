@@ -1,5 +1,5 @@
-function validateForm(){
-    $(document).ready(function(){
+function validateForm() {
+    $(document).ready(function () {
 
         // set boolean flag to False -> to check if all elements are ok
         var checkAllElements = true;
@@ -26,20 +26,20 @@ function validateForm(){
 
         // check first name and put corrisponding message
         if ((first_name_field != "") && (first_name_field.match(names_regex) != null)) {
-        //var first_name_form_message = "<h6 style='color:green;'>Valid Name</h6>";
-        //first_name_error_box_element.style.visibility = "hidden";
+            //var first_name_form_message = "<h6 style='color:green;'>Valid Name</h6>";
+            //first_name_error_box_element.style.visibility = "hidden";
         } else {
-        checkAllElements = false;
-        var first_name_form_message = "<h6 style='color:red;'>Invalid Name</h6>";
+            checkAllElements = false;
+            var first_name_form_message = "<h6 style='color:red;'>Invalid Name</h6>";
         }
 
 
         // checking last name and put corrisponding message
         if ((last_name_field != "") && (last_name_field.match(names_regex) != null)) {
-        //var last_name_form_message = "<h6 style='color:green;'>Valid Last Name</h6>";
+            //var last_name_form_message = "<h6 style='color:green;'>Valid Last Name</h6>";
         } else {
-        checkAllElements = false;
-        var last_name_form_message = "<h6 style='color:red;'>Invalid Last Name</h6>";
+            checkAllElements = false;
+            var last_name_form_message = "<h6 style='color:red;'>Invalid Last Name</h6>";
         }
 
 
@@ -55,10 +55,10 @@ function validateForm(){
 
         // check phone is not empty
         if (phone_field != "") {
-        //var phone_form_message = "<h6 style='color:green;'>Valid Phone</h6>";
+            //var phone_form_message = "<h6 style='color:green;'>Valid Phone</h6>";
         } else {
-        checkAllElements = false;
-        var phone_form_message = "<h6 style='color:red;'>Invalid Phone</h6>";
+            checkAllElements = false;
+            var phone_form_message = "<h6 style='color:red;'>Invalid Phone</h6>";
         }
 
         // check email_field and put corrisponding message
@@ -68,14 +68,14 @@ function validateForm(){
         // element to attach the message
         if ((email_field != "") && (email_field.match(email_regex) != null)) {
 
-        //TODO: add ok message
-        // var email_form_message = "<h6 style='color:green;'>Valid Email</h6>";
+            //TODO: add ok message
+            // var email_form_message = "<h6 style='color:green;'>Valid Email</h6>";
 
         } else {
-        checkAllElements = false;
+            checkAllElements = false;
 
-        //TODO: add error message
-        var email_form_message = "<h6 style='color:red;'>Invalid Email</h6>";
+            //TODO: add error message
+            var email_form_message = "<h6 style='color:red;'>Invalid Email</h6>";
         }
 
 
@@ -88,23 +88,23 @@ function validateForm(){
         // checking if the passwords are not empty
         if ((password_field != "") && (password_confirm_field != "")) {
 
-        // checking if the password match
-        if (password_field == password_confirm_field){
+            // checking if the password match
+            if (password_field == password_confirm_field) {
 
-            // checking if the passwords are valid
-            if ((password_field.match(password_regex) != null) && (password_confirm_field.match(password_regex) != null)) {
-            // var password_form_message = "<h6 style='color:green;'>Valid Password</h6>";
+                // checking if the passwords are valid
+                if ((password_field.match(password_regex) != null) && (password_confirm_field.match(password_regex) != null)) {
+                    // var password_form_message = "<h6 style='color:green;'>Valid Password</h6>";
+                } else {
+                    checkAllElements = false;
+                    var password_form_message = "<h6 style='color:red;'>InValid Password</h6>";
+                }
             } else {
-            checkAllElements = false;
-            var password_form_message = "<h6 style='color:red;'>InValid Password</h6>";
+                checkAllElements = false;
+                var password_form_message = "<h6 style='color:red;'>Password Do Not Match</h6>";
             }
         } else {
             checkAllElements = false;
-            var password_form_message = "<h6 style='color:red;'>Password Do Not Match</h6>";
-        }
-        } else {
-        checkAllElements = false;
-        var password_form_message = "<h6 style='color:red;'>No Password Entered</h6>";
+            var password_form_message = "<h6 style='color:red;'>No Password Entered</h6>";
         }
 
         $('#username_error_box').html(username_form_message);
@@ -118,29 +118,28 @@ function validateForm(){
         //test_func();
 
         //$('#first_name').attr("disabled value", first_name_field);
+    });
+
+    if (checkAllElements) {
+
+        var user = {
+            "user": {
+                "username": username_field,
+                "first_name": first_name_field,
+                "last_name": last_name_field,
+                "email": email_field,
+                "phone": phone_field,
+                "birthday": birthday_field,
+                "password": password_field,
+                "role_id": 1,
+                "profile_picture": ""
+            }
+        }
+        var uri = "/new/index.php/update";
+        $.post(uri, user, data => {
+            returned_data = JSON.parse(data);
+            console.log(returned_data);
         });
 
-        if (checkAllElements) {
-
-            var user = {
-                "user": {
-                    "username": username_field,
-                    "first_name": first_name_field,
-                    "last_name": last_name_field,
-                    "email": email_field,
-                    "phone": phone_field,
-                    "birthday": birthday_field,
-                    "password": password_field,
-                    "role_id": 1,
-                    "profile_picture": ""
-                }
-            }
-            var uri = "/new/index.php/update";
-            $.post(uri, user, data => {
-                returned_data = JSON.parse(data);
-                console.log(returned_data);
-            });
-            
-
-        }
     }
+}

@@ -211,7 +211,6 @@
 
     <div class="row" id="comments_all" style="display:none;">
         <?php 
-            echo json_encode($usr);
             $reviewsCount = count($reviews);
         ?>
         <div class="col s12">
