@@ -108,17 +108,18 @@ class User_model extends CI_Model
     public function update_user($user)
     {
         //TODO: add checks here
-        $this->username = $user['username'];
-        $this->password = $user['password'];
-        $this->email = $user['email'];
-        $this->first_name = $user['first_name'];
-        $this->last_name = $user['last_name'];
-        $this->phone = $user['phone'];
-        $this->birthdate = date('Y-m-d',strtotime($user['birthday']));
-        $this->profile_picture = $user['profile_picture'];
-        $this->role_id = $user['role_id'];
+        $data = array(
+            'username' => $user['username'],
+            'password' => $user['password'],
+            'email' => $user['email'],
+            'first_name' => $user['first_name'],
+            'last_name' => $user['last_name'],
+            'phone' => $user['phone'],
+            'birthdate' => date('Y-m-d',strtotime($user['birthday'])),
+            'profile_picture' => $user['profile_picture']
+        );
 
-        $this->db->update('users', $this, array('id' => $user['id']));
+        $this->db->update('users', $data, array('id' => $user['id']));
 
         return True;
     }
