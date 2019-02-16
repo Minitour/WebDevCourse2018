@@ -62,14 +62,11 @@
                         <br>
                         <div id="change_picture_div" style="padding-bottom:5px;">
                         <!-- <button class="btn waves-effect waves-light" style="width: 100%;" id="change_picture" name="action">Change Picture</button> -->
-                        <form action="/new/index.php/account/do_upload" method="POST">
+                        <?php echo form_open_multipart('account/do_upload');?>
                         <div class="file-field input-field">
                             <div class="btn">
                             <span>Change Profile Picture</span>
-                            <input type="file">
-                            </div>
-                            <div class="file-path-wrapper">
-                            <input enctype="multipart/form-data" class="file-path validate" type="text" name="userfile">
+                            <input type="file" name="userfile">
                             </div>
                             </div>
                             <button class="btn waves-effect waves-light" type="submit" name="action">Upload</button>

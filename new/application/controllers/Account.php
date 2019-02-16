@@ -142,7 +142,7 @@ class Account extends CI_Controller {
     public function do_upload() {
         header('Content-Type: application/json');
         $config['upload_path']          = './uploads/';
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['allowed_types']        = '*';
         $config['file_name'] = 'profile_' . $_SESSION['id'];
         $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);

@@ -65,7 +65,7 @@ class Movie extends CI_Controller {
 
         $real_tags = array();
         foreach($tags as $tag) {
-            if (strlen(trim($str)) != 0) {
+            if (strlen(trim($tag)) != 0) {
                 array_push($real_tags, $tag);
             }
         }
