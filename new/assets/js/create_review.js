@@ -7,7 +7,7 @@ This function will create and append the new comment to the list of comments
 this.get_reviews = function(movie_id, page_num, callback) {
     $.post(`/new/index.php/reviews/movie/${movie_id}/${page_num}`,{}, (data) => {
         if(data == undefined) return;
-        callback(JSON.parse(data));
+        callback(data);
     });
 }
 
