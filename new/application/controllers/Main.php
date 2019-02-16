@@ -64,7 +64,7 @@ class Main extends CI_Controller{
         $this->redirectIfNeeded();
 
         $user = $this->user_model->get_user_by_username($_SESSION['username']);
-        var_dump($user);
+        // var_dump($user);
         if ($user == FALSE) {
             show_404();
             die();
@@ -75,6 +75,7 @@ class Main extends CI_Controller{
         $reviews = $query->result();
         if (sizeof($reviews) > 0) {
             $data['reviews'] = $reviews;
+            $data['usr'] = $user;
             $this->load->view("pages/profile", $data);
         } else {
             show_404();
