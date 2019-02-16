@@ -80,7 +80,7 @@ class User_model extends CI_Model
             'last_name' => $last_name,
             'email' => $email,
             'phone' => $phone,
-            'birthday_date' => $birthday_date,
+            'birthdate' => strtotime($birthday_date),
             'password' => $password //TODO hash password.
         );
 
