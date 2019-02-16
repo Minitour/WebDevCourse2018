@@ -99,7 +99,7 @@ class Review extends CI_Controller {
     public function remove_review() {
         header('Content-Type: application/json');
         $movie_id = $_POST['movie_id'];
-        $user_id = $_POST['user_id'];
+        $user_id = $_SESSION['id'];
         $ret = $this->review_model->remove_review($movie_id, $user_id);
         $this->helper_functions->post_success_of_fail($ret);
     }
