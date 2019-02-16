@@ -147,6 +147,10 @@ class Account extends CI_Controller {
         $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);
 
+        if (!file_exists('./uploads/')) {
+            mkdir('./uploads/', 0777, true);
+        }
+
         if ( ! $this->upload->do_upload('userfile')) {
             $error = array('error' => $this->upload->display_errors());
             http_response_code(400);
@@ -154,12 +158,12 @@ class Account extends CI_Controller {
         }
         else
         {
-            $data = array('upload_data' => $this->upload->data());
-            $file_path = $this->upload->data(0)->full_path;
-            $this->user_model->update_picture($_SESSION['id'],$file_path);
+            $data = $this->upload->data();
+
+            $this->user_model->update_picture($_SESSION['id'],base_url('uploads/' . $data['file_name']));
             http_response_code(200);
             header('Location: /new/index.php/myprofile');
-            echo json_encode(array('message' => 'ok'));
+            echo json_encode(array('message' => $data));
         }
     }
 
