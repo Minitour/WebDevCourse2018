@@ -56,7 +56,7 @@ class Movie extends CI_Controller {
 
         if (isset($_POST['query'])) {
             $qs = $_POST['query'];
-            $query = json_decode($query,TRUE);
+            $query = json_decode($qs,TRUE);
         }
         
         $categories = $query['categories'];
