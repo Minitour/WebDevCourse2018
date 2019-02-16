@@ -82,36 +82,36 @@
   				</div>
   				<div class="row">
   					<div class="input-field col s12">
-  						<input id="email-register" type="text" class="validate" required>
+  						<input id="email-register" name="email-register" type="text" class="validate" required>
   						<label for="email">Email</label>
               <div id="email_error_box" name="email_error_box"></div>
   					</div>
   				</div>
   				<div class="row">
   					<div class="input-field col s12">
-  						<input id="phone-register" type="text" class="validate" required>
+  						<input id="phone-register" name="phone-register" type="text" class="validate" required>
   						<label for="phone-confirm">Phone Confirmation</label>
               <div id="phone_error_box" name="phone_error_box"></div>
   					</div>
   				</div>
           <div class="row">
             <div class='input-field col s12'>
-              <input id="birthday_date" type="text" class="datepicker" required>
+              <input id="birthday_date" name="birthday_date" type="text" class="datepicker" required>
               <label for="birthday_date">Birthday</label>
               <div id="birthday_error_box" name="birthday_error_box"></div>
             </div>
           </div>
   				<div class="row">
   					<div class="input-field col s12">
-  						<input id="password-register" type="password" class="validate" required>
-  						<label for="password-register">Password</label>
+  						<input id="password" name="password" type="password" class="validate" required>
+  						<label for="password">Password</label>
               <div id="password_error_box" name="password_error_box">
   					</div>
             </div>
   				</div>
   				<div class="row">
   					<div class="input-field col s12">
-  						<input id="password-confirm" name="password-confirm" type="password" class="validate" required>
+  						<input id="password-confirm" type="password" class="validate" required>
               <label for="password-confirm">Password Confirmation</label>
               <div id="password_confirm_error_box" name="password_confirm_error_box"></div>
             </div>

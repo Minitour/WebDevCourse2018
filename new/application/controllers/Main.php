@@ -59,7 +59,10 @@ class Main extends CI_Controller{
         $this->load->view("pages/cart");
     }
 
-    public function profile_view() {
+
+    public function profile_view_self() {
+        $this->redirectIfNeeded();
+        
         $user = $this->user_model->get_user_by_username($_SESSION['username']);
         if ($user == FALSE) {
             show_404();
@@ -74,6 +77,10 @@ class Main extends CI_Controller{
         } else {
             show_404();
         }
+    }
+
+    public function profile_view($user_id) {
+        
     }
 
     public function login_view() {
