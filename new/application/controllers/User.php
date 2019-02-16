@@ -24,7 +24,7 @@ class User extends CI_Controller {
         $rows = $query->result();
         $data = array();
         foreach($rows as $row) {
-            $data['ID'] = $row['ID'];
+            $data['id'] = $row['id'];
             $data['username'] = $row['username'];
             $data['password'] = $row['password'];
             $data['email'] = $row['email'];
@@ -47,6 +47,7 @@ class User extends CI_Controller {
     */
     public function update_user() {
         $user = $_POST['user'];
+        $user['id'] = $_SESSION['id'];
         $ret = $this->user_model->update_user($user);
         $this->helper_functions->post_success_of_fail($ret);
     }
@@ -96,7 +97,7 @@ class User extends CI_Controller {
         $counter = 0;
         foreach($rows as $row) {
             $temp_data = array();
-            $temp_data['ID'] = $row['ID'];
+            $temp_data['id'] = $row['id'];
             $temp_data['username'] = $row['username'];
             $temp_data['password'] = $row['password'];
             $temp_data['email'] = $row['email'];
@@ -129,7 +130,7 @@ class User extends CI_Controller {
         $counter = 0;
         foreach($rows as $row) {
             $temp_data = array();
-            $temp_data['ID'] = $row['ID'];
+            $temp_data['id'] = $row['id'];
             $temp_data['username'] = $row['username'];
             $temp_data['password'] = $row['password'];
             $temp_data['email'] = $row['email'];

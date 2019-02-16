@@ -2,7 +2,7 @@
 
 class User_model extends CI_Model
 {
-    public $ID;
+    public $id;
     public $username;
     public $password;
     public $email;
@@ -30,7 +30,7 @@ class User_model extends CI_Model
             $user - the user from the db
     */
     public function get_user($id){
-        return $this->db->get_where('users', array('ID' => $id));
+        return $this->db->get_where('users', array('id' => $id));
     }
 
 
@@ -84,7 +84,7 @@ class User_model extends CI_Model
             'password' => $password //TODO hash password.
         );
 
-        $this->ID = $this->db->insert('users', $data);
+        $this->id = $this->db->insert('users', $data);
         return True;
     }
 
@@ -114,11 +114,11 @@ class User_model extends CI_Model
         $this->first_name = $user['first_name'];
         $this->last_name = $user['last_name'];
         $this->phone = $user['phone'];
-        $this->birthday = $user['birthday'];
+        $this->birthday = $user['birthdate'];
         $this->profile_picture = $user['profile_picture'];
         $this->role_id = $user['role_id'];
 
-        $this->db->update('users', $this, array('ID' => $this->ID));
+        $this->db->update('users', $this, array('id' => $this->id));
 
         return True;
     }
@@ -134,7 +134,7 @@ class User_model extends CI_Model
             True/False - if the user has been deleted from db
     */
     public function delete($id){
-        $this->db->delete('users', array('ID' => $id));
+        $this->db->delete('users', array('id' => $id));
 
         return True;
     }
