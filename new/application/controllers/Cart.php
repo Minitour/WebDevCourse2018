@@ -11,7 +11,10 @@ class Category extends CI_Controller {
         $this->load->model('helper_functions');
     }
         
-
+    public function index() {
+        $data['username'] = $_SESSION['username'];
+        $this->load->view("pages/cart",$data);
+    }
 
     /*
         this function will get all items from cart for specific user

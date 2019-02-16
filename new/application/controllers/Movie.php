@@ -63,7 +63,14 @@ class Movie extends CI_Controller {
         $search = $query['search'];
         $tags = explode(" ", $search);
 
-        $query = $this->movie_model->get_movies($page, $tags, $categories);
+        $real_tags = array();
+        foreach($tags as $tag) {
+            if (strlen(trim($str)) != 0) {
+                array_push($real_tags, $tag);
+            }
+        }
+
+        $query = $this->movie_model->get_movies($page, $real_tags, $categories);
         $rows = $query->result();
         $counter = 0;
         $data = array();

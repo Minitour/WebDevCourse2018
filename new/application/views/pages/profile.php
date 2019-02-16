@@ -57,7 +57,7 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="aspect_ratio">
-                            <img id = "avatar_picture" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="width: 100%; border-radius: 100px;object-fit: cover;" class="avatar img-circle img-thumbnail" alt="avatar">
+                            <img id = "avatar_picture" src="<?php echo $user['profile_picture']; ?>" style="width: 100%; border-radius: 100px;object-fit: cover;" class="avatar img-circle img-thumbnail" alt="avatar">
                         </div>
                         <br>
                         <div id="change_picture_div" style="padding-bottom:5px;">
@@ -112,7 +112,7 @@
 
                     if (user_has_permissions($usr)) {
                       echo '<div style="padding-bottom:5px;padding-left:5px;padding-right:5px;">';
-                      echo '<button class="btn waves-effect waves-light" style="width: 100%;" id="upload_file" name="action">Upload File</button>';
+                      echo '<a href="/new/index.php/upload" class="btn waves-effect waves-light" style="width: 100%;" >Upload File</a>';
                       echo '</div>';
                     }
                   ?>
