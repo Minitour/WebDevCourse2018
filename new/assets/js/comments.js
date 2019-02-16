@@ -39,12 +39,12 @@ this.construct_comment = function(user_id,profile_img, name,time, comment) {
       let payload = {
         'movie_id' : movie_id,
         'reviewer_id' : reviewer_id,
-        'comment' : review
+        'comment' : comment
       }
   
       $.post('/new/index.php/comments/add',payload,(res) => {
         console.log(res)
-        M.toast({html: 'Review Published.'})
+        M.toast({html: 'Comment Published.'})
       })
     });
   });

@@ -62,9 +62,14 @@ class Comment extends CI_Controller {
     */
     public function add_comment() {
         
-        $data = $this->get_row_as_array($_POST['comment']);
+        // $data = $this->get_row_as_array($_POST['comment']);
 
-        $ret = $this->comment_model->add_comment($data);
+        $movie_id = $_POST['movie_id'];
+        $reviewer_id = $_POST['reviewer_id'];
+        $comment = $_POST['comment'];
+        $user_id = $_SESSION['id'];
+
+        $ret = $this->comment_model->add_comment($movie_id,$reviewer_id,$comment,$user_id);
         
         // post fail or success
         $this->helper_functions->post_success_of_fail($ret);

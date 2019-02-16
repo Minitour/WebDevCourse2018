@@ -111,6 +111,7 @@ this.construct_review = function(movie_id,user_id,profile_img, name,time, review
     review_item += '<i class="material-icons">grade</i>';
   }
   review_item += "</a>";
+  review_item += '<br>'
   review_item += '<div class="row">'
   review_item += `<div class="col s2 m1"><a href="/new/index.php/comments/${movie_id}/${user_id}" class="waves-effect blue waves-light btn"><i class="material-icons">comment</i></a></div>`
   if (this.user_id = user_id) {

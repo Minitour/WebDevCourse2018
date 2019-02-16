@@ -52,6 +52,13 @@
                </div>
             </div>
          </nav>
+         <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/new">Home</a></li>
+    <li class="breadcrumb-item"><a href="<?php echo "/new/index.php/movies/" . $review_data['movie_id'] ?>">Library</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Data</li>
+  </ol>
+</nav>
          <!-- The review -->
          <div class="row">
             <div class="col s12">
@@ -74,13 +81,13 @@
          <!-- comment box -->
          <div class="row justify-content-center" id="comment_box">
             <!-- review input -->
-            <div class="input-field col s6">
+            <div class="input-field col s9">
                <textarea id="textarea1" data-length="500" class="materialize-textarea"></textarea>
                <label for="textarea1">Comment</label>
             </div>
             <!-- button -->
             <div class="col s3">
-               <a id="create_comment" class="waves-effect blue waves-light btn" style="width: 100%">Post</a>
+               <a id="create_comment" class="waves-effect waves-light btn" style="width: 100%">Post</a>
             </div>
          </div>
          <h4>All Comments</h4>

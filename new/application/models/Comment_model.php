@@ -54,12 +54,19 @@ class Comment_model extends CI_Model{
         will return:
             comment_id - if the comment has been added to the review
     */  
-    public function add_comment($post_comment) {
-        $this->reviewer_id = $post_comment['reviewer_id'];
-        $this->movie_id = $post_comment['movie_id'];
-        $this->time = $post_comment['time'];
-        $this->comment = $post_comment['comment'];
-        $this->user_id = $post_comment['user_id'];
+    public function add_comment($movie_id,$reviewer_id,$comment,$user_id) {
+        // $this->reviewer_id = $post_comment['reviewer_id'];
+        // $this->movie_id = $post_comment['movie_id'];
+        // $this->time = $post_comment['time'];
+        // $this->comment = $post_comment['comment'];
+        // $this->user_id = $post_comment['user_id'];
+
+        $data = array(
+            "movie_id" => $movie_id,
+            "reviewer_id" => $reviewer_id,
+            "comment" => $comment,
+            "user_id" => $user_id
+        );
 
         $this->db->insert('comments', $this);
         return True;
