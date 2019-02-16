@@ -63,13 +63,9 @@
                         <div id="change_picture_div" style="padding-bottom:5px;">
                         <!-- <button class="btn waves-effect waves-light" style="width: 100%;" id="change_picture" name="action">Change Picture</button> -->
                         <?php echo form_open_multipart('account/do_upload');?>
-                        <div class="file-field input-field">
-                            <div class="btn">
-                            <span>Change Profile Picture</span>
-                            <input type="file" name="userfile">
-                            </div>
-                            </div>
-                            <button class="btn waves-effect waves-light" type="submit" name="action">Upload</button>
+                        <input type="file" name="userfile" />
+                            <br /><br />
+                        <input type="submit" value="upload" />
                         </form>
                         </div>
                         <div id="upload_file_div">
@@ -252,9 +248,9 @@
                         $reviewText = $entry['comment'];
                         $number_of_stars = $entry['star_rating'];
                         $created_at = $entry['created_at'];
-                        $movie_name = $entry['movie_name'];
-                        $picture = $usr['profile_picture'];
-                        $username = $usr['username'];
+                        $movie_name = $entry['name'];
+                        $picture = $entry['profile_picture'];
+                        $username = $entry['username'];
                         
                         $reviewView = construct_comment($movie_name,$reviewText,$number_of_stars,$picture,$username);
                         echo $reviewView;

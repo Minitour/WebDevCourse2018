@@ -92,7 +92,7 @@
       <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
       <script src="<?php echo base_url('assets/js/comments.js'); ?>"></script>
       <script>
-         var review_data = JSON.parse('<?php echo json_encode($review_data);?>'); 
+         var review_data = JSON.parse(`<?php echo json_encode($review_data);?>`); 
          
          var movie_id = review_data['movie_id'];
          var reviewer_id = review_data['user_id'];
