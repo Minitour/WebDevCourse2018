@@ -25,7 +25,7 @@
     <nav class="blue-grey darken-3" role="navigation">
         <div class="nav-wrapper container">
             <a href="/" class="brand-logo" style="float: left;text-align: center;white-space: nowrap;padding: 5px 10px;">
-            <img style="width: 100px;" src="<?php echo base_url('assets/img/logo.png'); ?> alt="Image text">
+            <img style="width: 100px;" src="<?php echo base_url('assets/img/logo.png'); ?>" alt="Image text">
             </a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
@@ -106,14 +106,14 @@
                     function user_has_permissions($user) {
                       // the permissions will change according to the excersize.
                       // for now its for Admin user only
-                      return $user->isAdmin();
+                      return $user['role_id'] == "1";
                     }
 
-                    //if (user_has_permissions($usr)) {
+                    if (user_has_permissions($usr)) {
                       echo '<div style="padding-bottom:5px;padding-left:5px;padding-right:5px;">';
                       echo '<button class="btn waves-effect waves-light" style="width: 100%;" id="upload_file" name="action">Upload File</button>';
                       echo '</div>';
-                    //}
+                    }
                   ?>
                 </div>
             </div>
@@ -127,7 +127,7 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-                                <input id="username" name="username" type="text" disabled value="<?php echo '$usr->username'; ?>" required>
+                                <input id="username" name="username" type="text" disabled value="<?php echo $usr['username']; ?>" required>
                                 <label for="username">First Name</label>
                                 <div id="username_error_box" name="username_error_box"></div>
                             </div>
@@ -135,7 +135,7 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-    					        <input id="first_name" name="first_name" type="text" disabled value="<?php echo '$usr->first_name'; ?>" required>
+    					        <input id="first_name" name="first_name" type="text" disabled value="<?php echo $usr['first_name']; ?>" required>
                                 <label for="first_name">First Name</label>
                                 <div id="first_name_error_box" name="first_name_error_box"></div>
                             </div>
@@ -143,7 +143,7 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-  						        <input id="last_name" name="last_name" type="text" class="validate" disabled value="<?php echo '$usr->last_name'; ?>" required>
+  						        <input id="last_name" name="last_name" type="text" class="validate" disabled value="<?php echo $usr['last_name']; ?>" required>
   						        <label for="last_name">Last Name</label>
                                 <div id="last_name_error_box" name="last_name_error_box"></div>
   					        </div>
@@ -152,7 +152,7 @@
                         <div class="form-group">
 
                            <div class="input-field col s12">
-  						        <input id="phone" type="text" class="validate" disabled value="<?php echo '$usr->phone'; ?>" required>
+  						        <input id="phone" type="text" class="validate" disabled value="<?php echo $usr['phone']; ?>" required>
   						        <label for="phone-confirm">Phone Confirmation</label>
                                 <div id="phone_error_box" name="phone_error_box"></div>
   					        </div>
@@ -160,14 +160,14 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-  						        <input id="email" type="text" class="validate" disabled value="<?php echo '$usr->email'; ?>" required>
+  						        <input id="email" type="text" class="validate" disabled value="<?php echo $usr['email']; ?>" required>
   						        <label for="email">Email</label>
                                 <div id="email_error_box" name="email_error_box"></div>
   					        </div>
                         </div>
                         <div class="form-group">
                             <div class='input-field col s12'>
-                                <input id="birthday_date" type="text" class="datepicker" disabled value="<?php echo '$usr->birthday'; ?>">
+                                <input id="birthday_date" type="text" class="datepicker" disabled value="<?php echo $usr['birthdate']; ?>">
                                 <label for="birthday_date">Birthday</label>
                                 <div id="birthday_error_box" name="birthday_error_box"></div>
                             </div>
@@ -176,7 +176,7 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-  						        <input id="password" name="location" type="password" class="validate" disabled value="<?php echo '$usr->password'; ?>" required>
+  						        <input id="password" name="location" type="password" class="validate" disabled value="<?php echo $usr['password']; ?>" required>
   						        <label for="password">Password</label>
                                 <div id="password_error_box" name="password_error_box"></div>
   					        </div>
@@ -184,7 +184,7 @@
                         <div class="form-group">
 
                             <div class="input-field col s12">
-  						        <input id="password-confirm" name="password-confirm" type="password" class="validate" disabled value="<?php echo '$usr->password'; ?>" required>
+  						        <input id="password-confirm" name="password-confirm" type="password" class="validate" disabled value="<?php echo $usr['password']; ?>" required>
                                 <label for="password-confirm">Password Confirmation</label>
                                 <div id="password_confirm_error_box" name="password_confirm_error_box"></div>
                             </div>
@@ -193,7 +193,7 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <br>
-                                <button id="save_info_button" class="btn btn-lg btn-success" onclick="validateForm()" name="action" disabled><i class="glyphicon glyphicon-ok-sign"></i>
+                                <button id="save_info_button" class="btn btn-lg btn-success" onclick="validateForm(1)" name="action" disabled><i class="glyphicon glyphicon-ok-sign"></i>
                                     SAVE</button>
                             </div>
                         </div>
@@ -218,11 +218,12 @@
             <ul class="collection" id="past_reviews">
                 <?php
                     // construct reviews
-                    function construct_comment($profile_img,$name,$review,$score) {
+                    function construct_comment($movie_name,$review,$score) {
                         $comment_item = "";
                         $comment_item .= '<li class="collection-item avatar">';
-                        $comment_item .= '<img src="' . $profile_img . '" alt="" class="circle">';
-                        $comment_item .= '<p>' . $name . '<br><br>';
+                        $comment_item .= '<img src="' . $usr->profile_img . '" alt="" class="circle">';
+                        $comment_item .= '<p>' . $usr->username . '<br>';
+                        $comment_item .= '<h5>' . $movie_name . '</h5><br><br>';
                         $comment_item .= $review;
                         $comment_item .= '</p>';
                         $comment_item .= '<a href="#!" class="secondary-content">';
@@ -234,16 +235,17 @@
                 
                         return $comment_item;
                     } 
-                    
+                    var_dump($reviews);
                     foreach($reviews as $entry) {
                         //$reviewItem = new Review($entry);
+                        var_dump($entry);
                         $reviewText = $entry['comment'];
                         $number_of_stars = $entry['star_rating'];
-                        $profile_image = $entry['profile_picture'];
-                        $name = $entry['username'];
+                        $created_at = $entry['created_at'];
+                        $movie_name = $entry['movie_name'];
 
                         
-                        $reviewView = construct_comment($profile_image,$name,$reviewText,$number_of_stars);
+                        $reviewView = construct_comment($movie_name,$reviewText,$number_of_stars);
                         echo $reviewView;
                     }
                 ?>
