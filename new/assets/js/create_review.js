@@ -143,7 +143,7 @@ $(document).ready(() => {
       'star_rating' : stars
     }
 
-    $.post('/new/reviews/add',payload,(res) => {
+    $.post('/new/index.php/reviews/add',payload,(res) => {
       console.log(res);
     })
   });
