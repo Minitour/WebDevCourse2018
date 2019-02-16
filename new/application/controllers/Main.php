@@ -78,11 +78,12 @@ class Main extends CI_Controller{
             $counter = 0;
             foreach($reviews as $review) {
                 $temp_data = array();
-                $query = $this->movie_model->get_movie_details($review->movie_id);
-                $movies = $query->result_array();
-                foreach($movies as $movie) {
-                    $temp_data['movie_name'] = $movie['name'];
-                }
+                // $query = $this->movie_model->get_movie_details($review->movie_id);
+                // $movies = $query->result_array();
+                // foreach($movies as $movie) {
+                //     $temp_data['movie_name'] = $movie['name'];
+                // }
+                $temp_data['movie_name'] = $review->movie_id;
                 $temp_data['comment'] = $review->comment;
                 $temp_data['star_rating'] = $review->star_rating;
                 $temp_data['created_at'] = $review->created_at;
