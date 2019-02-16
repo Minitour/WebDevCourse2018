@@ -112,9 +112,9 @@ this.construct_review = function(movie_id,user_id,profile_img, name,time, review
   }
   review_item += "</a>";
   review_item += '<div class="row">'
-  review_item += `<div class="col s12 m6"><a href="/new/index.php/comments/${movie_id}/${user_id}" class="waves-effect waves-light btn" style="width: 100%"><i class="material-icons">comment</i></a></div>`
-  if (name == username) {
-    review_item += `<div class="col s12 m6"><a onclick="did_select_delete(${movie_id})" class="waves-effect waves-light btn" style="width: 100%"><i class="material-icons">delete</i><</a></div>`
+  review_item += `<div class="col s2 m1"><a href="/new/index.php/comments/${movie_id}/${user_id}" class="waves-effect blue waves-light btn"><i class="material-icons">comment</i></a></div>`
+  if (this.user_id = user_id) {
+    review_item += `<div class="col s2 m1"><a onclick="did_select_delete(${movie_id})" class="waves-effect red waves-light btn"><i class="material-icons">delete</i></a></div>`
   }
   review_item += "</div>"
   review_item += "</li>";

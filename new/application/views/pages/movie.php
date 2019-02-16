@@ -103,7 +103,7 @@
 
 
 
-    <h4> All Reviews</h2>
+    <h4> All Reviews</h4>
     <div class="row" id="comments_all">
         <div class="col s12">
         <ul class="collection" id="comments">

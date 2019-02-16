@@ -23,6 +23,7 @@ class Comment extends CI_Controller {
 
     */
     public function get_comments_for_review($movie_id,$user_id,$page) {
+        header('Content-Type: application/json');
         $query = $this->comment_model->get_comments_for_review($movie_id,$user_id,$page);
         
         $data = $this->get_results_from_query($query);
