@@ -57,11 +57,23 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="aspect_ratio">
-                            <img id = "avatar_picture" src="<?php echo $user['profile_picture']; ?>" style="width: 100%; border-radius: 100px;object-fit: cover;" class="avatar img-circle img-thumbnail" alt="avatar">
+                            <img id = "avatar_picture" src="<?php echo $usr['profile_picture']; ?>" style="width: 100%; border-radius: 100px;object-fit: cover;" class="avatar img-circle img-thumbnail" alt="avatar">
                         </div>
                         <br>
                         <div id="change_picture_div" style="padding-bottom:5px;">
-                        <button class="btn waves-effect waves-light" style="width: 100%;" id="change_picture" name="action">Change Picture</button>
+                        <!-- <button class="btn waves-effect waves-light" style="width: 100%;" id="change_picture" name="action">Change Picture</button> -->
+                        <form action="/new/index.php/account/do_upload" method="POST">
+                        <div class="file-field input-field">
+                            <div class="btn">
+                            <span>Change Profile Picture</span>
+                            <input type="file">
+                            </div>
+                            <div class="file-path-wrapper">
+                            <input enctype="multipart/form-data" class="file-path validate" type="text" name="userfile">
+                            </div>
+                            </div>
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Upload</button>
+                        </form>
                         </div>
                         <div id="upload_file_div">
                         <button class="btn waves-effect waves-light" style="width: 100%;" id="edit_profile" onclick="edit_profile()" name="action">Edit Profile</button>

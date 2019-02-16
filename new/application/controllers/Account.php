@@ -140,6 +140,7 @@ class Account extends CI_Controller {
     }
 
     public function do_upload() {
+        header('Content-Type: application/json');
         $config['upload_path']          = './uploads/';
         $config['allowed_types']        = 'gif|jpg|png';
         $config['file_name'] = 'profile_' . $_SESSION['id'];
@@ -148,14 +149,15 @@ class Account extends CI_Controller {
 
         if ( ! $this->upload->do_upload('userfile')) {
             $error = array('error' => $this->upload->display_errors());
-
-            $this->load->view('upload_form', $error);
+            http_response_code(400);
+            echo json_encode(array('message' => 'error'));
         }
         else
         {
             $data = array('upload_data' => $this->upload->data());
-
-            $this->load->view('upload_success', $data);
+            $file_path = $this->upload->data(0)->full_path;
+            http_response_code(200);
+            echo json_encode(array('message' => 'ok'));
         }
     }
 
