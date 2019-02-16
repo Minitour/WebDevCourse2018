@@ -73,8 +73,14 @@ class Review extends CI_Controller {
             success/fail - if the review has been added
     */
     public function add_review() {
-        $posted_review = $_POST['review'];
-        $ret = $this->review_model->add_review($posted_review);
+        
+        $movie_id = $_POST['movie_id'];
+        $posted_review = $_POST['comment'];
+        $star_rating = $star_rating['star_rating'];
+        $user_id = $_SESSION['id'];
+
+
+        $ret = $this->review_model->add_review($movie_id, $user_id, $posted_review, $star_rating);
         $this->helper_functions->post_success_of_fail($ret);
     }
 

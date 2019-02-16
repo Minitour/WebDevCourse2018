@@ -92,7 +92,7 @@ class Main extends CI_Controller{
     }
 
     public function redirectIfNeeded() {
-        if (!isset($_SESSION['username'])) {
+        if (!isset($_SESSION['id'])) {
             header('Location: /new/index.php/login');
             die();
         }

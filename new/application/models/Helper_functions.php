@@ -10,9 +10,11 @@ class Helper_functions extends CI_Model {
     public function post_success_of_fail($success) {
         $response = array();
         if ($success == True) {
-            $response['success'] = 'success';
+            $response['message'] = 'success';
+            http_response_code(200);
         } else {
-            $response['success'] = 'fail';
+            $response['message'] = 'fail';
+            http_response_code(400);
         }
         echo (json_encode($response));
     }

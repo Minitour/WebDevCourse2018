@@ -66,14 +66,10 @@
 
     </div>
 
-    <div class="row justify-content-center" id="comment_box">
-        <div class="input-field col s9">
-          <textarea id="review_title" data-length="80" class="materialize-textarea"></textarea>
-          <label for="title">Title</label>
-        </div>
-
+    <div class="row justify-content-center" id="comment_box">        
+        <!-- star input -->
         <div class="col s3">
-        <form id="star_rating_form">
+          <form id="star_rating_form">
             <fieldset class="rating">
                 <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
                 <!-- <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label> -->
@@ -85,18 +81,19 @@
                 <!-- <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label> -->
                 <input checked="checked" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
                 <!-- <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>  -->
-        </form>
+          </form>
         </div>
 
-        <div class="input-field col s12">
+        <!-- review input -->
+        <div class="input-field col s6">
           <textarea id="textarea1" data-length="500" class="materialize-textarea"></textarea>
           <label for="textarea1">Review</label>
         </div>
 
 
-
-        <div class="col s12">
-            <a id="create_comment" class="waves-effect waves-light btn" style="width: 100%">Post</a>
+        <!-- button -->
+        <div class="col s3">
+            <a id="create_review" class="waves-effect waves-light btn" style="width: 100%">Post</a>
         </div>
     </div>
 
@@ -131,11 +128,17 @@
   <script src="<?php echo base_url('assets/js/create_review.js'); ?>"></script>
   
   <script>
+    var movie_data = JSON.parse('<?php echo json_encode($movie_data);?>'); 
+    
+    var movie_id = movie_data['id'];
+    var username = '<?php echo $_SESSION["username"]; ?>';
+    var profile_picture = '<?php echo $_SESSION["profile_picture"]; ?>'
+
     var page = 1;
     var should_load_more = true;
     var isMakingRequest = false;
     
-    var movie_data = JSON.parse('<?php echo json_encode($movie_data);?>'); 
+    
     
     // load movie
     setup_movie(movie_data);

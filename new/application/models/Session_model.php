@@ -4,8 +4,6 @@ class Session_model extends CI_Model{
 
     public $session_id;
     public $user_id;
-    public $session_token;
-    public $created_at;
 
     public function __construct()
     {
@@ -23,7 +21,16 @@ class Session_model extends CI_Model{
         will return:
             $session<Session> - the session details
     */
-    public function get_session($user_id, $session) {}
+    public function get_session($user_id, $session) {
+        $query = $this->db->query("(SELECT * FROM user_session WHERE user_id = ? AND session_id = ?)", array($user_id,$session_id));
+        $res = $query->result_array();
+
+        if ($res > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
     /*
@@ -35,7 +42,9 @@ class Session_model extends CI_Model{
         will return:
             True/False - if the session has been successfuly added
     */
-    public function insert($session) {}
+    public function insert($session) {
+        
+    }
 
     
     /*

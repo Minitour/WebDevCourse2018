@@ -120,23 +120,32 @@ function construct_review(profile_img, name,time, review, score) {
 $(document).ready(() => {
   $("#create_review").click(() => {
     let review = $("#textarea1").val();
-    let title = $("#review_title").val();
+    // let title = $("#review_title").val();
     let stars = parseInt(
       $("input[name=rating]:checked", "#star_rating_form").val()
     );
-    let name = "<?php echo $usr->username; ?>";
 
     let reviewView = construct_review(
-      "https://catking.in/wp-content/uploads/2017/02/default-profile-1.png",
-      title,
-      name,
+      profile_picture,
+      username,
+      new Date(),
       review,
       stars
     );
+
     $("#textarea1").val("");
-    $("#review_title").val("");
 
     $("#reviews").prepend(reviewView);
+
+    let payload = {
+      'movie_id' : movie_id;
+      'comment' : review,
+      'star_rating' : stars
+    }
+
+    $.post('/new/reviews/add',payload,(res) => {
+      console.log(res);
+    })
   });
 });
 

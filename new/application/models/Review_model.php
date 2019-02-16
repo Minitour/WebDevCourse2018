@@ -57,13 +57,12 @@ class Review_model extends CI_Model{
         will return:
             review_id - if the review has been added to the movie
     */  
-    public function add_review($post_review) {
-        $this->movie_id = $post_review['movie_id'];
-        $this->user_id = $post_review['user_id'];
-        $this->comment = $post_review['comment'];
-        $this->star_rating = $post_review['star_rating'];
-        $this->created_at = $post_review['created_at'];
-
+    public function add_review($movie_id,$user_id,$comment, $star_rating) {
+        $this->movie_id = $movie_id;
+        $this->user_id = $user_id;
+        $this->comment = $comment;
+        $this->star_rating = $star_rating;
+        
         $this->db->insert('reviews', $this);
         return True;
     }
