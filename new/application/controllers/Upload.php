@@ -11,17 +11,17 @@ class Upload extends CI_Controller {
 
         public function index()
         {
-            if(!isset($_SESSION['role']) || $_SESSION['role'] != 0) {
+            if(!isset($_SESSION['role']) || $_SESSION['role'] != '0') {
                 show_404();
                 die();
             }
-            $this->load->view('movie_import', array('error' => ' ' ));
+            $this->load->view('pages/movie_import', array('error' => ' ' ));
         }
 
         public function do_upload_json()
         {
                 // check if session is valid
-                if(!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 0) {
+                if(!isset($_SESSION['role']) || $_SESSION['role'] != '0') {
                     show_404();
                     die();
                 }
@@ -38,7 +38,7 @@ class Upload extends CI_Controller {
                 if ( ! $this->upload->do_upload_json('userfile'))
                 {
                     $error = array('error' => $this->upload->display_errors());
-                    $this->load->view('upload_form', $error);
+                    $this->load->view('pages/upload_form', $error);
                         
                 }
                 else
@@ -66,7 +66,7 @@ class Upload extends CI_Controller {
 
                     // load view
                     $data = array("imported"=>$counter, "failed"=>$failure);
-                    $this->load->view('upload_success', $data);
+                    $this->load->view('pages/upload_success', $data);
                 }
         }
 }
