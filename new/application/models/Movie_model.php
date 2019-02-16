@@ -68,8 +68,8 @@ class Movie_model extends CI_Model{
 
         array_push($params,$offset);
 
-        $tags_query = $this->tags_clause();
-        $categories_query = $this->categories_clause();
+        $tags_query = $this->tags_clause($tags);
+        $categories_query = $this->categories_clause($categories);
 
         if ($tags_query == '0' && $categories_query == '0') {
             $query_string .= '1';
