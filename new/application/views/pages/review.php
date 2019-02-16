@@ -57,15 +57,15 @@
             <div class="col s12">
                <ul class="collection">
                   <li class="collection-item avatar">
-                     <img src="<?php echo $profile_picture; ?>" alt="" class="circle">
+                     <img src="<?php echo $review_data['profile_picture']; ?>" alt="" class="circle">
                      <span class="title">
-                     <b><?php echo $username; ?></b>
+                     <b><?php echo $review_data['username']; ?></b>
                      </span>
-                     <p><?php echo $created_at; ?><br>
-                        <br><?php echo $comment; ?>
+                     <p><?php echo $review_data['created_at']; ?><br>
+                        <br><?php echo $review_data['comment']; ?>
                      </p>
                      <a class="secondary-content">
-                     <?php for ($i = 0; $i < $star_rating; $i++) { echo '<i class="material-icons">grade</i>'; } ?>
+                     <?php for ($i = 0; $i < $review_data['star_rating']; $i++) { echo '<i class="material-icons">grade</i>'; } ?>
                      </a>
                   </li>
                </ul>
@@ -97,8 +97,8 @@
       <script>
          var review_data = JSON.parse('<?php echo json_encode($review_data);?>'); 
          
-         var movie_id = review_data['id'];
-         var reviewer_id = review_data['reviewer_id'];
+         var movie_id = review_data['movie_id'];
+         var reviewer_id = review_data['user_id'];
          var username = '<?php echo $_SESSION["username"]; ?>';
          var user_id = '<?php echo $_SESSION["id"]; ?>'
          var profile_picture = '<?php echo $_SESSION["profile_picture"]; ?>'

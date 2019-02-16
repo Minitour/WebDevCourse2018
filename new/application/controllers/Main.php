@@ -87,7 +87,16 @@ class Main extends CI_Controller{
         $query = $this->review_model->get_review($movie_id, $user_id);
         if ($query->num_rows() > 0) {
             $row = $query->row_array();
-            $data['review'] = $row;
+            $data['username'] = $_SESSION['username'];
+            $data['review_data'] = array(
+                "username" => $row['username'],
+                "created_at" => $row['created_at'],
+                "comment" => $row['comment'],
+                "star_rating" => $row['star_rating'],
+                "user_id" => $row['user_id'],
+                "profile_picture" => $row['profile_picture'],
+                "movie_id" => $row['movie_id']
+            );
 
             $this->load->view("pages/review", $data);
         }else {
