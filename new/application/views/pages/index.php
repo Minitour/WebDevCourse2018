@@ -217,14 +217,14 @@
 
 
     <!-- Pagination -->
-    <div class="row" style="display: flex;align-items: center;justify-content: center;">
+    <!-- <div class="row" style="display: flex;align-items: center;justify-content: center;">
         <ul class="pagination">
             <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
             <li class="active"><a onclick="return app.fetchMovies(1);" href="#!">1</a></li>
             <li class="waves-effect"><a href="#!">2</a></li>
             <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
         </ul>
-    </div>
+    </div> -->
 
   </div>
   <!-- /.container -->
@@ -246,7 +246,10 @@
     </div>
   </footer>
   
-  
+  <script>
+    var current_page = 1;
+  </script>
+
   <script src="<?php echo base_url('assets/js/index.js'); ?>"></script>
 </body>
 

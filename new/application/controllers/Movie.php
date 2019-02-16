@@ -48,15 +48,15 @@ class Movie extends CI_Controller {
             $movies<Array<Movie>> - array of all movies in form <Movie>
 
     */
-    public function get_movies() {
-        // $tags = $_POST['tags'];
-        // $categories = $_POST['categories'];
+    public function get_movies($page) {
+        $qs = $_POST['query'];
+        $query = json_decode($query,TRUE);
 
-        // for testing
-        $tags = array();
-        $categories = array();
+        $categories = $query['categories'];
+        $search = $query['search'];
+        $tags = explode(" ", $search);
 
-        $query = $this->movie_model->get_movies($tags, $categories);
+        $query = $this->movie_model->get_movies($page, $tags, $categories);
         $rows = $query->result();
         $counter = 0;
         $data = array();
