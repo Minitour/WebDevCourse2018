@@ -11,20 +11,20 @@ class Upload extends CI_Controller {
 
         public function index()
         {
-            if(!isset($_SESSION['role']) || $_SESSION['role'] != 0) {
-                show_404();
-                die();
-            }
+            // if(!isset($_SESSION['role']) || $_SESSION['role'] != 0) {
+            //     show_404();
+            //     die();
+            // }
             $this->load->view('movie_import', array('error' => ' ' ));
         }
 
         public function do_upload_json()
         {
                 // check if session is valid
-                if(!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 0) {
-                    show_404();
-                    die();
-                }
+                // if(!isset($_SESSION['role']) || $_SESSION['role'] != 0) {
+                //     show_404();
+                //     die();
+                // }
 
                 // configure upload settings
                 $config['upload_path'] = './uploads/';
