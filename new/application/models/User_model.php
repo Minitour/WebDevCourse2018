@@ -9,7 +9,7 @@ class User_model extends CI_Model
     public $first_name;
     public $last_name;
     public $phone;
-    public $birthday;
+    public $birthdate;
     public $profile_picture;
     public $role_id;
 
@@ -114,7 +114,7 @@ class User_model extends CI_Model
         $this->first_name = $user['first_name'];
         $this->last_name = $user['last_name'];
         $this->phone = $user['phone'];
-        $this->birthday = $user['birthdate'];
+        $this->birthdate = date('Y-m-d',strtotime($user['birthday']));
         $this->profile_picture = $user['profile_picture'];
         $this->role_id = $user['role_id'];
 
