@@ -49,9 +49,16 @@ class Movie extends CI_Controller {
 
     */
     public function get_movies($page) {
-        $qs = $_POST['query'];
-        $query = json_decode($query,TRUE);
+        $query = array(
+            "categories" => array(),
+            "search" => ''
+        );
 
+        if (isset($_POST['query'])) {
+            $qs = $_POST['query'];
+            $query = json_decode($query,TRUE);
+        }
+        
         $categories = $query['categories'];
         $search = $query['search'];
         $tags = explode(" ", $search);
