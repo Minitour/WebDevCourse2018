@@ -106,7 +106,7 @@
                     function user_has_permissions($user) {
                       // the permissions will change according to the excersize.
                       // for now its for Admin user only
-                      return $user['role_id'] == "1";
+                      return $user['role_id'] == "0";
                     }
 
                     if (user_has_permissions($usr)) {
@@ -193,7 +193,7 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <br>
-                                <button id="save_info_button" class="btn btn-lg btn-success" onclick="validateForm(1)" name="action" disabled><i class="glyphicon glyphicon-ok-sign"></i>
+                                <button id="save_info_button" class="btn btn-lg btn-success" onclick="validateForm()" name="action" disabled><i class="glyphicon glyphicon-ok-sign"></i>
                                     SAVE</button>
                             </div>
                         </div>
