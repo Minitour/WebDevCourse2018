@@ -34,7 +34,7 @@
                 <li class="nav-item active"><a href="/new/index.php/myprofile">
                     <?php echo $_SESSION['username']; ?>
                 </a></li>
-                <li><a href="new/index.php/cart">Cart</a></li>
+                <li><a href="/new/index.php/cart">Cart</a></li>
             </ul>
         </div>
     </nav>
