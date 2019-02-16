@@ -64,15 +64,13 @@ class Main extends CI_Controller{
         $this->redirectIfNeeded();
 
         $user = $this->user_model->get_user_by_username($_SESSION['username']);
-        foreach($user as $u){
-            var_dump($u);
-        }
+        var_dump($user);
         if ($user == FALSE) {
             show_404();
             die();
         }
 
-        //$user_id = $user->ID;
+        $user_id = $user['id'];
         $query = $this->review_model->get_all_reviews($user_id);
         $reviews = $query->result();
         if (sizeof($reviews) > 0) {
