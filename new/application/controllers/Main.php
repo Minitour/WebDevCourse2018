@@ -81,7 +81,7 @@ class Main extends CI_Controller{
                 $query = $this->movie_model->get_movie_details($review->movie_id);
                 $movies = $query->result_array();
                 foreach($movies as $movie) {
-                    $temp_data['movie_name'] = $movie->name;
+                    $temp_data['movie_name'] = $movie['name'];
                 }
                 $temp_data['comment'] = $review->comment;
                 $temp_data['star_rating'] = $review->star_rating;
