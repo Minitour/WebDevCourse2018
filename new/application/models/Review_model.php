@@ -43,8 +43,8 @@ class Review_model extends CI_Model{
         will return:
             $reviews<Array<Review>> - array of reviews requested in form <Review>
     */  
-    public function get_all_reviews($user) {
-        return $this->db->get_where('reviews', array('user_id' => $user));
+    public function get_all_reviews($user_id) {
+        return $this->db->query('(SELECT * FROM reviews INNER JOIN users ON users.id = reviews.user_id INNER JOIN movies ON movies.id = reviews.movie_id WHERE user_id = ?)', array($user_id));
     }
 
     public function user_has_review($user_id, $movie_id) {

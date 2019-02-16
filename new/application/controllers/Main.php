@@ -64,6 +64,25 @@ class Main extends CI_Controller{
         $this->redirectIfNeeded();
         $user = $this->user_model->get_user_by_username($_SESSION['username']);
         $data['usr'] = $user;
+        
+        $query = $this->review_model->get_all_reviews($_SESSION['id']);
+        $rows = $query->result_array();
+        $result = array();
+        foreach($rows as $row) {
+            $data1 = array(
+                "username" => $row['username'],
+                "created_at" => $row['created_at'],
+                "comment" => $row['comment'],
+                "star_rating" => $row['star_rating'],
+                "user_id" => $row['user_id'],
+                "profile_picture" => $row['profile_picture'],
+                "movie_id" => $row['movie_id'],
+                "name" => $row['name']
+            );
+
+            array_push($result, $data1);
+        }
+        $data['reviews'] = $result;
         $this->load->view("pages/profile", $data);
     }
 
