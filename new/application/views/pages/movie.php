@@ -115,7 +115,7 @@
 
     <div id="loading_indicator" class="preloader-wrapper big active">
       <div class="spinner-layer spinner-blue">
-        <div class="circle-clipper left">
+        <div class="circle-clipper center">
           <div class="circle"></div>
         </div><div class="gap-patch">
           <div class="circle"></div>
@@ -148,7 +148,7 @@
       isMakingRequest = true;
       $('#loading_indicator').show();
       get_reviews(movie_data['id'],page, (reviews) => {
-        
+        $('#loading_indicator').hide();
         // reached the final page.
         if (reviews.length == 0) {
           should_load_more = false;
@@ -166,7 +166,7 @@
 
         // disable flag
         isMakingRequest = false;
-        $('#loading_indicator').hide();
+        
       });
     }
 
