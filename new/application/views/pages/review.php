@@ -28,9 +28,9 @@
       <!-- Navigation -->
       <nav class="blue-grey darken-3" role="navigation">
          <div class="nav-wrapper container">
-            <a href="/new/index.php" class="brand-logo" style="float: left;text-align: center;white-space: nowrap;padding: 5px 10px;">
+            <!-- <a href="/new/index.php" class="brand-logo" style="float: left;text-align: center;white-space: nowrap;padding: 5px 10px;">
             <img style="width: 100px;" src="<?php echo base_url('assets/img/logo.png'); ?>" alt="Image text">
-            </a>
+            </a> -->
             <div class="col s12">
                   <a href="/new" class="breadcrumb">Home</a>
                   <a href="<?php echo "/new/index.php/movies/" . $review_data['movie_id'] ?>" class="breadcrumb"><?php echo $review_data['name']; ?></a>
@@ -108,4 +108,4 @@
          load_more();
       </script>
    </body>
-</html>
+</html>  
