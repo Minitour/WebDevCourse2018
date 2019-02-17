@@ -14,6 +14,7 @@ class Cart extends CI_Controller {
         
     public function index() {
         $data['username'] = $_SESSION['username'];
+        $data['items'] = $this->cart_model->get_items($_SESSION['id']);
         $this->load->view("pages/cart",$data);
     }
 
@@ -26,15 +27,9 @@ class Cart extends CI_Controller {
         will return:
             $items<Array> - an array of items
     */
-    public function get_items($user_id) {
-        $query = $this->cart_model->get_items($user_id);
-        //$rows = $query->result();
-        //$data = array();
-        // foreach($rows as $row) {
-        //     $temp_data = array();
-        //     $data.push($temp_data);
-        // }
-        echo(json_encode($query));
+    public function get_items() {
+        $result = $this->cart_model->get_items($_SESSION['id']);
+        echo(json_encode($result));
     }
 
 
@@ -49,9 +44,10 @@ class Cart extends CI_Controller {
             True/False - if the item has been added to cart
     */
     public function insert_item() {
-        $user_id = $_POST['user_id'];
-        $item_id = $_POST['item_id'];
-        $ret = $this->cart_model->insert_item($user_id, $item_id);
+        $user_id = $_SESSION['id'];
+        $movie_id = $_POST['movie_id'];
+        $ret = $this->cart_model->insert_item($user_id, $movie_id);
+        header('Location: /new/index.php/cart');
         $this->helper_functions->post_success_of_fail($ret);
     }
 
@@ -66,9 +62,10 @@ class Cart extends CI_Controller {
             True/False - if the item has been removed from cart
     */
     public function remove_item() {
-        $user_id = $_POST['user_id'];
-        $item_id = $_POST['item_id'];
-        $ret = $this->cart_model->remove_item($user_id, $item_id);
+        $user_id = $_SESSION['id'];
+        $movie_id = $_POST['movie_id'];
+        $ret = $this->cart_model->remove_item($user_id, $movie_id);
+        header('Location: /new/index.php/cart');
         $this->helper_functions->post_success_of_fail($ret);
     }
 

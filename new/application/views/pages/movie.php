@@ -67,7 +67,9 @@
     <div class="row" id="first_tag">
 
     </div>
-
+    <div class="col s3">
+          <button id="add_to_cart" class="waves-effect waves-light btn" style="width: 100%">Add to Cart</button>
+    </div>
     <div class="row justify-content-center" id="comment_box" <?php if ($did_comment) { echo 'style="display: none;"';}?>>        
         <!-- star input -->
         <div class="col s3">

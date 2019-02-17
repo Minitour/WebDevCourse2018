@@ -25,7 +25,7 @@
                <li><a href="/new/index.php/">Home</a></li>
                <li><a href="/new/index.php/login">Logout</a></li>
                <li ><a href="/new/index.php/myprofile">
-                  <?php echo $usr->username; ?>
+                  <?php echo $_SESSION['username'] ?>
                   </a>
                </li>
                <li class="nav-item active"><a>Cart</a></li>
@@ -39,91 +39,27 @@
          <li><a href="mobile.html">Mobile</a></li>
       </ul>
       <header style="float:right; padding-top:10px; padding-right:5px;">
-         <button style="height: auto;" onclick="location.href='index.php'" type="button" id="cat_btn" class="waves-effect waves-light btn">Continue Shopping</button>
+         <button style="height: auto;" onclick="location.href='/new/index.php'" type="button" id="cat_btn" class="waves-effect waves-light btn">Continue Browsing</button>
       </header>
       <div class="container" style="padding-top:60px; float: center;">
          <section id="cart" style="padding-top:10px;">
-            <article class="product">
-               <header>
-                  <a class="remove">
-                     <img src="http://www.astudio.si/preview/blockedwp/wp-content/uploads/2012/08/1.jpg" alt="">
-                     <h3>Remove product</h3>
-                  </a>
-               </header>
-               <div class="content">
-                  <h1>Lorem ipsum</h1>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, numquam quis perspiciatis ea ad omnis provident laborum dolore in atque.
-                  <!-- <div title="You have selected this product to be shipped in the color yellow." style="top: 0" class="color yellow"></div> -->
-                  <!-- <div style="top: 43px" class="type small">XXL</div> -->
-               </div>
-               <footer class="content">
-                  <span class="qt-minus">-</span>
-                  <span class="qt">2</span>
-                  <span class="qt-plus">+</span>
-                  <h2 class="full-price">
-                     29.98€
-                  </h2>
-                  <h2 class="price">
-                     14.99€
-                  </h2>
-               </footer>
-            </article>
-            <article class="product">
-               <header>
-                  <a class="remove">
-                     <img src="http://www.astudio.si/preview/blockedwp/wp-content/uploads/2012/08/3.jpg" alt="">
-                     <h3>Remove product</h3>
-                  </a>
-               </header>
-               <div class="content">
-                  <h1>Lorem ipsum dolor</h1>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, numquam quis perspiciatis ea ad omnis provident laborum dolore in atque.
-                  <!-- <div title="You have selected this product to be shipped in the color red." style="top: 0" class="color red"></div>
-                     <div title="You have selected this product to be shipped sized Small."  style="top: 43px" class="type small">Small</div> -->
-               </div>
-               <footer class="content">
-                  <span class="qt-minus">-</span>
-                  <span class="qt">1</span>
-                  <span class="qt-plus">+</span>
-                  <h2 class="full-price">
-                     79.99€
-                  </h2>
-                  <h2 class="price">
-                     79.99€
-                  </h2>
-               </footer>
-            </article>
-            <article class="product">
-               <header>
-                  <a class="remove">
-                     <img src="http://www.astudio.si/preview/blockedwp/wp-content/uploads/2012/08/5.jpg" alt="">
-                     <h3>Remove product</h3>
-                  </a>
-               </header>
-               <div class="content">
-                  <h1>Lorem ipsum dolor ipsdu</h1>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, numquam quis perspiciatis ea ad omnis provident laborum dolore in atque.
-                  <!-- <div title="You have selected this product to be shipped in the color blue." style="top: 0" class="color blue"></div>
-                     <div style="top: 43px" class="type small">Large</div> -->
-               </div>
-               <footer class="content">
-                  <span class="qt-minus">-</span>
-                  <span class="qt">3</span>
-                  <span class="qt-plus">+</span>
-                  <h2 class="full-price">
-                     53.99€
-                  </h2>
-                  <h2 class="price">
-                     17.99€
-                  </h2>
-               </footer>
-            </article>
+            <?php
+               function item_template($cover,$title,$plot) {
+                  return '<article class="product"><header><a class="remove">
+                  <img src="' . $cover . '" alt=""><h3>Remove product</h3></a></header>
+                  <div class="content"><h1>'. $title . '</h1>' . $plot . '</div>
+                  <footer class="content"><h2 class="full-price">$9.99</h2></footer></article>';
+               }
+               foreach($items as $item) {
+                  echo item_template($item['cover'],$item['name'],$item['plot']);
+               }
+            ?>
          </section>
       </div>
       <footer id="site-footer">
          <div class="container clearfix">
             <div class="right">
-               <h1 class="total">Total: <span>177.16</span>€</h1>
+               <h1 class="total">Total: <span><?php echo '$' . (count($items) * 10);?></span>€</h1>
                <a class="btn">Checkout</a>
             </div>
          </div>

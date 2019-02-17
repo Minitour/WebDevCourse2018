@@ -175,6 +175,23 @@ $(document).ready(() => {
       M.toast({ html: "Review Published." });
     });
   });
+
+  $("#add_to_cart").click(()=>{
+    let payload = { 'movie_id' : movie_id };
+    $.post("/new/index.php/cart/insert_item", payload, res => {
+      console.log(res);
+      M.toast({ html: "Review Published." });
+    });
+  })
+
+  $("#remove_from_cart").click(()=>{
+    let payload = { 'movie_id' : movie_id };
+    $.post("/new/index.php/cart/remove_item", payload, res => {
+      console.log(res);
+      M.toast({ html: "Review Published." });
+    });
+  })
+  
 });
 
 function load_more() {
