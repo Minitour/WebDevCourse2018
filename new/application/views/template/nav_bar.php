@@ -1,6 +1,6 @@
 <nav class="blue-grey darken-3" role="navigation">
     <div class="nav-wrapper container">
-      <a href="/" class="brand-logo" style="float: left;text-align: center;white-space: nowrap;padding: 5px 10px;">
+      <a href="/new/index.php" class="brand-logo" style="float: left;text-align: center;white-space: nowrap;padding: 5px 10px;">
       <img style="width: 100px;" src="./web_dev_pictures/logo.png" alt="Image text">
       </a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>

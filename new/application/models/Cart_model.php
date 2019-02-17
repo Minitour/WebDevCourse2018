@@ -21,8 +21,7 @@ class Cart_model extends CI_Model{
             $items<Array> - an array of items
     */
     public function get_items($user_id) {
-        $sql = "(SELECT * FROM cart INNER JOIN movies ON movie.id = cart.movie_id WHERE cart.user_id = ?)";
-        $offset = ($page-1) * 20;
+        $sql = "(SELECT * FROM user_cart INNER JOIN movies ON movies.id = user_cart.movie_id WHERE user_cart.user_id = ?)";
         $rows = $this->db->query($sql, array($user_id))->result_array();
         $data = array();
         foreach($rows as $row){
@@ -53,7 +52,7 @@ class Cart_model extends CI_Model{
             "movie_id" => $movie_id,
             "user_id" => $user_id
         );
-        $this->db->insert('cart', $data);
+        $this->db->insert('user_cart', $data);
         return True;
     }
 
@@ -73,7 +72,7 @@ class Cart_model extends CI_Model{
             "movie_id" => $movie_id,
             "user_id" => $user_id
         );
-        $this->db->delete('cart', $data);
+        $this->db->delete('user_cart', $data);
         return True;
     }
 

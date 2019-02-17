@@ -17,7 +17,7 @@
       <script src="<?php echo base_url('assets/js/cart.js'); ?>"></script>
       <nav class="blue-grey darken-3" role="navigation">
          <div class="nav-wrapper container">
-            <a href="/" class="brand-logo" style="float: left;text-align: center;white-space: nowrap;padding: 5px 10px;">
+            <a href="/new/index.php" class="brand-logo" style="float: left;text-align: center;white-space: nowrap;padding: 5px 10px;">
             <img style="width: 100px;" src="./web_dev_pictures/logo.png" alt="Image text">
             </a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
@@ -47,7 +47,7 @@
                function item_template($cover,$title,$plot) {
                   return '<article class="product"><header><a class="remove">
                   <img src="' . $cover . '" alt=""><h3>Remove product</h3></a></header>
-                  <div class="content"><h1>'. $title . '</h1>' . $plot . '</div>
+                  <div class="content"><h1>'. $title . '</h1>' . substr($plot,0,min(strlen($plot),280)) . ((strlen($plot) > 280) ? '...' : '' ) . '</div>
                   <footer class="content"><h2 class="full-price">$9.99</h2></footer></article>';
                }
                foreach($items as $item) {

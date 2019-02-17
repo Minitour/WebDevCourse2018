@@ -42,13 +42,14 @@
   <!-- Navigation -->
   <nav class="blue-grey darken-3" role="navigation">
     <div class="nav-wrapper container">
-      <a href="/" class="brand-logo" style="float: left;text-align: center;white-space: nowrap;padding: 5px 10px;">
+      <a href="/new/index.php" class="brand-logo" style="float: left;text-align: center;white-space: nowrap;padding: 5px 10px;">
       <img style="width: 100px;" src="<?php echo base_url('assets/img/logo.png'); ?>" alt="Image text">
       </a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a href="/new/index.php">Home</a></li>
         <li><a href="/new/index.php/login">Logout</a></li>
+        <li><a href="/new/index.php/cart">Cart</a></li>
         <li class="nav-item"><a href="/new/index.php/myprofile">
             <?php echo $username; ?>
         </a></li>
@@ -70,6 +71,7 @@
     <div class="col s3">
           <button id="add_to_cart" class="waves-effect waves-light btn" style="width: 100%">Add to Cart</button>
     </div>
+    <br>
     <div class="row justify-content-center" id="comment_box" <?php if ($did_comment) { echo 'style="display: none;"';}?>>        
         <!-- star input -->
         <div class="col s3">

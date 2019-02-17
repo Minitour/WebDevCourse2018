@@ -159,8 +159,9 @@ class Account extends CI_Controller {
         else
         {
             $data = $this->upload->data();
-
-            $this->user_model->update_picture($_SESSION['id'],base_url('uploads/' . $data['file_name']));
+            $url = base_url('uploads/' . $data['file_name']);
+            $this->user_model->update_picture($_SESSION['id'],$url);
+            $_SESSION['profile_picture'] = $url;
             http_response_code(200);
             header('Location: /new/index.php/myprofile');
             echo json_encode(array('message' => $data));

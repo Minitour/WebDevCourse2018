@@ -24,17 +24,18 @@
 
     <nav class="blue-grey darken-3" role="navigation">
         <div class="nav-wrapper container">
-            <a href="/" class="brand-logo" style="float: left;text-align: center;white-space: nowrap;padding: 5px 10px;">
+            <a href="/new/index.php" class="brand-logo" style="float: left;text-align: center;white-space: nowrap;padding: 5px 10px;">
             <img style="width: 100px;" src="<?php echo base_url('assets/img/logo.png'); ?>" alt="Image text">
             </a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="/new/index.php">Home</a></li>
                 <li><a href="/new/index.php/login">Logout</a></li>
+                <li><a href="/new/index.php/cart">Cart</a></li>
                 <li class="nav-item active"><a href="/new/index.php/myprofile">
+                    <?php echo '<img src="'. $_SESSION['profile_picture'] .'" class="img-circle special-img">' ?>
                     <?php echo $_SESSION['username']; ?>
                 </a></li>
-                <li><a href="/new/index.php/cart">Cart</a></li>
             </ul>
         </div>
     </nav>
