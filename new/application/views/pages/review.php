@@ -104,7 +104,6 @@
          var page = 1;
          var should_load_more = true;
          var isMakingRequest = false;
-         
          // load first comments page.
          load_more();
       </script>

@@ -253,5 +253,14 @@
 
   <script src="<?php echo base_url('assets/js/index.js'); ?>"></script>
 </body>
-
 </html>
+
+
+
+
+
+
+
+
+
+
