@@ -42,6 +42,7 @@
                <li><a href="/new/index.php/login">Logout</a></li>
                <li><a href="/new/index.php/cart">Cart</a></li>
                <li class="nav-item"><a href="/new/index.php/myprofile">
+                  <?php echo '<img src="'. $_SESSION['profile_picture'] .'" class="circle responsive-img valign" style="width: 30px; height: 30px;position: relative;top: 16px;float: left;left: -5px;">' ?>
                   <?php echo $_SESSION['username']; ?>
                   </a>
                </li>
