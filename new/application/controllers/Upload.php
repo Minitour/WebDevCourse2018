@@ -46,7 +46,7 @@ class Upload extends CI_Controller {
                     // file uploaded
 
                     // convert to json
-                    $file_path = $this->upload->data(0)->full_path;
+                    $file_path = $this->upload->data()->full_path;
                     $string = file_get_contents($file_path);
                     $movie_data = json_decode($string,TRUE);
 
