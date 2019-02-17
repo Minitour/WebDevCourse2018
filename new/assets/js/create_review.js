@@ -171,24 +171,22 @@ $(document).ready(() => {
     };
 
     $.post("/new/index.php/reviews/add", payload, res => {
-      console.log(res);
       M.toast({ html: "Review Published." });
+      location.reload();
     });
   });
 
   $("#add_to_cart").click(()=>{
     let payload = { 'movie_id' : movie_id };
     $.post("/new/index.php/cart/insert_item", payload, res => {
-      console.log(res);
-      M.toast({ html: "Review Published." });
+      M.toast({ html: "Added to cart." });
     });
   })
 
   $("#remove_from_cart").click(()=>{
     let payload = { 'movie_id' : movie_id };
     $.post("/new/index.php/cart/remove_item", payload, res => {
-      console.log(res);
-      M.toast({ html: "Review Published." });
+      M.toast({ html: "Removed from cart." });
     });
   })
   

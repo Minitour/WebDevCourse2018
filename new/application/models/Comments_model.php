@@ -26,7 +26,7 @@ class Comments_model extends CI_Model{
             $comment<Comment> - the comment requested in form <Comment>
     */
     public function get_comments_for_review($movie_id,$user_id,$page) {
-        $sql = "(SELECT * FROM comments INNER JOIN users ON users.id = comments.reviewer_id WHERE comments.movie_id = ? LIMIT 20 OFFSET ?)";
+        $sql = "(SELECT * FROM comments INNER JOIN users ON users.id = comments.user_id WHERE comments.movie_id = ? LIMIT 20 OFFSET ?)";
         $offset = ($page-1) * 20;
         return $this->db->query($sql, array($movie_id,$offset));
     }

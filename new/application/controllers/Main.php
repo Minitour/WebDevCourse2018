@@ -91,6 +91,9 @@ class Main extends CI_Controller{
     }
 
     public function login_view() {
+        if (isset($_SESSION)){
+            session_destroy();
+        }
         $this->load->view("pages/login");
     }
 
